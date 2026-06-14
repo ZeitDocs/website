@@ -1,0 +1,49 @@
+---
+import ProductCard from '../../components/ProductCard.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="Products | Zeitdocs"
+  description="Explore Zeitdocs products for Confluence documentation governance, classification and metadata workflows."
+>
+  <section class="hero">
+    <div class="section-inner">
+      <span class="eyebrow">Products</span>
+      <h1>Confluence apps for documentation governance.</h1>
+      <p class="lead">
+        Zeitdocs products focus on practical controls for admins, editors and readers
+        who work with sensitive or structured Confluence content.
+      </p>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="section-inner card-grid">
+      <ProductCard
+        name="Classify"
+        description="Page Permissions & Visual Security Banners"
+        detail="Define classification levels, apply them to Confluence pages and display visual banners directly in the page header area."
+        href="/products/classify/"
+        docsHref="/docs/classify/"
+        variant="classify"
+      />
+      <ProductCard
+        name="Sync My Page - Copy Publish"
+        description="Copy, publish or synchronize Confluence pages."
+        detail="This product needs additional detail before public documentation is written. The placeholder keeps the product structure ready."
+        href="/products/sync-my-page-copy-publish/"
+        status="Detail pending"
+        variant="sync"
+      />
+      <ProductCard
+        name="Advanced Page Properties & Metadata"
+        description="Enhanced page properties and structured metadata."
+        detail="This product needs additional detail before public documentation is written. The placeholder keeps the product structure ready."
+        href="/products/advanced-page-properties-metadata/"
+        status="Detail pending"
+        variant="metadata"
+      />
+    </div>
+  </section>
+</SiteLayout>

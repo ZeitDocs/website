@@ -1,0 +1,109 @@
+---
+import FeatureCard from '../../components/FeatureCard.astro';
+import HeroIllustration from '../../components/HeroIllustration.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="Classify | Zeitdocs"
+  description="Classify helps Confluence teams visually classify pages with banners, page header styles and permission guidance."
+>
+  <section class="hero">
+    <div class="section-inner hero-grid">
+      <div>
+        <span class="eyebrow">Classify</span>
+        <h1>Page Permissions & Visual Security Banners for Confluence.</h1>
+        <p class="lead">
+          Classify helps Confluence teams visually classify pages, define
+          classification levels and guide users around permissions and information
+          sensitivity.
+        </p>
+        <div class="cta-row">
+          <a class="button button-primary" href="/docs/classify/">Read documentation</a>
+          <a class="button button-secondary" href="/contact/">Contact Zeitdocs</a>
+        </div>
+      </div>
+      <HeroIllustration label="Classify page banner illustration" />
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="section-inner split-grid">
+      <div>
+        <span class="eyebrow">Problem</span>
+        <h2>Sensitive pages should not look like ordinary pages.</h2>
+      </div>
+      <div>
+        <p>
+          Confluence pages can contain public, internal, confidential or restricted
+          information. Permissions may exist in the background, but readers and
+          editors do not always see a clear visual signal.
+        </p>
+        <p>
+          Classify makes the selected classification visible in the page header area
+          so teams can handle content with more care.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">Core capabilities</span>
+        <h2>Focused on visible classification and clear guidance.</h2>
+      </div>
+      <div class="feature-grid">
+        <FeatureCard
+          title="Classification levels"
+          text="Admins can define levels such as Pending Classification, Public, Internal, Confidential and Restricted."
+        />
+        <FeatureCard
+          title="Visual banners"
+          text="Classification can appear directly in the page header area, where page readers naturally look first."
+          accent="orange"
+        />
+        <FeatureCard
+          title="Page header styles"
+          text="Admins can configure colors and expected header styles for each classification level."
+        />
+        <FeatureCard
+          title="Permission guidance"
+          text="Classify can help users understand whether page permissions appear aligned with the selected classification."
+          accent="orange"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">Governance examples</span>
+        <h2>Common classification levels.</h2>
+        <p>
+          These examples are starting points. A Confluence admin should adapt labels,
+          descriptions and guidance to the organization's policies.
+        </p>
+      </div>
+      <div class="mini-stats">
+        <div class="mini-stat">
+          <strong>Internal</strong>
+          <span>For employee-only documentation and internal operating pages.</span>
+        </div>
+        <div class="mini-stat">
+          <strong>Confidential</strong>
+          <span>For sensitive content that should be reviewed before sharing.</span>
+        </div>
+        <div class="mini-stat">
+          <strong>Restricted</strong>
+          <span>For highly sensitive content that needs limited access.</span>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a class="button button-primary" href="/docs/classify/getting-started/">Get started</a>
+        <a class="button button-secondary" href="/docs/classify/permission-guidance/">Read permission guidance</a>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

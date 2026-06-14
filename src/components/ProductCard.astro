@@ -1,0 +1,151 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  detail: string;
+  href: string;
+  docsHref?: string;
+  status?: string;
+  variant?: 'classify' | 'sync' | 'metadata';
+}
+
+const {
+  name,
+  description,
+  detail,
+  href,
+  docsHref,
+  status = 'Available',
+  variant = 'classify',
+} = Astro.props;
+---
+
+<article class={`product-card product-card--${variant}`}>
+  <div class="product-card__top">
+    <div class="product-card__icon" aria-hidden="true">
+      <span class="product-card__sheet"></span>
+    </div>
+    <span class="product-card__status">{status}</span>
+  </div>
+  <h3>{name}</h3>
+  <p class="product-card__description">{description}</p>
+  <p>{detail}</p>
+  <div class="product-card__actions">
+    <a class="card-link" href={href}>View product</a>
+    {docsHref && <a class="card-link card-link--muted" href={docsHref}>Documentation</a>}
+  </div>
+</article>
+
+<style>
+  .product-card {
+    display: flex;
+    min-height: 360px;
+    flex-direction: column;
+    border: var(--zd-border);
+    border-radius: var(--zd-radius-md);
+    background: var(--zd-white);
+    box-shadow: var(--zd-shadow-card);
+    padding: 24px;
+  }
+
+  .product-card__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .product-card__icon {
+    display: grid;
+    width: 62px;
+    height: 62px;
+    place-items: center;
+    border-radius: 18px;
+    background: var(--zd-blue-50);
+    border: 1px solid var(--zd-blue-100);
+  }
+
+  .product-card__sheet {
+    position: relative;
+    width: 30px;
+    height: 38px;
+    border: 2px solid var(--zd-blue-700);
+    border-radius: 7px;
+    background: var(--zd-white);
+  }
+
+  .product-card__sheet::before,
+  .product-card__sheet::after {
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    border-radius: 99px;
+    content: "";
+  }
+
+  .product-card__sheet::before {
+    top: 7px;
+    height: 7px;
+    background: var(--zd-orange-300);
+  }
+
+  .product-card__sheet::after {
+    top: 21px;
+    height: 2px;
+    background: var(--zd-blue-100);
+    box-shadow: 0 7px 0 var(--zd-blue-100);
+  }
+
+  .product-card--sync .product-card__sheet::before {
+    background: var(--zd-blue-300);
+  }
+
+  .product-card--metadata .product-card__sheet::before {
+    background: var(--zd-orange-100);
+  }
+
+  .product-card__status {
+    border: 1px solid var(--zd-gray-200);
+    border-radius: 999px;
+    background: var(--zd-gray-50);
+    color: var(--zd-gray-700);
+    font-size: 0.78rem;
+    font-weight: 760;
+    padding: 6px 9px;
+  }
+
+  .product-card__description {
+    color: var(--zd-gray-900);
+    font-weight: 680;
+  }
+
+  .product-card p {
+    margin: 12px 0 0;
+  }
+
+  .product-card__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 24px;
+  }
+
+  .card-link {
+    align-items: center;
+    border-radius: 999px;
+    color: var(--zd-blue-700);
+    font-weight: 760;
+    text-decoration: none;
+  }
+
+  .card-link::after {
+    margin-left: 6px;
+    content: "->";
+  }
+
+  .card-link--muted {
+    color: var(--zd-gray-700);
+  }
+</style>

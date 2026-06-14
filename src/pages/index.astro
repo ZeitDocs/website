@@ -1,0 +1,121 @@
+---
+import FeatureCard from '../components/FeatureCard.astro';
+import HeroIllustration from '../components/HeroIllustration.astro';
+import ProductCard from '../components/ProductCard.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="Zeitdocs | Documentation governance apps for Confluence"
+  description="Zeitdocs builds clear, governance-oriented apps for Atlassian Confluence documentation teams."
+>
+  <section class="hero">
+    <div class="section-inner hero-grid">
+      <div>
+        <span class="eyebrow">Confluence governance</span>
+        <h1>Clearer control for serious documentation work.</h1>
+        <p class="lead">
+          Zeitdocs builds practical Confluence apps for teams that need visible classification,
+          structured documentation governance and clearer guidance for sensitive content.
+        </p>
+        <div class="cta-row">
+          <a class="button button-primary" href="/products/">View products</a>
+          <a class="button button-secondary" href="/docs/">Open documentation</a>
+        </div>
+      </div>
+      <HeroIllustration />
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">Products</span>
+        <h2>Apps for visible, maintainable Confluence governance.</h2>
+        <p>
+          The first product area is Classify, with documentation focused on visual
+          classification banners, page header styles and permission guidance.
+        </p>
+      </div>
+      <div class="card-grid">
+        <ProductCard
+          name="Classify"
+          description="Page Permissions & Visual Security Banners"
+          detail="Visually classify Confluence pages and help teams understand how sensitive content should be handled."
+          href="/products/classify/"
+          docsHref="/docs/classify/"
+          variant="classify"
+        />
+        <ProductCard
+          name="Sync My Page - Copy Publish"
+          description="Copy, publish or synchronize Confluence pages."
+          detail="A planned product area for controlled page reuse and publishing flows. Public documentation needs more product detail."
+          href="/products/sync-my-page-copy-publish/"
+          status="Detail pending"
+          variant="sync"
+        />
+        <ProductCard
+          name="Advanced Page Properties & Metadata"
+          description="Structured metadata for Confluence documentation."
+          detail="A planned product area for stronger page property and metadata workflows. Public documentation needs more product detail."
+          href="/products/advanced-page-properties-metadata/"
+          status="Detail pending"
+          variant="metadata"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">Why Zeitdocs</span>
+        <h2>Documentation-first, admin-oriented and calm by design.</h2>
+      </div>
+      <div class="feature-grid">
+        <FeatureCard
+          title="Built for Confluence admins"
+          text="Zeitdocs products explain governance through settings, page behavior and clear documentation instead of vague claims."
+        />
+        <FeatureCard
+          title="Visible guidance for readers"
+          text="Classify makes sensitivity visible in the page experience so readers can understand how content should be handled."
+          accent="orange"
+        />
+        <FeatureCard
+          title="Structured product documentation"
+          text="The documentation area is organized around common admin tasks, page editor tasks and practical use cases."
+        />
+        <FeatureCard
+          title="Conservative product claims"
+          text="The site avoids unsupported security promises and clearly separates classification guidance from permissions."
+          accent="orange"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="section-inner split-grid">
+      <div>
+        <span class="eyebrow">Documentation</span>
+        <h2>Start with Classify documentation.</h2>
+        <p class="lead">
+          The initial docs cover overview concepts, applying a classification, managing
+          classification levels, visual banners, page header styles and governance use cases.
+        </p>
+        <div class="cta-row">
+          <a class="button button-primary" href="/docs/classify/">Read Classify docs</a>
+          <a class="button button-secondary" href="/products/classify/">View product page</a>
+        </div>
+      </div>
+      <div class="note-panel">
+        <h3>Important distinction</h3>
+        <p>
+          Classification helps users understand how content should be handled. It does
+          not replace Confluence permissions or permission reviews.
+        </p>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

@@ -1,0 +1,61 @@
+---
+interface Props {
+  title: string;
+  text: string;
+  accent?: 'blue' | 'orange';
+}
+
+const { title, text, accent = 'blue' } = Astro.props;
+---
+
+<article class={`feature-card feature-card--${accent}`}>
+  <div class="feature-card__icon" aria-hidden="true">
+    <span></span>
+  </div>
+  <h3>{title}</h3>
+  <p>{text}</p>
+</article>
+
+<style>
+  .feature-card {
+    min-height: 190px;
+    border: var(--zd-border);
+    border-radius: var(--zd-radius-md);
+    background: var(--zd-white);
+    box-shadow: var(--zd-shadow-card);
+    padding: 24px;
+  }
+
+  .feature-card__icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 18px;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--zd-blue-50);
+    border: 1px solid var(--zd-blue-100);
+  }
+
+  .feature-card__icon span {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--zd-blue-700);
+    border-radius: 5px;
+    box-shadow: 8px 8px 0 -2px var(--zd-orange-300);
+  }
+
+  .feature-card--orange .feature-card__icon {
+    background: var(--zd-orange-50);
+    border-color: var(--zd-orange-100);
+  }
+
+  .feature-card--orange .feature-card__icon span {
+    border-color: var(--zd-orange-700);
+    box-shadow: 8px 8px 0 -2px var(--zd-blue-300);
+  }
+
+  .feature-card p {
+    margin: 12px 0 0;
+  }
+</style>

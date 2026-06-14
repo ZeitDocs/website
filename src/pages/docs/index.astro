@@ -1,0 +1,57 @@
+---
+import FeatureCard from '../../components/FeatureCard.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="Documentation | Zeitdocs"
+  description="Product documentation for Zeitdocs Confluence apps."
+>
+  <section class="hero">
+    <div class="section-inner">
+      <span class="eyebrow">Documentation</span>
+      <h1>Product documentation for Zeitdocs apps.</h1>
+      <p class="lead">
+        Start with Classify documentation for Confluence admins, space admins, page
+        editors and page readers.
+      </p>
+      <div class="cta-row">
+        <a class="button button-primary" href="/docs/classify/">Open Classify docs</a>
+        <a class="button button-secondary" href="/products/classify/">View Classify</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">Available docs</span>
+        <h2>Classify</h2>
+        <p>
+          The initial documentation explains visual classification, page header
+          styles, permission guidance, space configuration and global templates.
+        </p>
+      </div>
+      <div class="doc-grid">
+        <FeatureCard
+          title="Getting Started"
+          text="Learn the basic flow for applying a classification to a Confluence page."
+        />
+        <FeatureCard
+          title="Administration"
+          text="Configure classification levels, visual banners, page header styles and templates."
+          accent="orange"
+        />
+        <FeatureCard
+          title="Permission Guidance"
+          text="Understand how classification and Confluence permissions work together."
+        />
+        <FeatureCard
+          title="Use Cases"
+          text="Review practical scenarios for internal, confidential and mixed-audience spaces."
+          accent="orange"
+        />
+      </div>
+    </div>
+  </section>
+</SiteLayout>

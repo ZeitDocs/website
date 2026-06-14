@@ -1,0 +1,30 @@
+# Development prompts and AI context
+prompts/
+context/
+
+# Build output
+node_modules/
+dist/
+.astro/
+.npm-cache/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
