@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../utils/paths';
+
 interface Props {
   name: string;
   description: string;
@@ -7,6 +9,8 @@ interface Props {
   docsHref?: string;
   status?: string;
   variant?: 'classify' | 'sync' | 'metadata';
+  logoSrc?: string;
+  logoAlt?: string;
 }
 
 const {
@@ -17,13 +21,29 @@ const {
   docsHref,
   status = 'Available',
   variant = 'classify',
+  logoSrc,
+  logoAlt = '',
 } = Astro.props;
 ---
 
 <article class={`product-card product-card--${variant}`}>
   <div class="product-card__top">
     <div class="product-card__icon" aria-hidden="true">
-      <span class="product-card__sheet"></span>
+      {
+        logoSrc ? (
+          <img
+            class="product-card__logo"
+            src={withBase(logoSrc)}
+            alt={logoAlt}
+            width="439"
+            height="388"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <span class="product-card__sheet"></span>
+        )
+      }
     </div>
     <span class="product-card__status">{status}</span>
   </div>
@@ -31,8 +51,8 @@ const {
   <p class="product-card__description">{description}</p>
   <p>{detail}</p>
   <div class="product-card__actions">
-    <a class="card-link" href={href}>View product</a>
-    {docsHref && <a class="card-link card-link--muted" href={docsHref}>Documentation</a>}
+    <a class="card-link" href={withBase(href)}>View product</a>
+    {docsHref && <a class="card-link card-link--muted" href={withBase(docsHref)}>Documentation</a>}
   </div>
 </article>
 
@@ -64,6 +84,13 @@ const {
     border-radius: 18px;
     background: var(--zd-blue-50);
     border: 1px solid var(--zd-blue-100);
+  }
+
+  .product-card__logo {
+    display: block;
+    max-width: 54px;
+    max-height: 52px;
+    object-fit: contain;
   }
 
   .product-card__sheet {

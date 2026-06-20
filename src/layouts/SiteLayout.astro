@@ -1,5 +1,6 @@
 ---
 import LogoMark from '../components/LogoMark.astro';
+import { withBase } from '../utils/paths';
 import '../styles/global.css';
 
 interface Props {
@@ -12,13 +13,12 @@ const pathname = Astro.url.pathname;
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/products/', label: 'Products' },
-  { href: '/docs/', label: 'Documentation' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
 
 const isCurrent = (href: string) =>
-  href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href);
+  href === '/' ? pathname === withBase('/') : pathname === withBase(href) || pathname.startsWith(withBase(href));
 ---
 
 <!doctype html>
@@ -26,7 +26,7 @@ const isCurrent = (href: string) =>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={withBase('/assets/brand/zeitdocs-logo.png')} type="image/png" />
     <meta name="description" content={description} />
     <title>{title}</title>
   </head>
@@ -34,14 +34,14 @@ const isCurrent = (href: string) =>
     <div class="site-shell">
       <header class="site-header">
         <div class="site-header__inner">
-          <a class="brand-link" href="/" aria-label="Zeitdocs home">
+          <a class="brand-link" href={withBase('/')} aria-label="Zeitdocs home">
             <LogoMark />
             <span class="brand-name">Zeitdocs</span>
           </a>
           <nav class="site-nav" aria-label="Main navigation">
             {
               navItems.map((item) => (
-                <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                <a href={withBase(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>
                   {item.label}
                 </a>
               ))
@@ -56,9 +56,8 @@ const isCurrent = (href: string) =>
         <div class="section-inner site-footer__inner">
           <span>&copy; {new Date().getFullYear()} Zeitdocs</span>
           <div class="footer-links">
-            <a href="/products/">Products</a>
-            <a href="/docs/">Documentation</a>
-            <a href="/contact/">Contact</a>
+            <a href={withBase('/products/')}>Products</a>
+            <a href={withBase('/contact/')}>Contact</a>
           </div>
         </div>
       </footer>

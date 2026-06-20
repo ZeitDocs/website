@@ -3,24 +3,121 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 ---
 
 <SiteLayout
-  title="Contact | Zeitdocs"
-  description="Contact Zeitdocs for product and support questions."
+  title="Contact Zeitdocs | Product Support and General Inquiries"
+  description="Contact Zeitdocs for Classify support, Atlassian Marketplace questions, partnership inquiries, and information about our upcoming Confluence apps."
 >
   <section class="hero">
     <div class="section-inner">
       <span class="eyebrow">Contact</span>
-      <h1>Contact Zeitdocs.</h1>
+      <h1>Contact Zeitdocs</h1>
       <p class="lead">
-        Use this page as the support and contact entry point while the public support
-        process is finalized.
+        Have a question about Zeitdocs or need help with one of our products?
       </p>
-      <div class="note-panel">
-        <h3>TODO: Confirm product support channel.</h3>
-        <p>
-          Add the approved support email, Atlassian Marketplace support link or contact
-          form before publishing.
-        </p>
-      </div>
+      <p class="lead">
+        Contact our team for product support, technical questions, Atlassian
+        Marketplace inquiries, partnerships, or general information.
+      </p>
     </div>
   </section>
+
+  <section class="section band">
+    <div class="section-inner contact-options">
+      <article class="contact-card contact-card--support">
+        <span class="eyebrow">Support</span>
+        <h2>Get product support</h2>
+        <p>
+          For technical problems, configuration questions, or help using Classify,
+          open a request through our support portal.
+        </p>
+        <div class="cta-row">
+          <a
+            class="button button-primary"
+            href="https://zeitdocs.atlassian.net/servicedesk/customer/portal/1"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open a support request in a new browser tab"
+          >
+            Open a support request
+          </a>
+        </div>
+        <p class="supporting-text">
+          Using the support portal helps us collect the information needed to
+          investigate your request and keep you updated.
+        </p>
+        <p>
+          Classify is currently available on the Atlassian Marketplace. Support
+          for upcoming Zeitdocs products will also be handled through this portal
+          once they are released.
+        </p>
+      </article>
+
+      <article class="contact-card">
+        <span class="eyebrow">Email</span>
+        <h2>Contact us by email</h2>
+        <p>
+          For general questions, partnership opportunities, product inquiries, or
+          anything not related to an existing support request, contact us at:
+        </p>
+        <p class="contact-email">
+          <a href="mailto:support@zeitdocs.com">support@zeitdocs.com</a>
+        </p>
+        <p class="supporting-text">
+          For technical issues, we recommend using the support portal whenever
+          possible.
+        </p>
+      </article>
+    </div>
+  </section>
+
 </SiteLayout>
+
+<style>
+  .contact-options {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+    align-items: stretch;
+  }
+
+  .contact-card {
+    border: var(--zd-border);
+    border-radius: var(--zd-radius-md);
+    background: var(--zd-white);
+    box-shadow: var(--zd-shadow-card);
+  }
+
+  .contact-card {
+    padding: 24px;
+  }
+
+  .contact-card--support {
+    border-color: var(--zd-orange-100);
+    background: linear-gradient(180deg, var(--zd-white), var(--zd-orange-50));
+  }
+
+  .contact-card h2 {
+    margin-top: 14px;
+  }
+
+  .contact-card p {
+    margin: 14px 0 0;
+  }
+
+  .supporting-text {
+    font-size: 0.95rem;
+  }
+
+  .contact-email a {
+    color: var(--zd-blue-700);
+    font-size: 1.16rem;
+    font-weight: 760;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .contact-options {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

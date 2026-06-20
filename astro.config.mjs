@@ -2,12 +2,16 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  site: 'https://zeitdocs.com',
+  site: 'https://www.zeitdocs.com',
   integrations: [
     starlight({
       title: 'Zeitdocs Documentation',
       description: 'Product documentation for Zeitdocs Confluence apps.',
-      favicon: '/favicon.svg',
+      logo: {
+        src: './src/assets/brand/zeitdocs-logo.png',
+        alt: 'Zeitdocs',
+      },
+      favicon: '/assets/brand/zeitdocs-logo.png',
       customCss: ['./src/styles/starlight.css'],
       social: [
         {

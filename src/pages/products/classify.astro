@@ -2,6 +2,7 @@
 import FeatureCard from '../../components/FeatureCard.astro';
 import HeroIllustration from '../../components/HeroIllustration.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import { withBase } from '../../utils/paths';
 ---
 
 <SiteLayout
@@ -11,7 +12,17 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
   <section class="hero">
     <div class="section-inner hero-grid">
       <div>
-        <span class="eyebrow">Classify</span>
+        <div class="product-hero-kicker">
+          <img
+            class="product-hero-logo"
+            src={withBase('/assets/products/classify-logo.png')}
+            alt=""
+            width="372"
+            height="388"
+            decoding="async"
+          />
+          <span class="eyebrow">Classify</span>
+        </div>
         <h1>Page Permissions & Visual Security Banners for Confluence.</h1>
         <p class="lead">
           Classify helps Confluence teams visually classify pages, define
@@ -19,8 +30,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           sensitivity.
         </p>
         <div class="cta-row">
-          <a class="button button-primary" href="/docs/classify/">Read documentation</a>
-          <a class="button button-secondary" href="/contact/">Contact Zeitdocs</a>
+          <a class="button button-primary" href={withBase('/docs/classify/')}>Read documentation</a>
+          <a class="button button-secondary" href={withBase('/contact/')}>Contact Zeitdocs</a>
         </div>
       </div>
       <HeroIllustration label="Classify page banner illustration" />
@@ -101,9 +112,31 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
         </div>
       </div>
       <div class="cta-row">
-        <a class="button button-primary" href="/docs/classify/getting-started/">Get started</a>
-        <a class="button button-secondary" href="/docs/classify/permission-guidance/">Read permission guidance</a>
+        <a class="button button-primary" href={withBase('/docs/classify/getting-started/')}>Get started</a>
+        <a class="button button-secondary" href={withBase('/docs/classify/permission-guidance/')}>Read permission guidance</a>
       </div>
     </div>
   </section>
 </SiteLayout>
+
+<style>
+  .product-hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .product-hero-logo {
+    display: block;
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+  }
+
+  @media (max-width: 560px) {
+    .product-hero-logo {
+      width: 60px;
+      height: 60px;
+    }
+  }
+</style>

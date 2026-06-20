@@ -3,18 +3,107 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 ---
 
 <SiteLayout
-  title="About | Zeitdocs"
-  description="About Zeitdocs and its documentation governance products for Confluence."
+  title="About Us | ZeitDocs"
+  description="About ZeitDocs and its mission to create practical, elegant apps for better workflows in the Atlassian ecosystem."
 >
   <section class="hero">
     <div class="section-inner">
-      <span class="eyebrow">About</span>
-      <h1>Practical apps for teams that care about documentation control.</h1>
+      <span class="eyebrow">About Us</span>
+      <h1>It's time for better workflows.</h1>
       <p class="lead">
-        Zeitdocs builds governance-oriented apps for Atlassian Confluence. The work is
-        focused on visible signals, clearer admin configuration and documentation that
-        helps teams make careful decisions.
+        At ZeitDocs, we believe that every era has its defining spirit, a
+        Zeitgeist that shapes the way people work, collaborate and innovate.
       </p>
     </div>
   </section>
+
+  <section class="section">
+    <div class="section-inner split-grid">
+      <div>
+        <span class="eyebrow">About Zeitdocs</span>
+        <h2>Barcelona-based software for Atlassian teams.</h2>
+      </div>
+      <div>
+        <p>Zeitdocs is a software company based in Barcelona, Spain.</p>
+        <p>
+          We build focused apps for Atlassian products that help teams organize,
+          govern, reuse, and understand their information more effectively.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="section-inner split-grid">
+      <div>
+        <span class="eyebrow">Why ZeitDocs</span>
+        <h2>Tools should simplify complexity.</h2>
+      </div>
+      <div>
+        <p>
+          The modern workplace moves faster than ever. Teams need tools that
+          simplify complexity, automate repetitive tasks and help people focus on
+          what truly matters.
+        </p>
+        <p>
+          Inspired by the concept of Zeitgeist, ZeitDocs was founded to create
+          applications that reflect the needs of today's organizations: intuitive,
+          efficient and built for seamless collaboration within the Atlassian
+          ecosystem.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner split-grid">
+      <div>
+        <span class="eyebrow">Mission</span>
+        <h2>Transform everyday processes into effortless experiences.</h2>
+      </div>
+      <div>
+        <p>
+          Our mission is simple: transform everyday processes into effortless
+          experiences. By building practical and elegant solutions, we help
+          companies spend less time managing work and more time achieving their
+          goals.
+        </p>
+        <p>
+          Because great organizations don't succeed through complexity, they
+          succeed through clarity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="section-inner">
+      <div class="about-closing">
+        <p>It's time for better workflows.</p>
+        <p>It's time for smarter collaboration.</p>
+        <p>It's time for organization.</p>
+        <p>It's time for ZeitDocs.</p>
+      </div>
+    </div>
+  </section>
 </SiteLayout>
+
+<style>
+  .about-closing {
+    display: grid;
+    gap: 10px;
+    max-width: 760px;
+  }
+
+  .about-closing p {
+    margin: 0;
+    color: var(--zd-gray-900);
+    font-size: clamp(1.35rem, 3vw, 2.2rem);
+    font-weight: 760;
+    line-height: 1.2;
+  }
+
+  .about-closing p:last-child {
+    color: var(--zd-blue-700);
+  }
+</style>

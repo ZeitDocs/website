@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import { withBase } from '../../utils/paths';
 ---
 
 <SiteLayout
@@ -8,7 +9,17 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 >
   <section class="hero">
     <div class="section-inner">
-      <span class="eyebrow">Product detail pending</span>
+      <div class="product-hero-kicker">
+        <img
+          class="product-hero-logo product-hero-logo--wide"
+          src={withBase('/assets/products/sync-my-page-copy-publish-logo.png')}
+          alt=""
+          width="439"
+          height="326"
+          decoding="async"
+        />
+        <span class="eyebrow">Product detail pending</span>
+      </div>
       <h1>Sync My Page - Copy Publish</h1>
       <p class="lead">
         This product area is reserved for Confluence page copy, publishing and
@@ -18,3 +29,33 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
     </div>
   </section>
 </SiteLayout>
+
+<style>
+  .product-hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .product-hero-logo {
+    display: block;
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+  }
+
+  .product-hero-logo--wide {
+    width: 96px;
+  }
+
+  @media (max-width: 560px) {
+    .product-hero-logo {
+      width: 60px;
+      height: 60px;
+    }
+
+    .product-hero-logo--wide {
+      width: 80px;
+    }
+  }
+</style>

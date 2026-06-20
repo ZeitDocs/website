@@ -3,6 +3,7 @@ import FeatureCard from '../components/FeatureCard.astro';
 import HeroIllustration from '../components/HeroIllustration.astro';
 import ProductCard from '../components/ProductCard.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { withBase } from '../utils/paths';
 ---
 
 <SiteLayout
@@ -19,8 +20,8 @@ import SiteLayout from '../layouts/SiteLayout.astro';
           structured documentation governance and clearer guidance for sensitive content.
         </p>
         <div class="cta-row">
-          <a class="button button-primary" href="/products/">View products</a>
-          <a class="button button-secondary" href="/docs/">Open documentation</a>
+          <a class="button button-primary" href={withBase('/products/')}>View products</a>
+          <a class="button button-secondary" href={withBase('/products/classify/')}>View Classify</a>
         </div>
       </div>
       <HeroIllustration />
@@ -45,6 +46,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
           href="/products/classify/"
           docsHref="/docs/classify/"
           variant="classify"
+          logoSrc="/assets/products/classify-logo.png"
         />
         <ProductCard
           name="Sync My Page - Copy Publish"
@@ -53,6 +55,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
           href="/products/sync-my-page-copy-publish/"
           status="Detail pending"
           variant="sync"
+          logoSrc="/assets/products/sync-my-page-copy-publish-logo.png"
         />
         <ProductCard
           name="Advanced Page Properties & Metadata"
@@ -61,6 +64,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
           href="/products/advanced-page-properties-metadata/"
           status="Detail pending"
           variant="metadata"
+          logoSrc="/assets/products/advanced-page-properties-metadata-logo.png"
         />
       </div>
     </div>
@@ -91,30 +95,6 @@ import SiteLayout from '../layouts/SiteLayout.astro';
           text="The site avoids unsupported security promises and clearly separates classification guidance from permissions."
           accent="orange"
         />
-      </div>
-    </div>
-  </section>
-
-  <section class="section band">
-    <div class="section-inner split-grid">
-      <div>
-        <span class="eyebrow">Documentation</span>
-        <h2>Start with Classify documentation.</h2>
-        <p class="lead">
-          The initial docs cover overview concepts, applying a classification, managing
-          classification levels, visual banners, page header styles and governance use cases.
-        </p>
-        <div class="cta-row">
-          <a class="button button-primary" href="/docs/classify/">Read Classify docs</a>
-          <a class="button button-secondary" href="/products/classify/">View product page</a>
-        </div>
-      </div>
-      <div class="note-panel">
-        <h3>Important distinction</h3>
-        <p>
-          Classification helps users understand how content should be handled. It does
-          not replace Confluence permissions or permission reviews.
-        </p>
       </div>
     </div>
   </section>

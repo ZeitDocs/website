@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import { withBase } from '../../utils/paths';
 ---
 
 <SiteLayout
@@ -8,7 +9,17 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 >
   <section class="hero">
     <div class="section-inner">
-      <span class="eyebrow">Product detail pending</span>
+      <div class="product-hero-kicker">
+        <img
+          class="product-hero-logo"
+          src={withBase('/assets/products/advanced-page-properties-metadata-logo.png')}
+          alt=""
+          width="389"
+          height="402"
+          decoding="async"
+        />
+        <span class="eyebrow">Product detail pending</span>
+      </div>
       <h1>Advanced Page Properties & Metadata</h1>
       <p class="lead">
         This product area is reserved for structured Confluence metadata and improved
@@ -18,3 +29,25 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
     </div>
   </section>
 </SiteLayout>
+
+<style>
+  .product-hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .product-hero-logo {
+    display: block;
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+  }
+
+  @media (max-width: 560px) {
+    .product-hero-logo {
+      width: 60px;
+      height: 60px;
+    }
+  }
+</style>
