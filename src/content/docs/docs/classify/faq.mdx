@@ -1,56 +1,127 @@
 ---
 title: FAQ
-description: Answers to common Classify questions.
+description: Troubleshooting and answers to common Classify questions, grouped by symptom.
 ---
 
-# FAQ
+Common questions and fixes, grouped by symptom.
 
-## Does Classify replace Confluence permissions?
+## Classifying pages
 
-No. Classification helps users understand how content should be handled. Confluence permissions control who can access a page.
+### The byline just says "Classification" with no coloured dot — I cannot classify.
 
-## Can admins define custom classification levels?
+One of these is true:
 
-Classify is documented around admin-managed classification levels.
+- **Classification is not enabled in the space.** A space admin needs to enable it in [Space Settings](/docs/classify/space-settings/). Non-admins see *"Classification is not enabled. Contact your space admin."*
+- **The space is blocked** by a Confluence admin via [Space Access Control](/docs/classify/space-access-control/). Nobody can classify there.
 
-TODO: Confirm product behavior. Confirm the full customization model, including naming, colors, ordering and default levels.
+### I see the level but it is read-only — I cannot change it.
 
-## Can different spaces use different classification levels?
+You have **view** access to the page but not **edit** access. Classification
+changes restrictions, so only editors (and Confluence admins) can change a page's
+level. Ask an editor or admin.
 
-Classify is documented around space configuration and global templates.
+### I picked a level but nothing changed.
 
-TODO: Confirm product behavior. Confirm how different space configurations are created, inherited and updated.
+Did you **refresh** after the green **"Classification saved ✓"** confirmation? The
+byline dot, banner, and label update on page reload.
 
-## What is the default classification level?
+### Should I refresh while it is still saving?
 
-The recommended example set includes **Pending Classification** for pages that still need review.
+No. Wait for the green **"Classification saved ✓ — refresh the page now"** message
+first. Refreshing mid-save can desync the restriction tracking and cause the
+*next* level change to remove the wrong groups (restrictions appear to
+accumulate). Always wait for the confirmation.
 
-TODO: Confirm product behavior. Confirm whether Pending Classification is the product default, a recommended template value or a customer-defined level.
+## Banners
 
-## Can the visual banner be customized?
+### I classified a page but there is no banner.
 
-The expected page header style options include None, Color Band, Upload Background and Predefined Background.
+- The level's page header style may be **None** (byline dot only) — by design.
+- The level may be set to **Image** but have **no image uploaded** — it falls back to no banner. Ask your space admin to add an image or switch to **Colour**.
+- Try a **refresh** — the banner appears on reload.
 
-TODO: Confirm product behavior. Confirm the final labels and behavior of visual customization options.
+See [Page Banner](/docs/classify/page-banner/).
 
-## Can Classify help with permission review?
+### The banner is too big or too small.
 
-Classify can help users understand whether page permissions appear aligned with the selected classification.
+Banner height is a space-wide setting (**small**, **medium**, or **large**). A
+space admin changes it in
+[Space Settings → Header image size](/docs/classify/space-settings/#header-image-size).
 
-TODO: Confirm product behavior. Confirm the exact permission guidance logic and visibility.
+## Restrictions and access
 
-## Is classification visible to page readers?
+### Does Classify replace Confluence permissions?
 
-Classify is designed to make classification visible in the page experience.
+No. Classification helps users understand how content should be handled, and it
+**also applies real Confluence view and edit restrictions** based on each level's
+groups. You should still review Confluence permissions when strict access control
+is required.
 
-TODO: Confirm product behavior. Confirm whether every page reader sees the same banner and guidance.
+### After classifying, some people can no longer see the page.
 
-## What should I do with pages marked Pending Classification?
+That is expected — classification applies the level's **view restrictions**. Only
+the groups attached to that level can see the page. If the wrong people are locked
+out, the level's view and edit groups need adjusting in
+[Space Settings](/docs/classify/space-settings/). Re-classify after fixing the
+level.
 
-Review the page content, choose the appropriate classification level and check whether the page permissions match the sensitivity of the content.
+### View restrictions seem to be piling up after each change.
+
+This is the symptom of refreshing mid-save (see above). Going forward, always wait
+for the saved confirmation. If a page is already in a bad state, re-apply the
+correct level once (waiting for confirmation) to reset it cleanly.
+
+### A Confluence admin can classify a restricted page I cannot.
+
+Correct — admins bypass page edit-restrictions, matching normal Confluence
+behaviour.
+
+## Templates and spaces (admins)
+
+### Can admins define custom classification levels?
+
+Yes. Confluence admins define classification levels inside global templates, and
+space admins can build or adjust levels per space — including name, colour,
+description, label, page header style, and the view/edit groups. See
+[Global Templates](/docs/classify/global-templates/) and
+[Space Settings](/docs/classify/space-settings/).
+
+### Can different spaces use different classification levels?
+
+Yes. Each space has its own configuration. Levels are usually copied from a global
+template, but a space can edit them locally afterwards, and different spaces can
+use entirely different level sets.
+
+### I applied a template to spaces but some were skipped.
+
+Those spaces are **blocked by Space Access Control** and are skipped on purpose.
+The result message lists them. See
+[Space Access Control](/docs/classify/space-access-control/).
+
+### I edited a template but existing spaces did not change.
+
+Global templates are **copied** into a space when applied, so spaces stay
+independent. To push changes, **re-apply** the template to those spaces (confirm
+the override prompt).
+
+### A space already has levels — can I apply a template anyway?
+
+Yes, but you get a **conflict prompt**. Confirming **overrides** the space's
+current configuration.
+
+### How do I stop a space from using classification entirely?
+
+Use [Space Access Control](/docs/classify/space-access-control/): switch to
+*Blocked spaces* and add it, or *Allowed spaces only* and leave it off the list.
 
 ## Where should screenshots be added?
 
 Add product screenshots under `public/assets/screenshots/classify/`.
 
-Use clear file names such as `02-page-with-confidential-banner.png` or `06-permission-guidance.png`.
+Use clear file names such as `02-page-with-confidential-banner.png` or
+`05-space-access-control.png`.
+
+## Still stuck?
+
+- Re-read the guide for the specific area: [Classifying a Page](/docs/classify/classifying-a-page/), [Page Banner](/docs/classify/page-banner/), [Space Settings](/docs/classify/space-settings/), [Global Templates](/docs/classify/global-templates/), [Space Access Control](/docs/classify/space-access-control/), [Classification Report](/docs/classify/classification-report/).
+- Contact your space administrator (for space-level issues) or Confluence administrator (for templates and access control).

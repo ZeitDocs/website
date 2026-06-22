@@ -1,0 +1,122 @@
+---
+title: Space Settings
+description: How space administrators enable classification, manage levels, and configure banners for a space.
+---
+
+Space Settings is where a space administrator turns classification **on** for a
+space, chooses the **classification levels** people can apply, and sets the
+banner **size**. You reach it from your space's **Classification** settings page,
+or through the byline onboarding flow.
+
+The page has three sections, top to bottom.
+
+[Screenshot needed: The Classify Space Settings page showing the status card and classification levels]
+
+Suggested caption:
+The Classify Space Settings page for a single Confluence space.
+
+Suggested alt text:
+The Classify Space Settings page showing the enabled status, classification levels, and header image size.
+
+## Status
+
+A card showing whether classification is **Enabled** or **Disabled** for the space.
+
+- When **disabled**, the only action is the primary **Enable classification** button. Until you enable it, page editors cannot classify pages.
+- When **enabled**, the levels and other controls appear below.
+
+## Classification levels
+
+This is the heart of the space configuration: the list of classification levels
+page editors can pick from.
+
+### Where classification levels come from
+
+You have two ways to populate levels:
+
+1. **Apply a global template** (recommended) — use **Add from template** to copy a ready-made set of levels published by your Confluence admin. This keeps your space consistent with the rest of the organisation. Once applied, the levels are **copied into your space** and you can adjust them locally.
+2. **Build your own** — use **Add level** to create levels from scratch.
+
+A small hint shows the **template origin** when your levels came from a global
+template, so you know the source.
+
+### What is in a classification level
+
+Each classification level has:
+
+| Field | Purpose |
+|---|---|
+| **Name** | For example *Public*, *Internal*, *Confidential*. Shown in the byline and banner. |
+| **Colour** | The colour dot in the byline and the colour-band banner. |
+| **Description** | Short explanation; shown on hover and on image banners. |
+| **View restriction groups** | Confluence groups allowed to **view** pages at this level. |
+| **Edit restriction groups** | Confluence groups allowed to **edit** pages at this level. |
+| **Label** | The Confluence label added to classified pages (for example `INTERNAL`). |
+| **Page header style** | `image`, `colour`, or `none` — see [Page Banner](/docs/classify/page-banner/). |
+| **Header image** | The banner background, when the style is `image`. |
+
+:::caution
+The view and edit groups directly change who can access a page. Double-check
+them before letting page editors classify important pages — applying a level
+restricts the page to exactly these groups.
+:::
+
+### Reordering levels
+
+Once you have levels, you can **drag and drop** to reorder them. The order is the
+order page editors see in the picker.
+
+### Header image editor
+
+When a level's page header style is **Image**, you get a header image editor:
+
+- **Select background** — choose from the built-in predefined header themes (no upload needed).
+- **Upload background** — upload your own image; the level name and description are drawn on top and can be repositioned by dragging on the canvas.
+- **Remove** — appears only for uploaded or previously saved custom images; clears the image.
+
+Images are saved automatically when you save the level — there is no separate
+"save image" button.
+
+[Screenshot needed: The header image editor showing a predefined background with level name and description]
+
+Suggested caption:
+Editing a classification level's header image.
+
+Suggested alt text:
+The Classify header image editor showing a background image with the level name and description positioned on top.
+
+### Manage global templates
+
+If you are also a **Confluence admin**, a **"Manage global templates ↗"** link
+appears in the levels section header, taking you to the global template library.
+It is hidden for non-admins and while you are editing a level.
+
+## Header image size
+
+A secondary setting at the bottom controls the banner **height** for the whole
+space: **small**, **medium** (the default), or **large**. This applies to every
+image and colour banner in the space.
+
+## Unlinking from a global template
+
+If your levels came from a global template and you want to start fresh:
+
+1. Use the **Unlink** action.
+2. Confirm in the warning dialog.
+3. The space resets to **disabled with no levels**, and is removed from the template's linked-spaces list.
+
+After unlinking you can re-apply a different global template or build levels
+manually.
+
+## Blocked spaces
+
+If your Confluence admin has **blocked** this space via Space Access Control, the
+whole settings page is replaced with an informational message and all controls
+are hidden — you cannot enable classification here. See
+[Space Access Control](/docs/classify/space-access-control/).
+
+## Related
+
+- [Global Templates](/docs/classify/global-templates/) — where global templates come from.
+- [Page Banner](/docs/classify/page-banner/) — how page header styles render.
+- [Classification Report](/docs/classify/classification-report/) — see what has been classified.

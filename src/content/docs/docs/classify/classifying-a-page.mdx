@@ -1,0 +1,95 @@
+---
+title: Classifying a Page
+description: How page editors apply a classification level from the page byline.
+---
+
+The **byline** is the line near the top of every page showing who created it and
+when. When classification is enabled in your space, a **Classification** item
+appears there with a coloured dot indicating the page's current level.
+
+This is the main place where day-to-day classification happens.
+
+[Screenshot needed: The Classify classification selector open on a Confluence page byline]
+
+Suggested caption:
+Selecting a classification level from a Confluence page.
+
+Suggested alt text:
+A Confluence page showing the Classify classification selection dialog open from the byline.
+
+## Reading the byline indicator
+
+| What you see | What it means |
+|---|---|
+| A coloured dot and level name | The page is classified at that level. Hover for the level description. |
+| A grey or disabled icon | Classification is enabled in the space, but this page is not classified yet. |
+| Just "Classification" with no coloured dot | Classification is not available here (disabled, or the space is blocked). |
+
+## Classifying or re-classifying a page
+
+1. Click the **Classification** item in the byline.
+2. The dialog opens showing the available classification levels for your space.
+3. Click the level you want. Each level shows its colour and description.
+4. The dialog shows **"Saving classification…"** — a short, multi-step save. **Do not refresh the page yet.**
+5. When you see **"Classification saved ✓ — refresh the page now"**, click **Done** and refresh.
+
+:::caution
+**Why you must wait for the confirmation:** applying a classification is several
+steps (restrictions, then label, then status, then tracking). If you refresh the
+page in the middle of the save, the restriction tracking can desync and your
+*next* classification change may remove the wrong groups (restrictions appear to
+accumulate). Always wait for the green confirmation before refreshing.
+:::
+
+## What happens when you pick a level
+
+Classify automatically:
+
+- **Applies view and edit restrictions** to the page using the Confluence groups attached to that level. Afterwards, only people in the allowed groups can view or edit the page.
+- **Adds a label** (for example `INTERNAL`) to the page.
+- **Updates the byline dot** and the page banner.
+- **Records the classification** in the Classification Report.
+
+Changing the level later cleanly removes the previous level's restrictions and
+applies the new ones.
+
+## Who can classify a page?
+
+You must have **edit access** to the page. Classify checks this before making any
+change:
+
+- If you can edit the page, you see the full level picker.
+- If you can only **view** the page, you see a **read-only** view that shows the current classification but does not let you change it.
+- Confluence administrators can classify even restricted pages, matching Confluence's normal admin override.
+
+This prevents a page reader with view-only access from changing a page's
+restrictions.
+
+## First time in a space (onboarding)
+
+If classification is **not yet enabled** in your space, the dialog adapts to your role:
+
+- **Space administrators** see a short onboarding flow: a list of available global templates to preview and apply, right inside the dialog. Pick one and the space is set up instantly (see [Space Settings](/docs/classify/space-settings/)).
+- **Non-admins** see: *"Classification is not enabled. Contact your space admin."*
+
+## Blocked spaces
+
+If your Confluence admin has blocked classification for this space, **everyone**
+(including space admins) sees:
+
+> *"Classification is not available in this space…"*
+
+No level picker appears, and pages here cannot be classified. See
+[Space Access Control](/docs/classify/space-access-control/).
+
+## Tips
+
+- The coloured dot is visible to everyone, but the dialog only lets editors change it.
+- Re-classify freely — switching levels is safe and cleans up the old restrictions for you.
+- If the banner or dot looks wrong after a change, refresh the page — the byline indicator updates on reload.
+
+## Related
+
+- [Page Banner](/docs/classify/page-banner/) — the header strip that appears once a page is classified.
+- [Space Settings](/docs/classify/space-settings/) — where the available levels come from.
+- [FAQ](/docs/classify/faq/)

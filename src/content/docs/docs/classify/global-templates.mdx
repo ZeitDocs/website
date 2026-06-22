@@ -1,46 +1,103 @@
 ---
 title: Global Templates
-description: Standardize classification settings across Confluence spaces.
+description: How Confluence administrators define reusable classification templates and apply them across spaces.
 ---
 
-# Global Templates
+The **Classification Templates** screen (under **Apps → Classification
+Templates**) is where a Confluence administrator defines classification **once
+for the whole site** and rolls it out to many spaces consistently. This is the
+recommended way to keep every space using the same classification levels,
+colours, labels, and restrictions.
 
-Global templates help admins standardize classification settings across spaces.
-
-They are useful when an organization wants consistent classification levels, visual styles and permission guidance.
-
-## When to use global templates
-
-Use a global template when:
-
-- Multiple spaces should share the same classification model.
-- Admins want consistent names and descriptions.
-- New spaces should start from an approved classification setup.
-- Governance teams need reusable configuration.
-
-TODO: Confirm product behavior. Confirm whether spaces inherit global template updates automatically or copy template values at setup time.
-
-[Screenshot needed: Global templates screen using the same classification level configuration UI as space settings]
+[Screenshot needed: The Classification Templates screen showing the template library]
 
 Suggested caption:
-Managing classification levels in global templates.
+The global Classification Templates library.
 
 Suggested alt text:
-A global settings screen showing classification level configuration for templates.
+The Classify Classification Templates screen showing a list of global templates with their classification levels.
 
-## Relationship with space configuration
+## What a global template is
 
-A global template provides a reusable starting point. Space configuration can support local needs when a space requires different guidance or a different level set.
+A global template is a named, reusable set of **classification levels** — the
+same levels described in
+[Space Settings](/docs/classify/space-settings/#what-is-in-a-classification-level)
+(name, colour, description, view and edit groups, label, page header style and
+image).
 
-TODO: Confirm product behavior. Confirm whether space admins can override all template fields or only selected fields.
+When a space admin applies a template, the levels are **deep-copied** into that
+space. The space then runs independently — later edits to the template do not
+retroactively change spaces that already applied it (they re-apply to pick up
+changes).
 
-## Example
+## The template library
 
-A Confluence admin creates a global template with **Pending Classification**, **Internal**, **Confidential** and **Restricted**. New regulated spaces can start from the template instead of rebuilding the same levels manually.
+The screen lists all global templates. Classify ships with **6 predefined
+templates** (for example *Enterprise Standard* and *Simple Business*) that are
+seeded automatically the first time you open the screen. You can use these as
+they are, edit them, or add your own.
 
-[Example needed: Global template applied to a new regulated space]
+### Creating or editing a template
 
-## Related pages
+1. Add a new template or open an existing one.
+2. Give it a **name** and **description**.
+3. Add **classification levels** — the same fields as space levels.
+4. Save.
 
-- [Space-Level Configuration](../space-level-configuration/)
-- [Managing Classification Levels](../managing-classification-levels/)
+### Enabling or disabling a template
+
+Each template has an **enabled** toggle. Only **enabled** templates appear to
+space admins in the byline onboarding and the "Add from template" picker. Disable
+a template to retire it without deleting it.
+
+## Applying a template to spaces
+
+From a template you can push it to many spaces at once via **Apply to Spaces**:
+
+1. Open the **Apply to Spaces** panel for the template.
+2. Search and select the spaces (paginated 25 per page).
+   - Spaces already linked to this template are **pre-selected, greyed out, and marked "Already linked"** — you cannot double-apply.
+   - The selection count and Apply button reflect only **new** selections.
+3. Click **Apply**.
+   - If some spaces already have a configuration, you see a **conflict prompt** — confirm to **override** them, or cancel.
+4. Classify applies the levels and updates the template's linked-spaces list.
+
+[Screenshot needed: The Apply to Spaces panel with some spaces selected and others marked Already linked]
+
+Suggested caption:
+Applying a global template to multiple spaces.
+
+Suggested alt text:
+The Apply to Spaces panel showing a searchable list of spaces, some selected and some marked as already linked.
+
+### Spaces that get skipped
+
+Any space **blocked by Space Access Control** is skipped automatically — it is
+never written, even if you selected it. The result shows an info message such as:
+
+> *"N skipped — blocked by Space Access Control: …"*
+
+This is a safety guard: an admin cannot accidentally classify a space that policy
+forbids. See [Space Access Control](/docs/classify/space-access-control/).
+
+## Seeing which spaces use a template
+
+Each template shows its **linked spaces** as pills (up to 5). If more than five
+spaces are linked, a **"+N more"** link opens a dialog listing them all.
+
+## Manage access
+
+A **Manage access** button at the bottom of the templates list opens **Space
+Access Control**, where you decide which spaces are allowed to use classification
+at all. See [Space Access Control](/docs/classify/space-access-control/).
+
+## Tips
+
+- **Edit the predefined templates** rather than starting from scratch — they cover common classification schemes.
+- **Disable instead of delete** when retiring a scheme, so existing spaces keep working.
+- Changing a template does **not** auto-update spaces that already applied it — re-apply the template (with override) to push changes out.
+
+## Related
+
+- [Space Settings](/docs/classify/space-settings/) — how space admins apply templates locally.
+- [Space Access Control](/docs/classify/space-access-control/) — controlling which spaces can classify.
