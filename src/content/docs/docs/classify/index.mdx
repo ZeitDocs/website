@@ -1,54 +1,64 @@
 ---
 title: Classify overview
-description: Learn what Classify does and why visual classification matters in Confluence.
+description: Learn what Classify does, who uses it, and how visual classification works in Confluence.
 ---
 
-# Classify overview
+Classify helps Confluence teams visually classify pages and guide users around
+permissions and information sensitivity. It lets your organisation label pages
+with classification levels (for example *Public*, *Internal*, *Confidential*),
+apply the right view and edit restrictions automatically, and show a clear
+visual banner so every page reader knows how sensitive a page is.
 
-Classify helps Confluence teams visually classify pages and guide users around permissions and information sensitivity.
+This documentation is written for the people who use Classify day to day:
 
-It is designed for Confluence admins, space admins, compliance teams, knowledge managers and teams that handle sensitive internal documentation.
+- **Page editors** — classify the pages you write.
+- **Space administrators** — turn classification on for a space and choose its classification levels.
+- **Confluence administrators** — manage the organisation-wide global templates and control which spaces can use the app.
 
-## Why visual classification matters
+## What classification does
 
-A Confluence page can contain sensitive information, but the page itself may not make that sensitivity obvious.
+When you apply a classification level to a page, Classify does several things at once:
 
-Classify helps by showing the selected classification level directly in the page experience. The visual banner and page header style make classification visible where page readers naturally look first.
+1. **Shows a visual banner** at the top of the page (an image header or a colour band), so readers see the sensitivity first.
+2. **Sets a coloured indicator and label** in the page byline, next to the author and date line.
+3. **Applies view and edit restrictions** so only the right Confluence groups can see or change the page.
+4. **Adds a label** (for example `CONFIDENTIAL`) to the page for search and reporting.
+5. **Records the classification** so it appears in the Classification Report.
 
-[Screenshot needed: Confluence page with a visible Confidential or Internal classification banner]
+All of this happens from one small dialog — the page editor picks a level, and
+Classify takes care of the rest.
 
-Suggested caption:
-A Confluence page with a visible classification banner.
-
-Suggested alt text:
-A Confluence page showing a visible Confidential or Internal classification banner in the page header.
+<figure>
+  <img src="/assets/screenshots/classify/09-index.png" alt="A Confluence page showing a visible Confidential or Internal classification banner in the page header." />
+  <figcaption>A Confluence page with a visible classification banner.</figcaption>
+</figure>
 
 ## Core concepts
 
-- **Classification level**: A named sensitivity level that can be applied to a Confluence page.
-- **Visual banner**: A visible classification indicator displayed on the page.
-- **Page header style**: The visual style used to display the classification at the top of the page.
-- **Permission guidance**: Information that helps users understand whether page permissions are appropriate for the selected classification.
-- **Space configuration**: Settings that apply to one Confluence space.
-- **Global template**: A reusable classification configuration managed globally and applied across spaces.
+- **Classification level** — a named sensitivity tier (for example *Internal*) with a colour, an optional banner image, a label, and the Confluence groups allowed to view or edit pages at that level.
+- **Global template** — a reusable set of classification levels defined once by a Confluence admin and applied to many spaces. Keeps classification consistent across the whole site.
+- **Space configuration** — the set of classification levels active in one space. Usually copied from a global template, but it can be edited locally afterwards.
+- **Visual banner / page header style** — how a level is shown at the top of a classified page: an image header, a colour band, or none.
+- **Permission guidance** — the view and edit restrictions Classify applies automatically when a page is classified.
 
-## What Classify helps teams do
+## The parts of the app
 
-- Define classification levels.
-- Apply a classification level to a Confluence page.
-- Display a visual banner or page header style.
-- Configure colors and visual styles.
-- Provide permission guidance.
-- Manage classification templates globally or at space level.
+| Part | Where you find it | Who uses it | Guide |
+|---|---|---|---|
+| **Page byline** | The author and date line at the top of any page | Page editors | [Classifying a Page](/docs/classify/classifying-a-page/) |
+| **Page banner** | A header strip at the very top of a classified page | Page readers | [Page Banner](/docs/classify/page-banner/) |
+| **Space Settings** | Space → *Classification* settings page | Space admins | [Space Settings](/docs/classify/space-settings/) |
+| **Classification Templates** | Apps → *Classification Templates* | Confluence admins | [Global Templates](/docs/classify/global-templates/) |
+| **Space Access Control** | Inside Classification Templates → *Manage access* | Confluence admins | [Space Access Control](/docs/classify/space-access-control/) |
+| **Classification Report** | A page in the space listing all classified pages | Space members | [Classification Report](/docs/classify/classification-report/) |
 
 :::note
-Classification helps users understand how content should be handled. It does not replace Confluence permissions.
+Classification helps users understand how content should be handled, and it also
+applies real Confluence view and edit restrictions. Always make sure the groups
+attached to each classification level are correct before classifying important
+pages.
 :::
-
-## Example
-
-[Example needed: A company classifying HR policies as Internal and salary planning pages as Confidential]
 
 ## Next step
 
-Start with [Getting Started](getting-started/).
+Start with [Getting Started](/docs/classify/getting-started/).

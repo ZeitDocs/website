@@ -1,0 +1,56 @@
+---
+title: Page Banner
+description: How the visual banner and page header styles appear on classified pages.
+---
+
+When a page is classified, a **visual banner** can appear at the very top of the
+page. It is the most visible signal of a page's sensitivity — page readers see
+it before any content.
+
+The banner is controlled by the classification **level**, so what it looks like
+depends on how your space admin configured that level's page header style.
+
+<figure>
+  <img src="/assets/screenshots/classify/02-confluence-page-classification-banner-applied.png" alt="A Confluence page showing a visible classification banner at the top of the page." />
+  <figcaption>A Confluence page after a classification banner is applied.</figcaption>
+</figure>
+
+## The three page header styles
+
+Each classification level uses one of three page header styles:
+
+| Style | What page readers see |
+|---|---|
+| **Image** | A full-width background image (a themed header) with the level name and description drawn on top. |
+| **Colour** | A solid colour band using the level's colour. No image. |
+| **None** | No banner at all. The byline dot still shows the level. |
+
+Your space administrator chooses the style per level in
+[Space Settings](/docs/classify/space-settings/#header-image-editor).
+
+## Banner size
+
+The banner's height is a **space-wide** setting: **small**, **medium**, or
+**large** (the default is *medium*). All image and colour banners in the space
+use the same size. Space admins set this in
+[Space Settings → Header image size](/docs/classify/space-settings/#header-image-size).
+
+## Where the banner appears
+
+- On regular **pages** and **blog posts** that have been classified.
+- It does **not** appear on Confluence space-settings or admin pages, even though those technically have a page context. This is intentional, to avoid showing the banner where it does not belong.
+
+## I classified a page but do not see a banner
+
+Check these in order:
+
+1. **Did you refresh?** The banner appears on page reload after classifying.
+2. **What style is the level?** If the level is set to **None**, there is no banner by design — only the byline dot.
+3. **Is the level set to Image but missing an image?** If no image was uploaded, it falls back to no banner. Ask your space admin to add a header image or switch the level to **Colour**.
+
+See [FAQ](/docs/classify/faq/) for more.
+
+## Related
+
+- [Classifying a Page](/docs/classify/classifying-a-page/) — how to apply a level.
+- [Space Settings](/docs/classify/space-settings/) — where banner style, image, and size are configured.

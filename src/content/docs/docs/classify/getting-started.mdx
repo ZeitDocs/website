@@ -1,66 +1,79 @@
 ---
 title: Getting Started
-description: Understand the basic Classify flow for a Confluence page.
+description: Understand the Classify flow from zero, depending on your role.
 ---
 
-# Getting Started
+This guide walks you through classification from the start, depending on your role.
 
-This guide explains the basic Classify flow for a page editor or admin reviewing a Confluence page.
+## I am a page editor
 
-## Before you start
+If your space already has classification enabled, you can classify any page you
+have permission to edit.
 
-Make sure classification levels have been configured for the space or inherited from a global template.
+1. Open the page.
+2. Look at the **byline** — the line near the top showing the author and date. You will see a **Classification** item with a coloured dot.
+3. Click it to open the classification dialog.
+4. Pick the classification level that matches the page's sensitivity.
+5. Wait for the **"Classification saved ✓"** confirmation, then refresh the page.
 
-TODO: Confirm product behavior. Confirm whether a page can be classified before any space configuration exists.
+That is all — the visual banner, label, and restrictions are applied automatically.
 
-## Basic flow
+[GIF recommended: Open a Confluence page, select a classification level, and see the banner appear]
 
-1. Open a Confluence page.
-2. Open the Classify control.
-3. Select a classification level.
-4. Review the visual banner or page header style.
-5. Check permission guidance if it appears.
-
-TODO: Confirm product behavior. Confirm the exact entry point name in the Confluence page UI.
-
-[GIF recommended: Open a Confluence page, select a classification level and see the banner appear]
-
-## Apply a classification to a page
-
-Choose the classification level that best matches the page content.
-
-For example, a general internal policy page may use **Internal**, while a salary planning page may use **Confidential**.
-
-[Screenshot needed: Classification selector on a Confluence page]
-
-Suggested caption:
-Selecting a classification level from a Confluence page.
-
-Suggested alt text:
-A Confluence page showing the Classify classification selection dialog.
-
-## Review the visual banner
-
-After the classification is applied, readers should be able to see the selected level clearly in the page experience.
-
-[Screenshot needed: Page after classification banner is applied]
-
-Suggested caption:
-A Confluence page after a classification banner is applied.
-
-Suggested alt text:
-A Confluence page showing a visible classification banner after a level is selected.
-
-## Check permission guidance
-
-If permission guidance is shown, review whether the page access appears aligned with the selected classification level.
-
-:::caution
-Do not rely on classification alone to protect sensitive content. Review Confluence permissions when access control is required.
+:::note
+If you only see *"Classification is not enabled"*, the space has not been set up
+yet. Ask your space administrator (see below).
 :::
 
-## Next steps for admins
+→ Full details: [Classifying a Page](/docs/classify/classifying-a-page/)
 
-- Review [Managing Classification Levels](../managing-classification-levels/).
-- Review [Visual Banners and Page Header Styles](../visual-banners-page-header-styles/).
-- Review [Permission Guidance](../permission-guidance/).
+## I am a space administrator
+
+You decide whether classification is available in your space and which levels
+people can choose.
+
+1. Open the byline classification dialog on any page, **or** go to your space's **Classification** settings page.
+2. If classification is disabled, click **Enable classification**.
+3. Choose your classification levels in one of two ways:
+   - **Apply a global template** — pick a ready-made set of levels published by your Confluence admin (recommended for consistency).
+   - **Add levels manually** — create your own levels with custom names, colours, banners, labels, and group restrictions.
+4. Save. Page editors in your space can now classify pages.
+
+→ Full details: [Space Settings](/docs/classify/space-settings/)
+
+## I am a Confluence administrator
+
+You manage classification across the whole site.
+
+1. Go to **Apps → Classification Templates**.
+2. Build or edit **global templates** — reusable level sets that space admins can apply.
+3. Optionally use **Space Access Control** to decide which spaces are allowed to use classification at all.
+
+→ Full details: [Global Templates](/docs/classify/global-templates/) and
+[Space Access Control](/docs/classify/space-access-control/)
+
+## How a page gets classified — the big picture
+
+```text
+Confluence admin            Space admin                 Page editor
+─────────────────           ─────────────               ───────────
+Creates templates  ──────▶  Applies a template  ──────▶  Picks a level
+(once, site-wide)           to the space                 on each page
+                            (or builds levels)                 │
+                                                               ▼
+                                          Classify applies banner + label +
+                                          view/edit restrictions + report entry
+```
+
+:::caution
+Do not rely on classification alone to protect sensitive content. Classify
+applies real Confluence restrictions based on each level's groups, but you
+should still review Confluence permissions when strict access control is
+required.
+:::
+
+## Next steps
+
+- [Classifying a Page](/docs/classify/classifying-a-page/)
+- [Space Settings](/docs/classify/space-settings/)
+- [FAQ](/docs/classify/faq/)

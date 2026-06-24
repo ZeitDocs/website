@@ -1,10 +1,12 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightImageZoom from 'starlight-image-zoom';
 
 export default defineConfig({
   site: 'https://www.zeitdocs.com',
   integrations: [
     starlight({
+      plugins: [starlightImageZoom()],
       title: 'Zeitdocs Documentation',
       description: 'Product documentation for Zeitdocs Confluence apps.',
       logo: {
@@ -26,13 +28,12 @@ export default defineConfig({
           items: [
             { label: 'Overview', link: '/docs/classify/' },
             { label: 'Getting Started', link: '/docs/classify/getting-started/' },
-            { label: 'Applying a Classification', link: '/docs/classify/applying-a-classification/' },
-            { label: 'Managing Classification Levels', link: '/docs/classify/managing-classification-levels/' },
-            { label: 'Visual Banners and Page Header Styles', link: '/docs/classify/visual-banners-page-header-styles/' },
-            { label: 'Permission Guidance', link: '/docs/classify/permission-guidance/' },
-            { label: 'Space-Level Configuration', link: '/docs/classify/space-level-configuration/' },
+            { label: 'Classifying a Page', link: '/docs/classify/classifying-a-page/' },
+            { label: 'Page Banner', link: '/docs/classify/page-banner/' },
+            { label: 'Space Settings', link: '/docs/classify/space-settings/' },
             { label: 'Global Templates', link: '/docs/classify/global-templates/' },
-            { label: 'Use Cases', link: '/docs/classify/use-cases/' },
+            { label: 'Space Access Control', link: '/docs/classify/space-access-control/' },
+            { label: 'Classification Report', link: '/docs/classify/classification-report/' },
             { label: 'FAQ', link: '/docs/classify/faq/' },
           ],
         },
