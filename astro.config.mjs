@@ -8,7 +8,7 @@ export default defineConfig({
       title: 'Zeitdocs Documentation',
       description: 'Product documentation for Zeitdocs Confluence apps.',
       logo: {
-        src: './src/assets/brand/zeitdocs-logo.png',
+        src: './src/assets/brand/zeitdocs-logo-no-back.png',
         alt: 'Zeitdocs',
       },
       favicon: '/assets/brand/zeitdocs-logo.png',
