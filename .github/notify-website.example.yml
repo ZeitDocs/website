@@ -1,0 +1,27 @@
+# Copy this file into the APP repo (e.g. ZeitDocs/Classification) at
+#   .github/workflows/notify-website.yml
+# It pings the website repo whenever you publish a GitHub Release, so the
+# changelog/releases page rebuilds automatically.
+#
+# Setup (one-time):
+#   1. Create a fine-grained PAT that can dispatch the website repo:
+#        - Repository access: only ZeitDocs/website
+#        - Permissions: Contents -> Read and write
+#   2. In the APP repo, add it as a secret named WEBSITE_DISPATCH_TOKEN.
+#
+name: Notify website of release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger website rebuild
+        env:
+          GH_TOKEN: ${{ secrets.WEBSITE_DISPATCH_TOKEN }}
+        run: |
+          gh api repos/ZeitDocs/website/dispatches \
+            -f event_type=release-published

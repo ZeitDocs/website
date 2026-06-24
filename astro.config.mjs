@@ -35,6 +35,7 @@ export default defineConfig({
             { label: 'Space Access Control', link: '/docs/classify/space-access-control/' },
             { label: 'Classification Report', link: '/docs/classify/classification-report/' },
             { label: 'FAQ', link: '/docs/classify/faq/' },
+            { label: 'Releases', link: '/docs/classify/releases/' },
           ],
         },
       ],
