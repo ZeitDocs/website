@@ -11,7 +11,7 @@ export default defineConfig({
         src: './src/assets/brand/no-background-zeitdocs.png',
         alt: 'Zeitdocs',
       },
-      favicon: '/assets/brand/zeitdocs-logo.png',
+      favicon: '/assets/brand/no-background-zeitdocs.png',
       customCss: ['./src/styles/starlight.css'],
       social: [
         {
