@@ -1,10 +1,12 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightImageZoom from 'starlight-image-zoom';
 
 export default defineConfig({
   site: 'https://www.zeitdocs.com',
   integrations: [
     starlight({
+      plugins: [starlightImageZoom()],
       title: 'Zeitdocs Documentation',
       description: 'Product documentation for Zeitdocs Confluence apps.',
       logo: {
