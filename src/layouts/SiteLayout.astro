@@ -58,18 +58,12 @@ const isCurrent = (href: string) =>
       <footer class="site-footer">
         <div class="section-inner site-footer__inner">
           <span>&copy; {new Date().getFullYear()} Zeitdocs</span>
-          <nav class="footer-link-groups" aria-label="Footer navigation">
-            <div class="footer-links">
-              <a href={withBase('/products/')}>Products</a>
-              <a href={withBase('/contact/')}>Contact</a>
-            </div>
-            <div class="footer-legal-links" aria-label="Legal and trust links">
-              <a href={withBase('/privacy/')}>Privacy Policy</a>
-              <span aria-hidden="true">·</span>
-              <a href={withBase('/terms/')}>Terms of Use</a>
-              <span aria-hidden="true">·</span>
-              <a href={withBase('/security/')}>Security</a>
-            </div>
+          <nav class="footer-legal-links" aria-label="Legal and trust links">
+            <a href={withBase('/privacy/')}>Privacy Policy</a>
+            <span aria-hidden="true">&middot;</span>
+            <a href={withBase('/terms/')}>Terms of Use</a>
+            <span aria-hidden="true">&middot;</span>
+            <a href={withBase('/security/')}>Security</a>
           </nav>
         </div>
       </footer>

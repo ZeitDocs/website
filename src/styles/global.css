@@ -343,18 +343,6 @@ p {
   font-size: 0.94rem;
 }
 
-.footer-link-groups {
-  display: grid;
-  gap: 10px;
-  justify-items: end;
-}
-
-.footer-links {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-
 .footer-legal-links {
   display: flex;
   gap: 8px;
@@ -363,13 +351,11 @@ p {
   font-size: 0.88rem;
 }
 
-.footer-legal-links a,
-.footer-links a {
+.footer-legal-links a {
   text-decoration: none;
 }
 
-.footer-legal-links a:hover,
-.footer-links a:hover {
+.footer-legal-links a:hover {
   color: var(--zd-blue-700);
 }
 
@@ -436,10 +422,6 @@ p {
   .site-footer__inner {
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .footer-link-groups {
-    justify-items: start;
   }
 
   .hero-grid,
