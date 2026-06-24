@@ -1,0 +1,31 @@
+---
+import SiteLayout from './SiteLayout.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  frontmatter?: {
+    title: string;
+    description: string;
+    canonicalPath: string;
+  };
+}
+
+const frontmatter = Astro.props.frontmatter;
+const title = Astro.props.title ?? frontmatter?.title;
+const description = Astro.props.description ?? frontmatter?.description;
+const canonicalPath = Astro.props.canonicalPath ?? frontmatter?.canonicalPath;
+
+if (!title || !description || !canonicalPath) {
+  throw new Error('Legal pages require title, description and canonicalPath.');
+}
+---
+
+<SiteLayout title={title} description={description} canonicalPath={canonicalPath}>
+  <article class="legal-page section">
+    <div class="section-inner legal-page__inner">
+      <slot />
+    </div>
+  </article>
+</SiteLayout>

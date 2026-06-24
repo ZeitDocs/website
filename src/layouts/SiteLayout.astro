@@ -6,10 +6,12 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
+  canonicalPath?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, canonicalPath } = Astro.props;
 const pathname = Astro.url.pathname;
+const canonicalUrl = new URL(canonicalPath ?? pathname, Astro.site ?? Astro.url).href;
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/products/', label: 'Products' },
@@ -28,6 +30,7 @@ const isCurrent = (href: string) =>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href={withBase('/assets/brand/no-background-zeitdocs.png')} type="image/png" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
     <title>{title}</title>
   </head>
   <body>
@@ -55,10 +58,19 @@ const isCurrent = (href: string) =>
       <footer class="site-footer">
         <div class="section-inner site-footer__inner">
           <span>&copy; {new Date().getFullYear()} Zeitdocs</span>
-          <div class="footer-links">
-            <a href={withBase('/products/')}>Products</a>
-            <a href={withBase('/contact/')}>Contact</a>
-          </div>
+          <nav class="footer-link-groups" aria-label="Footer navigation">
+            <div class="footer-links">
+              <a href={withBase('/products/')}>Products</a>
+              <a href={withBase('/contact/')}>Contact</a>
+            </div>
+            <div class="footer-legal-links" aria-label="Legal and trust links">
+              <a href={withBase('/privacy/')}>Privacy Policy</a>
+              <span aria-hidden="true">·</span>
+              <a href={withBase('/terms/')}>Terms of Use</a>
+              <span aria-hidden="true">·</span>
+              <a href={withBase('/security/')}>Security</a>
+            </div>
+          </nav>
         </div>
       </footer>
     </div>

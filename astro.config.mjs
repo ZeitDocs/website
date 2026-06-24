@@ -15,6 +15,9 @@ export default defineConfig({
       },
       favicon: '/assets/brand/no-background-zeitdocs.png',
       customCss: ['./src/styles/starlight.css'],
+      components: {
+        Footer: './src/components/starlight/Footer.astro',
+      },
       social: [
         {
           icon: 'github',
