@@ -21,6 +21,7 @@ A card showing whether classification is **Enabled** or **Disabled** for the spa
 
 - When **disabled**, the only action is the primary **Enable classification** button. Until you enable it, page editors cannot classify pages.
 - When **enabled**, the levels and other controls appear below.
+- When your levels came from a **global template**, the card also names that template and warns that your levels are template-managed (see below).
 
 ## Classification levels
 
@@ -31,11 +32,29 @@ page editors can pick from.
 
 You have two ways to populate levels:
 
-1. **Apply a global template** (recommended) — use **Add from template** to copy a ready-made set of levels published by your Confluence admin. This keeps your space consistent with the rest of the organisation. Once applied, the levels are **copied into your space** and you can adjust them locally.
+1. **Apply a global template** (recommended) — use **Add from template** to copy a ready-made set of levels published by your Confluence admin. This keeps your space consistent with the rest of the organisation. Once applied, the levels are **copied into your space**.
 2. **Build your own** — use **Add level** to create levels from scratch.
 
-A small hint shows the **template origin** when your levels came from a global
-template, so you know the source.
+The status card names the **template** your levels came from, so you always know
+the source.
+
+:::caution[Template-managed levels]
+While your space is linked to a global template, the template is the source of
+truth for its levels:
+
+> *"Levels here are managed by the **&lt;template&gt;** template. If an
+> administrator updates it, changes you make to these levels are replaced. Unlink
+> to manage them independently."*
+
+You can still edit levels locally, but a Confluence administrator re-applying the
+template to your space **replaces** them with the template's levels.
+
+If your space needs its own levels permanently, ask your Confluence admin to
+adjust the template, or use
+[Unlink](#unlinking-from-a-global-template) and build the levels yourself. Note
+that unlinking **deletes the levels currently in the space** — it does not keep a
+local copy of them.
+:::
 
 ### What is in a classification level
 

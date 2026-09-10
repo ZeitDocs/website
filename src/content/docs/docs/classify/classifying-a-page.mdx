@@ -21,6 +21,7 @@ This is the main place where day-to-day classification happens.
 | A coloured dot and level name | The page is classified at that level. Hover for the level description. |
 | A grey or disabled icon | Classification is enabled in the space, but this page is not classified yet. |
 | Just "Classification" with no coloured dot | Classification is not available here (disabled, or the space is blocked). |
+| "Classification" with the tooltip *"Classification level no longer exists"* | The page was classified at a level that has since been removed from the space — see below. |
 
 ## Classifying or re-classifying a page
 
@@ -61,6 +62,33 @@ change:
 
 This prevents a page reader with view-only access from changing a page's
 restrictions.
+
+## If the page's classification level no longer exists
+
+A classification level can be removed from a space — a space admin deletes it, or
+an administrator re-applies a global template that no longer contains it. Pages
+already classified at that level are **not** changed automatically.
+
+When you open the byline on such a page, Classify tells you:
+
+> *"This page was classified at a level that no longer exists in this space. Its
+> current label and restrictions still come from that level — choose a level below
+> to update them."*
+
+No level is marked **Current**, and the byline itself shows a plain
+**Classification** item with no coloured dot.
+
+What this means in practice:
+
+- The page **keeps** the Confluence label and the view and edit restrictions of
+  the removed level. Nothing has been unlocked.
+- What the page *displays* no longer matches a level your space offers, so
+  readers have no reliable indicator.
+- Picking any level from the list clears the old label and restrictions and
+  applies the new ones, which resolves it.
+
+If you only have view access, you see the same explanation with a note that
+someone with edit access needs to re-classify the page.
 
 ## First time in a space (onboarding)
 
