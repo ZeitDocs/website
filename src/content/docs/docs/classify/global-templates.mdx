@@ -1,6 +1,6 @@
 ---
 title: Global Templates
-description: How Confluence administrators define reusable classification templates and apply them across spaces.
+description: How Confluence administrators define reusable classification templates and roll them out across spaces.
 ---
 
 The **Classification Templates** screen (under **Apps → Classification
@@ -22,10 +22,14 @@ same levels described in
 (name, colour, description, view and edit groups, label, page header style and
 image).
 
-When a space admin applies a template, the levels are **deep-copied** into that
-space. The space then runs independently — later edits to the template do not
-retroactively change spaces that already applied it (they re-apply to pick up
-changes).
+When a template is applied to a space, the levels are **copied into that space**
+and the space becomes **linked** to the template. A space is linked to **exactly
+one template at a time**: applying a different template moves the link across.
+
+Linked spaces are **template-managed**. When you re-apply a template — for
+example after editing one of its levels — the linked spaces you select receive
+the updated levels. To make a space independent again, the space admin uses
+**Unlink** in Space Settings.
 
 ## The template library
 
@@ -33,6 +37,9 @@ The screen lists all global templates. Classify ships with **6 predefined
 templates** (for example *Enterprise Standard* and *Simple Business*) that are
 seeded automatically the first time you open the screen. You can use these as
 they are, edit them, or add your own.
+
+At the bottom of the list you will also find **Documentation** and **Support**
+links, which open this guide and the Zeitdocs support portal.
 
 ### Creating or editing a template
 
@@ -49,35 +56,137 @@ a template to retire it without deleting it.
 
 ## Applying a template to spaces
 
-From a template you can push it to many spaces at once via **Apply to Spaces**:
+From a template, open **Apply to Spaces** to roll it out. The screen guides you
+through four steps: **select → confirm → progress → result**.
 
-1. Open the **Apply to Spaces** panel for the template.
-2. Search and select the spaces (paginated 25 per page).
-   - Spaces already linked to this template are **pre-selected, greyed out, and marked "Already linked"** — you cannot double-apply.
-   - The selection count and Apply button reflect only **new** selections.
-3. Click **Apply**.
-   - If some spaces already have a configuration, you see a **conflict prompt** — confirm to **override** them, or cancel.
-4. Classify applies the levels and updates the template's linked-spaces list.
+Rollouts run **in the background**, so a template can be applied to hundreds of
+spaces in a single action.
 
 <figure>
-  <img src="/assets/screenshots/classify/07-apply-to-spaces-panel.png" alt="The Apply to Spaces panel showing a searchable list of spaces, some selected and some marked as already linked." />
-  <figcaption>Applying a global template to multiple spaces.</figcaption>
+  <img src="/assets/screenshots/classify/10-apply-to-spaces-select.png" alt="The Apply to Spaces screen showing a search box, buttons to select the page or all spaces, and a list of spaces with checkboxes, several marked Already linked." />
+  <figcaption>Choosing the spaces to receive a template. Spaces marked <em>Already linked</em> stay selectable.</figcaption>
 </figure>
 
-### Spaces that get skipped
+### 1. Select the spaces
 
-Any space **blocked by Space Access Control** is skipped automatically — it is
-never written, even if you selected it. The result shows an info message such as:
+The space list is searchable and paginated at **25 spaces per page**. A selection
+can span several pages, so the **selected count** is shown above the list and
+always reflects your whole selection, not just the current page.
 
-> *"N skipped — blocked by Space Access Control: …"*
+Four buttons help with large selections:
 
-This is a safety guard: an admin cannot accidentally classify a space that policy
-forbids. See [Space Access Control](/docs/classify/space-access-control/).
+| Button | Selects |
+|---|---|
+| **Select page** | Every space on the current page. |
+| **Select all matching** | Every space matching your current search. |
+| **Select all spaces** | Every space in the site. |
+| **Clear** | Nothing — empties the selection. |
+
+Spaces that already use this template carry an **"Already linked"** badge. This
+is information only: the row stays selectable, and selecting it means the space
+will be **updated** with the template's current levels.
+
+:::note[Very large sites]
+On sites with a very large number of spaces, Classify may not be able to list
+every space in one request. When that happens, a warning appears above the list
+telling you that the list is incomplete. Use the search box to narrow down to the
+spaces you need, and note that **Select all spaces** can only select the spaces
+that were listed.
+:::
+
+### 2. Confirm what will happen
+
+Before anything is written, Classify shows a summary of your selection, grouped
+by what will happen to each space:
+
+| Group | Meaning |
+|---|---|
+| **Will be configured** | The space has no classification configuration yet, or one with no levels. The template will be applied. |
+| **Already use this template — will be updated** | The space is linked to this template and will receive its current levels. |
+| **Use another template — not changed** | The space is configured from a different template and is left untouched, unless you choose to replace it. |
+| **Blocked by Space Access Control** | The space is blocked by policy and is **never** written. |
+
+A **Replace existing templates in selected spaces** checkbox sits below the
+summary. It is **unchecked by default**. Ticking it moves the *Use another
+template* spaces into the group that will be written, and the summary updates
+immediately, so you can see the effect before you commit.
+
+<figure>
+  <img src="/assets/screenshots/classify/11-apply-to-spaces-confirm.png" alt="The Apply template confirmation dialog listing the four outcome groups with their counts, an unticked Replace existing templates checkbox, and Apply and Cancel buttons." />
+  <figcaption>The confirmation summary. Here all eleven selected spaces already use the template, so they will be updated.</figcaption>
+</figure>
+
+:::caution[Re-applying overwrites local changes]
+A linked space is managed by its template. When a space is configured or updated
+by a rollout, any classification levels a space admin edited locally in that
+space are **replaced** by the template's levels. The confirmation summary tells
+you how many spaces this affects before you start.
+
+Space admins are warned about this in Space Settings whenever their levels come
+from a template.
+:::
+
+:::note[Blocked spaces are always protected]
+**Replace existing templates** never overrides Space Access Control. A blocked
+space is skipped whatever you select or tick. See
+[Space Access Control](/docs/classify/space-access-control/).
+
+A space whose configuration cannot be identified as coming from a known template
+— for example one set up before templates were introduced — is treated as *Use
+another template*, so it is protected rather than silently overwritten.
+:::
+
+### 3. Progress
+
+Once the rollout starts, a progress bar shows how many of the selected spaces
+have been processed.
+
+The work runs **in the background on Atlassian's servers**, not in your browser.
+You can close the panel, navigate away, or close the browser entirely, and the
+rollout continues. If you reopen **Apply to Spaces** for the same template while
+a rollout is still running, the progress screen reappears automatically.
+
+<figure>
+  <img src="/assets/screenshots/classify/12-apply-to-spaces-progress.png" alt="A rollout in progress, showing an In progress message saying the page can be closed, a progress bar, the number of spaces processed, and a running count for each outcome." />
+  <figcaption>A rollout of 530 spaces starting. The counts fill in as batches complete.</figcaption>
+</figure>
+
+### 4. Result
+
+When the rollout finishes, you get the outcome for every space in the selection:
+
+- **Configured or updated** — the spaces that received the template.
+- **Use another template** — the spaces left untouched.
+- **Blocked by Space Access Control** — the spaces skipped by policy.
+- **Spaces that failed** — listed individually with the space key, its name, and the reason.
+
+<figure>
+  <img src="/assets/screenshots/classify/13-apply-to-spaces-result.png" alt="A completed rollout showing a Completed badge, a full progress bar, and the outcome counts: eleven spaces configured or updated and none skipped or failed." />
+  <figcaption>A completed rollout. Any spaces that failed are listed below the summary, with a retry action.</figcaption>
+</figure>
+
+#### Retrying failed spaces
+
+If any spaces failed, a **retry** action re-runs the rollout for **those spaces
+only**. A retry:
+
+- keeps the **Replace existing templates** choice made for the original rollout,
+  so it can never widen what gets overwritten;
+- re-checks each space against its **current** state, so a space that has since
+  been reconfigured, blocked or deleted is handled correctly;
+- is itself retryable, up to a small fixed number of attempts.
+
+Some failures are reported as permanent — for example, the template was deleted
+while the rollout was running. In that case Classify tells you that retrying will
+not help, so you can fix the cause first.
 
 ## Seeing which spaces use a template
 
 Each template shows its **linked spaces** as pills (up to 5). If more than five
 spaces are linked, a **"+N more"** link opens a dialog listing them all.
+
+Because a space is linked to exactly one template, applying a new template to a
+space also removes it from the linked-spaces list of the template it used before.
 
 ## Manage access
 
@@ -89,7 +198,9 @@ at all. See [Space Access Control](/docs/classify/space-access-control/).
 
 - **Edit the predefined templates** rather than starting from scratch — they cover common classification schemes.
 - **Disable instead of delete** when retiring a scheme, so existing spaces keep working.
-- Changing a template does **not** auto-update spaces that already applied it — re-apply the template (with override) to push changes out.
+- To push a template change out, edit the template and then **re-apply it to the spaces that use it** — select them in Apply to Spaces and confirm.
+- **Read the confirmation summary** before starting a large rollout. It is the point at which you can still see how many spaces will be overwritten.
+- Roll out to a **small group of spaces first** when trying out a new template, then repeat for the rest.
 
 ## Related
 
