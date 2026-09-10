@@ -62,7 +62,10 @@ through four steps: **select → confirm → progress → result**.
 Rollouts run **in the background**, so a template can be applied to hundreds of
 spaces in a single action.
 
-[Screenshot needed: The Apply to Spaces selection step, showing the search box, the select-all buttons, the selected count, and a space row carrying the "Already linked" badge.]
+<figure>
+  <img src="/assets/screenshots/classify/10-apply-to-spaces-select.png" alt="The Apply to Spaces screen showing a search box, buttons to select the page or all spaces, and a list of spaces with checkboxes, several marked Already linked." />
+  <figcaption>Choosing the spaces to receive a template. Spaces marked <em>Already linked</em> stay selectable.</figcaption>
+</figure>
 
 ### 1. Select the spaces
 
@@ -108,6 +111,11 @@ summary. It is **unchecked by default**. Ticking it moves the *Use another
 template* spaces into the group that will be written, and the summary updates
 immediately, so you can see the effect before you commit.
 
+<figure>
+  <img src="/assets/screenshots/classify/11-apply-to-spaces-confirm.png" alt="The Apply template confirmation dialog listing the four outcome groups with their counts, an unticked Replace existing templates checkbox, and Apply and Cancel buttons." />
+  <figcaption>The confirmation summary. Here all eleven selected spaces already use the template, so they will be updated.</figcaption>
+</figure>
+
 :::caution[Re-applying overwrites local changes]
 A linked space is managed by its template. When a space is configured or updated
 by a rollout, any classification levels a space admin edited locally in that
@@ -138,7 +146,10 @@ You can close the panel, navigate away, or close the browser entirely, and the
 rollout continues. If you reopen **Apply to Spaces** for the same template while
 a rollout is still running, the progress screen reappears automatically.
 
-[Screenshot needed: The rollout progress screen, showing the progress bar and the message that the rollout continues in the background.]
+<figure>
+  <img src="/assets/screenshots/classify/12-apply-to-spaces-progress.png" alt="A rollout in progress, showing an In progress message saying the page can be closed, a progress bar, the number of spaces processed, and a running count for each outcome." />
+  <figcaption>A rollout of 530 spaces starting. The counts fill in as batches complete.</figcaption>
+</figure>
 
 ### 4. Result
 
@@ -149,7 +160,10 @@ When the rollout finishes, you get the outcome for every space in the selection:
 - **Blocked by Space Access Control** — the spaces skipped by policy.
 - **Spaces that failed** — listed individually with the space key, its name, and the reason.
 
-[Screenshot needed: The rollout result screen, showing the outcome summary table and the list of failed spaces with their reasons.]
+<figure>
+  <img src="/assets/screenshots/classify/13-apply-to-spaces-result.png" alt="A completed rollout showing a Completed badge, a full progress bar, and the outcome counts: eleven spaces configured or updated and none skipped or failed." />
+  <figcaption>A completed rollout. Any spaces that failed are listed below the summary, with a retry action.</figcaption>
+</figure>
 
 #### Retrying failed spaces
 
