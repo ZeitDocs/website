@@ -72,6 +72,7 @@ Each classification level has:
 | **Label** | The Confluence label added to classified pages (for example `INTERNAL`). |
 | **Page header style** | `image`, `colour`, or `none` — see [Page Banner](/docs/classify/page-banner/). |
 | **Header image** | The banner background, when the style is `image`. |
+| **Banner text size** | How large the level name and description appear on the banner — see [Banner text size](#banner-text-size). |
 
 :::caution
 The view and edit groups directly change who can access a page. Double-check
@@ -95,10 +96,47 @@ When a level's page header style is **Image**, you get a header image editor:
 Images are saved automatically when you save the level — there is no separate
 "save image" button.
 
+The level name and description are **not** part of the saved image. They are
+drawn over it when the page is displayed. This is what allows them to resize to
+fit the banner, and it means you can change the wording later without touching
+the background.
+
 <figure>
   <img src="/assets/screenshots/classify/04-space-settings-predefined-background.png" alt="The Classify header image editor showing a background image with the level name and description positioned on top." />
   <figcaption>Editing a classification level's header image.</figcaption>
 </figure>
+
+:::caution[Levels created before this change]
+A classification level whose header image was created earlier still has its text
+inside the image. It keeps rendering exactly as before, but it ignores the banner
+text size controls and does not resize to fit.
+
+To convert one, re-select its background (**Select background** or **Upload
+background**) and save. The editor shows a hint when a level is in this state.
+:::
+
+### Banner text size
+
+Each classification level sets its own text size for the banner:
+
+| Setting | Range | Default |
+|---|---|---|
+| **Level name** | 16–72 | 42 |
+| **Description** | 10–32 | 20 |
+
+These are authoring sizes rather than final pixel sizes. What page readers
+actually see also depends on the space's
+[header image size](#header-image-size): a **Small** banner has very little room,
+so large values are scaled back down to fit.
+
+The editor shows the size each choice will really produce at your current header
+image size, and tells you when the banner is too short for the difference to show
+— in that case, switch the space to **Auto**.
+
+These controls sit in the level form, so they apply to **Colour** page header
+styles as well as **Image** ones.
+
+[Screenshot needed: the Banner text size controls in the level form, showing the rendered size hint beneath a slider]
 
 ### Manage global templates
 
@@ -109,8 +147,31 @@ It is hidden for non-admins and while you are editing a level.
 ## Header image size
 
 A secondary setting at the bottom controls the banner **height** for the whole
-space: **small**, **medium** (the default), or **large**. This applies to every
-image and colour banner in the space.
+space. It applies to every image and colour banner in the space.
+
+| Size | Height |
+|---|---|
+| **Small** | 80px |
+| **Medium** *(the default)* | 160px |
+| **Large** | 240px |
+| **Auto** | Grows to fit the description, between 80px and 320px |
+
+**Auto** is the option to choose when your level descriptions run long. The fixed
+sizes shrink the text until it fits the banner; **Auto** keeps the text at its
+configured size and grows the banner instead.
+
+The trade-off is that a text position you dragged in the header image editor is
+not applied in **Auto** mode — the level name and description use a standard
+stacked layout. See [Page Banner](/docs/classify/page-banner/#banner-size) for
+the full comparison.
+
+:::note[When a global template sets the size]
+If your Confluence admin has set a header image size on the **global template**
+your levels came from, a note here tells you which size that is.
+
+Your local choice still applies day to day, but re-applying the template will
+replace it — in the same way it replaces the levels.
+:::
 
 ## Unlinking from a global template
 
