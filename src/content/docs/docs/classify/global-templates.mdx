@@ -19,8 +19,9 @@ colours, labels, and restrictions.
 A global template is a named, reusable set of **classification levels** — the
 same levels described in
 [Space Settings](/docs/classify/space-settings/#what-is-in-a-classification-level)
-(name, colour, description, view and edit groups, label, page header style and
-image).
+(name, colour, description, view and edit groups, label, page header style,
+image and banner text size) — and, optionally, a
+[header image size](#header-image-size-on-a-template) for the whole space.
 
 When a template is applied to a space, the levels are **copied into that space**
 and the space becomes **linked** to the template. A space is linked to **exactly
@@ -106,6 +107,9 @@ by what will happen to each space:
 | **Use another template — not changed** | The space is configured from a different template and is left untouched, unless you choose to replace it. |
 | **Blocked by Space Access Control** | The space is blocked by policy and is **never** written. |
 
+If the template sets a **header image size**, the summary names it, so you can
+see that the rollout will also change the banner height in the spaces it reaches.
+
 A **Replace existing templates in selected spaces** checkbox sits below the
 summary. It is **unchecked by default**. Ticking it moves the *Use another
 template* spaces into the group that will be written, and the summary updates
@@ -180,6 +184,36 @@ Some failures are reported as permanent — for example, the template was delete
 while the rollout was running. In that case Classify tells you that retrying will
 not help, so you can fix the cause first.
 
+## Header image size on a template
+
+A global template can optionally carry a **header image size** — **Small**,
+**Medium**, **Large** or **Auto** — alongside its classification levels. This is
+the way to change the banner height across a whole Confluence site without
+opening every space.
+
+| Setting | What happens on a rollout |
+|---|---|
+| **A size is set** | Every space the template reaches gets that size, replacing whatever the space admin had chosen locally. |
+| **No size is set** | Each space keeps its own size. This is the default, and templates created before this option existed behave this way. |
+
+Leave it unset when spaces should decide their own banner height, and set it when
+you want one consistent height everywhere.
+
+:::caution[A size on the template overrides the space]
+Because a rollout replaces a space admin's own choice, Classify shows the size in
+the confirmation summary before you start, and Space Settings tells space admins
+which size their template sets.
+:::
+
+A template's header image size only reaches a space when the template is
+**applied**. Changing it on the template alone changes nothing until you re-apply
+the template to the spaces that use it.
+
+See [Page Banner](/docs/classify/page-banner/#banner-size) for what each size
+looks like to page readers.
+
+[Screenshot needed: the header image size selector in the global template editor]
+
 ## Seeing which spaces use a template
 
 Each template shows its **linked spaces** as pills (up to 5). If more than five
@@ -201,6 +235,7 @@ at all. See [Space Access Control](/docs/classify/space-access-control/).
 - To push a template change out, edit the template and then **re-apply it to the spaces that use it** — select them in Apply to Spaces and confirm.
 - **Read the confirmation summary** before starting a large rollout. It is the point at which you can still see how many spaces will be overwritten.
 - Roll out to a **small group of spaces first** when trying out a new template, then repeat for the rest.
+- **Set a header image size on the template** when you want one consistent banner height across the site; leave it unset to let each space decide.
 
 ## Related
 
