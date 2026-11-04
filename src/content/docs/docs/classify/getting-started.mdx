@@ -3,12 +3,24 @@ title: Getting Started
 description: Understand the Classify flow from zero, depending on your role.
 ---
 
+import { CardGrid, LinkCard, Steps } from '@astrojs/starlight/components';
+import Placeholder from '../../../../components/docs/Placeholder.astro';
+import ClassificationFlow from '../../../../components/docs/ClassificationFlow.astro';
+
 This guide walks you through classification from the start, depending on your role.
+
+<div class="zd-role-cards">
+  <LinkCard title="Page editor" description="Classify the pages you edit." href="#i-am-a-page-editor" />
+  <LinkCard title="Space admin" description="Enable classification and choose levels for your space." href="#i-am-a-space-administrator" />
+  <LinkCard title="Confluence admin" description="Manage classification across the whole site." href="#i-am-a-confluence-administrator" />
+</div>
 
 ## I am a page editor
 
 If your space already has classification enabled, you can classify any page you
 have permission to edit.
+
+<Steps>
 
 1. Open the page.
 2. Look at the **byline** — the line near the top showing the author and date. You will see a **Classification** item with a coloured dot.
@@ -16,21 +28,27 @@ have permission to edit.
 4. Pick the classification level that matches the page's sensitivity.
 5. Wait for the **"Classification saved ✓"** confirmation, then refresh the page.
 
+</Steps>
+
 That is all — the visual banner, label, and restrictions are applied automatically.
 
+<Placeholder>
 [GIF recommended: Open a Confluence page, select a classification level, and see the banner appear]
+</Placeholder>
 
 :::note
 If you only see *"Classification is not enabled"*, the space has not been set up
 yet. Ask your space administrator (see below).
 :::
 
-→ Full details: [Classifying a Page](/docs/classify/classifying-a-page/)
+<LinkCard title="Classifying a Page" description="Full details for page editors." href="/docs/classify/classifying-a-page/" />
 
 ## I am a space administrator
 
 You decide whether classification is available in your space and which levels
 people can choose.
+
+<Steps>
 
 1. Open the byline classification dialog on any page, **or** go to your space's **Classification** settings page.
 2. If classification is disabled, click **Enable classification**.
@@ -39,31 +57,30 @@ people can choose.
    - **Add levels manually** — create your own levels with custom names, colours, banners, labels, and group restrictions.
 4. Save. Page editors in your space can now classify pages.
 
-→ Full details: [Space Settings](/docs/classify/space-settings/)
+</Steps>
+
+<LinkCard title="Space Settings" description="Full details for space administrators." href="/docs/classify/space-settings/" />
 
 ## I am a Confluence administrator
 
 You manage classification across the whole site.
 
+<Steps>
+
 1. Go to **Apps → Classification Templates**.
 2. Build or edit **global templates** — reusable level sets that space admins can apply.
 3. Optionally use **Space Access Control** to decide which spaces are allowed to use classification at all.
 
-→ Full details: [Global Templates](/docs/classify/global-templates/) and
-[Space Access Control](/docs/classify/space-access-control/)
+</Steps>
+
+<CardGrid>
+  <LinkCard title="Global Templates" description="Define levels once and roll them out to spaces." href="/docs/classify/global-templates/" />
+  <LinkCard title="Space Access Control" description="Choose which spaces can use classification." href="/docs/classify/space-access-control/" />
+</CardGrid>
 
 ## How a page gets classified — the big picture
 
-```text
-Confluence admin            Space admin                 Page editor
-─────────────────           ─────────────               ───────────
-Creates templates  ──────▶  Applies a template  ──────▶  Picks a level
-(once, site-wide)           to the space                 on each page
-                            (or builds levels)                 │
-                                                               ▼
-                                          Classify applies banner + label +
-                                          view/edit restrictions + report entry
-```
+<ClassificationFlow />
 
 :::danger[Classification does not replace a permission review]
 Do not rely on classification alone to protect sensitive content. Classify

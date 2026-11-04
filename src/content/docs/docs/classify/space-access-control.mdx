@@ -3,6 +3,8 @@ title: Space Access Control
 description: How Confluence administrators decide which spaces are allowed to use classification.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 Space Access Control decides **which spaces are allowed to use classification at
 all**. It is a site-wide policy that overrides everything else — if a space is
 blocked here, no one (not even a space admin) can classify pages there.
@@ -26,10 +28,14 @@ When the mode is **All spaces**, the space list is ignored.
 
 ## Setting it up
 
+<Steps>
+
 1. Open **Manage access**.
 2. Choose a mode.
 3. If you picked *Allowed spaces only* or *Blocked spaces*, a **space picker** appears — search and select the relevant spaces (with pagination).
 4. Save.
+
+</Steps>
 
 :::note[Very large sites]
 On sites with a very large number of spaces, Classify may not be able to list

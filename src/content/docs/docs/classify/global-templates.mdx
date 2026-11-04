@@ -3,11 +3,20 @@ title: Global Templates
 description: How Confluence administrators define reusable classification templates and roll them out across spaces.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+import Placeholder from '../../../../components/docs/Placeholder.astro';
+
 The **Classification Templates** screen (under **Apps → Classification
 Templates**) is where a Confluence administrator defines classification **once
 for the whole site** and rolls it out to many spaces consistently. This is the
 recommended way to keep every space using the same classification levels,
 colours, labels, and restrictions.
+
+On this page:
+
+- [What a global template is](#what-a-global-template-is) and how to [create or edit one](#creating-or-editing-a-template).
+- [Applying a template to spaces](#applying-a-template-to-spaces), in four steps from selecting spaces to the result.
+- [Header image size on a template](#header-image-size-on-a-template) and [which spaces use a template](#seeing-which-spaces-use-a-template).
 
 <figure>
   <img src="/assets/screenshots/classify/06-space-templates.png" alt="The Classify Classification Templates screen showing a list of global templates with their classification levels." />
@@ -44,10 +53,14 @@ links, which open this guide and the Zeitdocs support portal.
 
 ### Creating or editing a template
 
+<Steps>
+
 1. Add a new template or open an existing one.
 2. Give it a **name** and **description**.
 3. Add **classification levels** — the same fields as space levels.
 4. Save.
+
+</Steps>
 
 ### Enabling or disabling a template
 
@@ -212,7 +225,9 @@ the template to the spaces that use it.
 See [Page Banner](/docs/classify/page-banner/#banner-size) for what each size
 looks like to page readers.
 
+<Placeholder>
 [Screenshot needed: the header image size selector in the global template editor]
+</Placeholder>
 
 ## Seeing which spaces use a template
 

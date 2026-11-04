@@ -3,6 +3,8 @@ title: Classifying a Page
 description: How page editors apply a classification level from the page byline.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 The **byline** is the line near the top of every page showing who created it and
 when. When classification is enabled in your space, a **Classification** item
 appears there with a coloured dot indicating the page's current level.
@@ -25,16 +27,19 @@ This is the main place where day-to-day classification happens.
 
 ## Classifying or re-classifying a page
 
+<Steps>
+
 1. Click the **Classification** item in the byline.
 2. The dialog opens showing the available classification levels for your space.
 3. Click the level you want. Each level shows its colour and description.
 4. The dialog shows **"Saving classification…"** — a short, multi-step save. **Do not refresh the page yet.**
 5. When you see **"Classification saved ✓ — refresh the page now"**, click **Done** and refresh.
 
+</Steps>
+
 :::caution[Wait for the confirmation before refreshing]
-Applying a classification is several
-steps (restrictions, then label, then status, then tracking). If you refresh the
-page in the middle of the save, the restriction tracking can desync and your
+Applying a classification is several steps (restrictions, then label, then
+status, then tracking). If you refresh the page in the middle of the save, the restriction tracking can desync and your
 *next* classification change may remove the wrong groups (restrictions appear to
 accumulate). Always wait for the green confirmation before refreshing.
 :::
