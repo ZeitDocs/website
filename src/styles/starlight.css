@@ -1,8 +1,23 @@
+/*
+ * Starlight styles live in cascade layers (@layer starlight.*). Everything in
+ * this file is unlayered, so it always wins over Starlight's defaults.
+ *
+ * Starlight's neutral scale is theme-relative:
+ * - Dark theme: --sl-color-white is the lightest (text), --sl-color-black the darkest (background).
+ * - Light theme: the scale is inverted. --sl-color-white is the darkest (text) and
+ *   --sl-color-black is the page background.
+ * Always set the neutral scale per theme, never once for both.
+ */
+
 :root {
   --sl-font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --sl-color-accent-low: #d7eef6;
-  --sl-color-accent: #2f7591;
-  --sl-color-accent-high: #20201d;
+}
+
+/* Dark theme (Starlight default) */
+:root {
+  --sl-color-accent-low: #173545;
+  --sl-color-accent: #8bc9df;
+  --sl-color-accent-high: #eef8fb;
   --sl-color-white: #ffffff;
   --sl-color-gray-1: #faf9f6;
   --sl-color-gray-2: #f1eee8;
@@ -11,16 +26,52 @@
   --sl-color-gray-5: #6d6b65;
   --sl-color-gray-6: #4a4a45;
   --sl-color-black: #20201d;
+
+  /* Callouts */
+  --zd-note-bg: #17303b;
+  --zd-note-border: #5fa9c6;
+  --zd-note-title: #a9d8ea;
+  --zd-caution-bg: #3a2a1b;
+  --zd-caution-border: #e0954f;
+  --zd-caution-title: #f5c79a;
+  --zd-danger-bg: #3b2222;
+  --zd-danger-border: #d77a7a;
+  --zd-danger-title: #f2b8b8;
+  --zd-callout-text: #f1eee8;
+  --zd-callout-outline: rgba(255, 255, 255, 0.08);
 }
 
-:root[data-theme='dark'] {
-  --sl-color-accent-low: #173545;
-  --sl-color-accent: #8bc9df;
-  --sl-color-accent-high: #eef8fb;
+/* Light theme: off-white canvas, dark warm text */
+:root[data-theme='light'] {
+  --sl-color-accent-low: #d7eef6;
+  --sl-color-accent: #2f7591;
+  --sl-color-accent-high: #1f5568;
+  --sl-color-white: #20201d;
+  --sl-color-gray-1: #2b2b28;
+  --sl-color-gray-2: #3a3a36;
+  --sl-color-gray-3: #55534e;
+  --sl-color-gray-4: #8a857c;
+  --sl-color-gray-5: #ded9cf;
+  --sl-color-gray-6: #f1eee8;
+  --sl-color-gray-7: #faf9f6;
+  --sl-color-black: #ffffff;
+
+  /* Callouts */
+  --zd-note-bg: #eef7fb;
+  --zd-note-border: #5fa9c6;
+  --zd-note-title: #1f5568;
+  --zd-caution-bg: #fdf3ea;
+  --zd-caution-border: #ed9852;
+  --zd-caution-title: #8a4813;
+  --zd-danger-bg: #fbeeee;
+  --zd-danger-border: #c96a6a;
+  --zd-danger-title: #8a2f2f;
+  --zd-callout-text: #3a3a36;
+  --zd-callout-outline: #e7e2d9;
 }
 
 .sl-markdown-content a {
-  color: #2f7591;
+  color: var(--sl-color-text-accent);
 }
 
 .sl-markdown-content table {
@@ -29,4 +80,44 @@
 
 .sl-markdown-content blockquote {
   border-inline-start-color: #ed9852;
+}
+
+/*
+ * Callouts (:::note, :::tip, :::caution, :::danger)
+ * Note and Tip: blue, for context. Caution: orange, for actions that overwrite
+ * or are hard to undo. Danger: muted red, for security-relevant warnings only.
+ */
+.starlight-aside {
+  color: var(--zd-callout-text);
+  border: 1px solid var(--zd-callout-outline);
+  border-inline-start-width: 3px;
+  border-radius: 0.5rem;
+  padding: 0.9rem 1.1rem;
+}
+
+.starlight-aside--note,
+.starlight-aside--tip {
+  --sl-color-asides-text-accent: var(--zd-note-title);
+  background-color: var(--zd-note-bg);
+  border-inline-start-color: var(--zd-note-border);
+}
+
+.starlight-aside--caution {
+  --sl-color-asides-text-accent: var(--zd-caution-title);
+  background-color: var(--zd-caution-bg);
+  border-inline-start-color: var(--zd-caution-border);
+}
+
+.starlight-aside--danger {
+  --sl-color-asides-text-accent: var(--zd-danger-title);
+  background-color: var(--zd-danger-bg);
+  border-inline-start-color: var(--zd-danger-border);
+}
+
+.starlight-aside__title {
+  font-size: 1rem;
+}
+
+.starlight-aside__content a {
+  color: var(--sl-color-asides-text-accent);
 }
