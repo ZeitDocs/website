@@ -3,12 +3,19 @@ title: Space Settings
 description: How space administrators enable classification, manage levels, and configure banners for a space.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+import Placeholder from '../../../../components/docs/Placeholder.astro';
+
 Space Settings is where a space administrator turns classification **on** for a
 space, chooses the **classification levels** people can apply, and sets the
 banner **size**. You reach it from your space's **Classification** settings page,
 or through the byline onboarding flow.
 
-The page has three sections, top to bottom.
+The page has three sections, top to bottom:
+
+- [Status](#status) — turn classification on or off for the space.
+- [Classification levels](#classification-levels) — the levels people can apply, and how each banner looks.
+- [Header image size](#header-image-size) — the banner height for the whole space.
 
 <figure>
   <img src="/assets/screenshots/classify/03-space-settings-level-cards.png" alt="The Classify Space Settings page showing the enabled status, classification levels, and header image size." />
@@ -136,7 +143,9 @@ image size, and tells you when the banner is too short for the difference to sho
 These controls sit in the level form, so they apply to **Colour** page header
 styles as well as **Image** ones.
 
+<Placeholder>
 [Screenshot needed: the Banner text size controls in the level form, showing the rendered size hint beneath a slider]
+</Placeholder>
 
 ### Manage global templates
 
@@ -177,9 +186,13 @@ replace it — in the same way it replaces the levels.
 
 If your levels came from a global template and you want to start fresh:
 
+<Steps>
+
 1. Use the **Unlink** action.
 2. Confirm in the warning dialog.
 3. The space resets to **disabled with no levels**, and is removed from the template's linked-spaces list.
+
+</Steps>
 
 After unlinking you can re-apply a different global template or build levels
 manually.

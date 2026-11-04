@@ -1,0 +1,141 @@
+---
+/**
+ * "How a page gets classified" flow for the Getting Started page.
+ * Three role steps, then what Classify applies to the page.
+ */
+const steps = [
+  { role: 'Confluence admin', action: 'Creates templates', detail: 'Once, site-wide' },
+  { role: 'Space admin', action: 'Applies a template to the space', detail: 'Or builds levels manually' },
+  { role: 'Page editor', action: 'Picks a level on each page', detail: 'From the byline' },
+];
+
+const results = ['Visual banner', 'Label', 'View and edit restrictions', 'Report entry'];
+---
+
+<div class="zd-flow not-content">
+  <ol class="zd-flow__steps">
+    {
+      steps.map((step) => (
+        <li class="zd-flow__step">
+          <span class="zd-flow__role">{step.role}</span>
+          <span class="zd-flow__action">{step.action}</span>
+          <span class="zd-flow__detail">{step.detail}</span>
+        </li>
+      ))
+    }
+  </ol>
+
+  <div class="zd-flow__result">
+    <p class="zd-flow__result-title">Classify then applies to the page:</p>
+    <ul class="zd-flow__chips">
+      {results.map((item) => <li>{item}</li>)}
+    </ul>
+  </div>
+</div>
+
+<style>
+  .zd-flow {
+    margin-block: 1.5rem;
+  }
+
+  .zd-flow__steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .zd-flow__step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-top: 3px solid var(--zd-note-border);
+    border-radius: 0.5rem;
+    background: var(--sl-color-bg);
+    box-shadow: var(--sl-shadow-sm);
+  }
+
+  /* Arrow between steps (decorative, hidden from screen readers). */
+  .zd-flow__step:not(:last-child)::after {
+    content: '→' / '';
+    position: absolute;
+    inset-inline-end: -1.45rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--zd-note-border);
+    font-size: 1.1rem;
+  }
+
+  .zd-flow__role {
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--zd-note-title);
+  }
+
+  .zd-flow__action {
+    font-weight: 600;
+    color: var(--sl-color-white);
+    line-height: 1.35;
+  }
+
+  .zd-flow__detail {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+
+  .zd-flow__result {
+    margin-top: 1.25rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--zd-callout-outline);
+    border-inline-start: 3px solid var(--zd-caution-border);
+    border-radius: 0.5rem;
+    background: var(--zd-caution-bg);
+  }
+
+  .zd-flow__result-title {
+    margin: 0 0 0.6rem;
+    font-weight: 600;
+    color: var(--zd-caution-title);
+  }
+
+  .zd-flow__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .zd-flow__chips li {
+    padding: 0.2rem 0.7rem;
+    border: 1px solid var(--zd-caution-border);
+    border-radius: 999px;
+    background: var(--sl-color-bg);
+    color: var(--zd-callout-text);
+    font-size: var(--sl-text-sm);
+  }
+
+  @media (max-width: 50rem) {
+    .zd-flow__steps {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .zd-flow__step:not(:last-child)::after {
+      content: '↓' / '';
+      inset-inline-end: auto;
+      inset-inline-start: 50%;
+      top: auto;
+      bottom: -1.5rem;
+      transform: translateX(-50%);
+    }
+  }
+</style>

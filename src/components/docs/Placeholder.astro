@@ -1,0 +1,39 @@
+---
+/**
+ * Wraps an editorial marker such as `[Screenshot needed: …]`,
+ * `[GIF recommended: …]` or `[Example needed: …]` (see AGENTS.md).
+ *
+ * The marker is shown as a dashed box in `astro dev` only. Production builds
+ * render nothing, so readers never see unfinished content.
+ *
+ * Usage in MDX (keep the blank lines):
+ *
+ *   <Placeholder>
+ *   [Screenshot needed: description]
+ *   </Placeholder>
+ */
+const show = import.meta.env.DEV;
+---
+
+{
+  show && (
+    <div class="zd-placeholder" role="note">
+      <slot />
+    </div>
+  )
+}
+
+<style>
+  .zd-placeholder {
+    border: 1px dashed var(--zd-caution-border);
+    border-radius: 0.5rem;
+    background: var(--zd-caution-bg);
+    color: var(--zd-caution-title);
+    padding: 0.6rem 1rem;
+    font-size: var(--sl-text-sm);
+  }
+
+  .zd-placeholder :global(p) {
+    margin: 0;
+  }
+</style>

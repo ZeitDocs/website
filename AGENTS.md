@@ -91,6 +91,14 @@ Use these as design inspiration for the website, product cards, iconography and 
   `[GIF recommended: description]`
 - Mark places where a real-world example would help with:
   `[Example needed: description]`
+- Wrap every marker above in the `Placeholder` component
+  (`src/components/docs/Placeholder.astro`), with the marker on its own line.
+  It shows in `astro dev` only and is hidden in production builds:
+  ```mdx
+  <Placeholder>
+  [Screenshot needed: description]
+  </Placeholder>
+  ```
 - Use consistent terminology:
   - classification level
   - visual banner

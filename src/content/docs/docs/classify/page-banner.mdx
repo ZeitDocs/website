@@ -3,6 +3,9 @@ title: Page Banner
 description: How the visual banner and page header styles appear on classified pages.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+import Placeholder from '../../../../components/docs/Placeholder.astro';
+
 When a page is classified, a **visual banner** can appear at the very top of the
 page. It is the most visible signal of a page's sensitivity — page readers see
 it before any content.
@@ -67,7 +70,9 @@ If precise text placement matters more to you than showing every word, use a
 fixed size.
 :::
 
+<Placeholder>
 [Screenshot needed: the same classification level shown as a Small banner and as an Auto banner, side by side, with a long description]
+</Placeholder>
 
 ## How the banner text fits
 
@@ -111,9 +116,13 @@ it.
 
 A space admin converts such a level by **re-selecting its background**:
 
+<Steps>
+
 1. Open the level in [Space Settings](/docs/classify/space-settings/#header-image-editor).
 2. Click **Select background** or **Upload background**.
 3. Choose the image again and save.
+
+</Steps>
 
 The header image editor shows a hint when a level is still in this state.
 
