@@ -18,13 +18,6 @@ export default defineConfig({
       components: {
         Footer: './src/components/starlight/Footer.astro',
       },
-      social: [
-        {
-          icon: 'github',
-          label: 'GitHub',
-          href: 'https://github.com/zeitdocs',
-        },
-      ],
       sidebar: [
         {
           label: 'Classify',
