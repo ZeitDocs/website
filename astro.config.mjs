@@ -33,6 +33,7 @@ export default defineConfig({
             { label: 'Getting Started', link: '/docs/classify/getting-started/' },
             { label: 'Classifying a Page', link: '/docs/classify/classifying-a-page/' },
             { label: 'Page Banner', link: '/docs/classify/page-banner/' },
+            { label: 'Banner Studio', link: '/docs/classify/banner-studio/' },
             { label: 'Space Settings', link: '/docs/classify/space-settings/' },
             { label: 'Global Templates', link: '/docs/classify/global-templates/' },
             { label: 'Space Access Control', link: '/docs/classify/space-access-control/' },
