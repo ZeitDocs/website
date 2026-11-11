@@ -19,7 +19,7 @@ This documentation is written for the people who use Classify day to day:
 
 When you apply a classification level to a page, Classify does several things at once:
 
-1. **Shows a visual banner** at the top of the page (an image header or a colour band), so readers see the sensitivity first.
+1. **Shows a visual banner** at the top of the page (a colour, a gradient or an image, with the level name and description), so readers see the sensitivity first.
 2. **Sets a coloured indicator and label** in the page byline, next to the author and date line.
 3. **Applies view and edit restrictions** so only the right Confluence groups can see or change the page.
 4. **Adds a label** (for example `CONFIDENTIAL`) to the page for search and reporting.
@@ -35,10 +35,10 @@ Classify takes care of the rest.
 
 ## Core concepts
 
-- **Classification level** — a named sensitivity tier (for example *Internal*) with a colour, an optional banner image, a label, and the Confluence groups allowed to view or edit pages at that level.
+- **Classification level** — a named sensitivity tier (for example *Internal*) with a colour, an optional visual banner, a label, and the Confluence groups allowed to view or edit pages at that level.
 - **Global template** — a reusable set of classification levels defined once by a Confluence admin and applied to many spaces. Keeps classification consistent across the whole site.
 - **Space configuration** — the set of classification levels active in one space. Usually copied from a global template, but it can be edited locally afterwards.
-- **Visual banner / page header style** — how a level is shown at the top of a classified page: an image header, a colour band, or none.
+- **Visual banner / page header style** — how a level is shown at the top of a classified page: a colour band, a gradient, an image, or none. Designed per level in the [Banner Studio](/docs/classify/banner-studio/).
 - **Permission guidance** — the view and edit restrictions Classify applies automatically when a page is classified.
 
 ## The parts of the app
@@ -48,6 +48,7 @@ Classify takes care of the rest.
 | **Page byline** | The author and date line at the top of any page | Page editors | [Classifying a Page](/docs/classify/classifying-a-page/) |
 | **Page banner** | A header strip at the very top of a classified page | Page readers | [Page Banner](/docs/classify/page-banner/) |
 | **Space Settings** | Space → *Classification* settings page | Space admins | [Space Settings](/docs/classify/space-settings/) |
+| **Banner Studio** | *Open banner designer* on a level in Space Settings or a global template | Space admins, Confluence admins | [Banner Studio](/docs/classify/banner-studio/) |
 | **Classification Templates** | Apps → *Classification Templates* | Confluence admins | [Global Templates](/docs/classify/global-templates/) |
 | **Space Access Control** | Inside Classification Templates → *Manage access* | Confluence admins | [Space Access Control](/docs/classify/space-access-control/) |
 | **Classification Report** | A page in the space listing all classified pages | Space members | [Classification Report](/docs/classify/classification-report/) |

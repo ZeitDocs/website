@@ -18,18 +18,27 @@ depends on how your space admin configured that level's page header style.
   <figcaption>A Confluence page after a classification banner is applied.</figcaption>
 </figure>
 
-## The three page header styles
+## What a banner can look like
 
-Each classification level uses one of three page header styles:
+Each classification level has its own banner, designed by an admin in the
+[Banner Studio](/docs/classify/banner-studio/). The background is one of:
 
-| Style | What page readers see |
+| Background | What page readers see |
 |---|---|
-| **Image** | A full-width background image (a themed header) with the level name and description drawn on top. |
-| **Colour** | A solid colour band using the level's colour. No image. |
-| **None** | No banner at all. The byline dot still shows the level. |
+| **Colour** | A solid colour band, in the level's colour or a custom colour. |
+| **Gradient** | A two-colour gradient. |
+| **Preset** | One of the built-in background images. |
+| **Upload** | The organisation's own image, cropped around a chosen focal point. |
 
-Your space administrator chooses the style per level in
-[Space Settings](/docs/classify/space-settings/#header-image-editor).
+The level name and description appear on top, in the position, size and text
+colour the admin chose. On an image, a semi-transparent overlay can sit behind the
+text to keep it readable.
+
+A level can also have **no banner**. The byline dot still shows the level.
+
+Space admins design banners for their space's levels in
+[Space Settings](/docs/classify/space-settings/#page-banner). Confluence admins
+design them for [global templates](/docs/classify/global-templates/).
 
 ## Banner size
 
@@ -62,12 +71,12 @@ Choose **Auto** when your classification descriptions are a full sentence or mor
 and you would rather not have them shrink.
 
 :::note[One trade-off with Auto]
-In **Auto** mode the level name and description use a standard stacked layout, so
-a custom text position dragged in the header image editor is not applied. The
-fixed sizes honour the dragged position exactly.
+In **Auto** mode, a text position dragged in the previous banner editor (shown as
+**Custom (previous editor)** in the Banner Studio) is not applied: the text uses
+a standard stacked layout. The fixed sizes honour it exactly.
 
-If precise text placement matters more to you than showing every word, use a
-fixed size.
+The nine text positions chosen in the Banner Studio work at every size, Auto
+included.
 :::
 
 <Placeholder>
@@ -82,11 +91,18 @@ Classify works to keep them readable for page readers:
 - **At a fixed size**, the text is measured against the space available and scaled down until the description fits, so a long description shrinks instead of being cut off. There is a lower limit on how small the text will go; beyond that point a very long description is shortened. As a guide, a *Small* banner shows around 460 characters, and *Medium* and *Large* around 610.
 - **At Auto size**, nothing shrinks. The description is shown at its configured size, up to roughly 1,200 characters.
 - The banner also re-fits when the browser window is resized, so the text stays readable in a narrow window as well as a wide one.
+- **Line breaks** typed in a level's description are kept, so a description can run over several lines. Blank lines at the start and end are ignored.
 
-Space admins can also set the **banner text size** for each classification level
-— see [Space Settings](/docs/classify/space-settings/#banner-text-size). The
-editor shows the size each choice actually produces at the space's current
-header image size, because a *Small* banner has far less room than *Auto*.
+Admins set the text size for each classification level in the
+[Banner Studio](/docs/classify/banner-studio/#text-size-and-colour). The studio
+shows the size each choice actually produces at the space's current banner size,
+because a *Small* banner has far less room than *Auto*.
+
+:::tip[Line breaks on a small banner]
+On a fixed-size banner, each line break uses a line of the available height. If a
+description with several lines is cut off, switch the space to **Large** or
+**Auto**.
+:::
 
 ## Where the banner appears
 
@@ -98,8 +114,8 @@ header image size, because a *Small* banner has far less room than *Auto*.
 Check these in order:
 
 1. **Did you refresh?** The banner appears on page reload after classifying.
-2. **What style is the level?** If the level is set to **None**, there is no banner by design — only the byline dot.
-3. **Is the level set to Image but missing an image?** If no image was uploaded, it falls back to no banner. Ask your space admin to add a header image or switch the level to **Colour**.
+2. **Does the level have a banner?** If the level's Page Banner is set to **None**, there is no banner by design — only the byline dot.
+3. **Does the level have a background?** A level with no background chosen has no banner. Ask your space admin to open the level in the [Banner Studio](/docs/classify/banner-studio/) and choose one.
 
 See [FAQ](/docs/classify/faq/) for more.
 
@@ -111,25 +127,23 @@ the per-level banner text sizes possible.
 
 Classification levels whose header image was created before this change keep
 their original banner exactly as it was. The text is still part of the image, so
-it will not resize and the banner text size controls have no visible effect on
-it.
+it will not resize and the text settings have no effect on it.
 
-A space admin converts such a level by **re-selecting its background**:
+A space admin converts such a level by **choosing a new background**:
 
 <Steps>
 
-1. Open the level in [Space Settings](/docs/classify/space-settings/#header-image-editor).
-2. Click **Select background** or **Upload background**.
-3. Choose the image again and save.
+1. Open the level in [Space Settings](/docs/classify/space-settings/#page-banner).
+2. Click **Open banner designer**. The studio shows *"Text is part of the image"*.
+3. Choose a background: a colour, a gradient, a preset or an uploaded image.
+4. Click **Apply**, then **Save Changes**.
 
 </Steps>
 
-The header image editor shows a hint when a level is still in this state.
-
-Levels using a **Colour** page header style were never affected and need no
-action.
+Levels with a colour banner were never affected and need no action.
 
 ## Related
 
 - [Classifying a Page](/docs/classify/classifying-a-page/) — how to apply a level.
-- [Space Settings](/docs/classify/space-settings/) — where banner style, image, and size are configured.
+- [Banner Studio](/docs/classify/banner-studio/) — where each level's banner is designed.
+- [Space Settings](/docs/classify/space-settings/) — classification levels and the space's banner size.
