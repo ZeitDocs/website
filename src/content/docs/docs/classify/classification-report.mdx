@@ -11,6 +11,12 @@ has been classified, so you can audit sensitivity at a glance.
   <figcaption>The Classification Report for a Confluence space.</figcaption>
 </figure>
 
+## Who can see it
+
+**Space admins** of the space, and **Confluence admins**. Other users who open
+it see a notice that only space administrators can manage classification. Every
+reader still sees a page's classification in its byline and banner.
+
 ## What it shows
 
 A table with one row per classified page:
@@ -32,6 +38,20 @@ classified.
 - **Search** — type to filter by page title, level name, or label. Filtering happens instantly in your browser.
 - **Load more** — the report loads 50 pages at a time; click **Load more** to append the next batch.
 
+## Exporting to CSV
+
+Select **Export CSV** above the table to download the pages listed as a CSV file.
+The file follows what the table shows: your search and sort order apply, and it
+contains the pages loaded so far. Select **Load more** until every page is listed
+if you need all of them.
+
+The file has these columns: **Page title**, **Level**, **Label**,
+**Classified at (UTC)** and **Page ID**. It is created in your browser; nothing is
+sent to an external service.
+
+To compare classification across spaces instead of page by page, use the
+[Compliance Dashboard](/docs/classify/compliance-dashboard/).
+
 ## Empty states
 
 - **No classifications yet** — the space has classification enabled but no pages have been classified.
@@ -46,3 +66,4 @@ classified.
 
 - [Classifying a Page](/docs/classify/classifying-a-page/)
 - [Space Settings](/docs/classify/space-settings/)
+- [Compliance Dashboard](/docs/classify/compliance-dashboard/)

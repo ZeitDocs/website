@@ -1,0 +1,189 @@
+---
+title: Compliance Dashboard
+description: See how classification is used across every space of your site, and export it as CSV.
+---
+
+import Placeholder from '../../../../components/docs/Placeholder.astro';
+
+The **Compliance** tab gives Confluence admins one view of classification across
+the whole site: which spaces use it, how many pages carry a classification level,
+and which spaces need a look.
+
+The [Classification Report](/docs/classify/classification-report/) answers the same
+question for a single space, page by page. The Compliance tab answers it for
+every space at once, with counts.
+
+<figure>
+  <img src="/assets/screenshots/classify/16-compliance-overview.png" alt="The Compliance tab in Classification Templates: the share of site spaces with classification enabled, a status bar, four stat tiles, a weekly activity chart and a chart of classified pages per level." />
+  <figcaption>The Compliance overview for the site spaces of a Confluence site.</figcaption>
+</figure>
+
+## Who can use it
+
+Only **Confluence admins**. The tab is part of **Classification Templates**
+(Apps → *Classification Templates*), and the app checks the Confluence
+Administrator permission again before it returns any data.
+
+## Opening the dashboard
+
+1. Open **Classification Templates**.
+2. Select the **Compliance** tab.
+
+The app scans every space of the site. While it runs, the tab shows
+*Scanning N of M spaces…* and the figures fill in as each group of spaces is
+counted. When it finishes, the top right shows **Scanned at** and the time.
+Select **Refresh** to scan again.
+
+On a large site the first scan can take a little while. If you switch to the
+**Templates** tab and back, the dashboard keeps its results and does not scan
+again.
+
+## Choosing which spaces to include
+
+The scope control at the top applies to everything on the tab: the figures, the
+charts and the table.
+
+| Scope | Includes |
+|---|---|
+| **Site spaces** (default) | Team and project spaces |
+| **Personal spaces** | Users' personal spaces |
+| **All spaces** | Both |
+
+Personal spaces are left out by default because a site usually has many of
+them, and most never use classification. Including them would make the
+coverage figure look lower than it really is for team content.
+
+If the site has archived spaces, an **Include archived spaces** checkbox appears.
+Archived spaces are left out unless you select it.
+
+## Space status
+
+Every space has one status:
+
+| Status | Meaning |
+|---|---|
+| **Enabled** | Classification is on and the space has levels. Pages can be classified. |
+| **No levels** | Classification is on, but the space has no levels, so nobody can classify a page. |
+| **Not enabled** | Classification is switched off, or was never set up in the space. |
+| **Blocked** | [Space Access Control](/docs/classify/space-access-control/) does not allow classification in this space. |
+
+**Blocked** wins over every other status: a blocked space is shown as Blocked even
+if its classification was switched on earlier.
+
+## The overview figures
+
+### Spaces with classification enabled
+
+The large percentage is the share of spaces in scope that are **Enabled**. The
+bar below it splits the same spaces by status. Hover over a part of the bar to
+see its count.
+
+Coverage is measured in **spaces**, not pages. Classify does not count the total
+number of pages in a space, so it cannot show a "percentage of pages classified".
+
+### Stat tiles
+
+| Tile | What it counts |
+|---|---|
+| **Classified pages** | Pages that carry a classification level in the spaces in scope, and how many of them were classified in the last 12 weeks. |
+| **Enabled, nothing classified** | Enabled spaces where no page has been classified yet. |
+| **Pages on removed levels** | Classified pages whose level was later deleted from the space, or removed by a template update. |
+| **Classified pages left behind** | Classified pages in spaces where classification is now switched off or blocked. |
+
+When a tile reports a problem, select **Show these spaces** to filter the table
+to the spaces concerned.
+
+:::note[Why pages on removed levels and left-behind pages matter]
+Classify does not remove anything from a page on its own. A page on a removed
+level, or in a space where classification was switched off or blocked, **keeps
+its label and its view and edit restrictions**. Re-classify these pages, or
+remove the label and restrictions in Confluence, so that what readers see
+matches your current policy.
+:::
+
+<Placeholder>
+[Example needed: An admin removes the "Internal" level from a space after a policy change. The dashboard shows 40 pages on a removed level in that space; the admin opens the space and re-classifies them.]
+</Placeholder>
+
+## Charts
+
+### Classification activity
+
+Pages by the week they were **last** classified, in enabled spaces, over the last
+12 weeks. Weeks start on Monday (UTC). The current week is drawn lighter because
+it is still in progress. Hover over a week to see its count.
+
+Re-classifying a page moves it to the week of its latest change, so the chart
+shows recent activity, not a complete history.
+
+### Levels in use
+
+Classified pages per level across enabled spaces. Each space has its own levels,
+so levels are grouped **by name**: an *Internal* level in two spaces is counted
+as one row. The coloured dot is the level's colour.
+
+## The Spaces table
+
+One row per space in scope, with its status, template, number of classified
+pages, a bar of pages per level, and the date of the last classification.
+
+<figure>
+  <img src="/assets/screenshots/classify/17-compliance-spaces-table.png" alt="The Spaces table with one space expanded to show its levels and page counts, and another space marked Not enabled with classified pages left behind." />
+  <figcaption>The Spaces table, with one space expanded.</figcaption>
+</figure>
+
+- **Search** by space name, space key or template name.
+- **Filter by status**: All, Enabled, Not enabled, Blocked, or **Needs attention**.
+- **Filter by template** to see the spaces that use one global template, or those with no template.
+- **Sort** by Space, Status, Template, Classified pages or Last classified: click the column header.
+- **Select a row** to expand it. You see each level with its page count and share,
+  the space key, the template, the date of the last classification, and a link to
+  open the space.
+
+**Needs attention** lists the spaces with at least one of these problems: no
+levels, pages on removed levels, classified pages left behind, nothing classified
+yet, or a space that could not be scanned.
+
+Pages on a level the space no longer has are drawn **hatched** in the
+*Pages per level* bar, and marked **Removed level** when you expand the row.
+
+A very large space shows its page count with a **+** (for example `5,000+`).
+This means the count stopped at that number and the space has at least that
+many classified pages.
+
+If a space could not be scanned, it shows **Not scanned**. Select **Refresh** to
+try again.
+
+## Exporting to CSV
+
+Select **Export CSV** above the table to download the table as a CSV file. The
+button is available once every space has been scanned.
+
+The file has one row per space, **as filtered**: the scope, search and filters
+you have applied decide which rows are exported. Columns:
+
+| Column | Content |
+|---|---|
+| Space, Space key, Space type | Name, key, and *Site* or *Personal* (with *(archived)* when it applies) |
+| Classification status | Enabled, No levels, Not enabled or Blocked |
+| Template | The global template the space uses, if any |
+| Classified pages | Number of classified pages |
+| Count is a lower bound | `yes` when the count stopped at its limit (shown as `+` on screen) |
+| Pages on removed levels | Number of pages on levels the space no longer has |
+| Last classified (UTC) | Date and time of the last classification |
+| Pages per level | For example `Public: 12; Internal: 30`. Removed levels are marked *(removed)*. |
+
+The file is created in your browser. Nothing is sent to an external service.
+
+## What the dashboard does not show
+
+The dashboard shows **counts only**. It does not list page titles, and it never
+shows the groups or labels attached to levels. To see the pages of one space,
+open its [Classification Report](/docs/classify/classification-report/).
+
+## Related
+
+- [Classification Report](/docs/classify/classification-report/)
+- [Global Templates](/docs/classify/global-templates/)
+- [Space Access Control](/docs/classify/space-access-control/)
+- [Space Settings](/docs/classify/space-settings/)
