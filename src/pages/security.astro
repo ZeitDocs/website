@@ -1,0 +1,482 @@
+---
+/**
+ * Trust centre (WEB-1): answers the usual app security questionnaire up front.
+ *
+ * Sources of truth, re-check them when the app changes:
+ * - Scopes: `permissions.scopes` in the Classification repo's manifest.yml, and the reasons in
+ *   its CLAUDE.md "Scopes Required".
+ * - What is stored: CLAUDE.md "Data Model" in the Classification repo.
+ */
+import Icon from '../components/Icon.astro';
+import RunsOnAtlassian from '../components/RunsOnAtlassian.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { MARKETPLACE_CLASSIFY, SUPPORT_PORTAL } from '../utils/links';
+import { withBase } from '../utils/paths';
+
+const SCOPES = [
+  { scope: 'storage:app', reason: 'Store classification levels, templates, page classification records and banner images in Forge storage.' },
+  { scope: 'read:confluence-groups', reason: 'List Confluence groups, so admins can attach view and edit groups to a level.' },
+  { scope: 'write:content.restriction:confluence', reason: "Apply the level's view and edit restrictions when a page is classified, and remove them when the level changes." },
+  { scope: 'read:confluence-content.all', reason: 'Read the current restrictions of a page before changing them, so restrictions Classify did not add are kept.' },
+  { scope: 'write:confluence-content', reason: "Add and remove the level's label on a page." },
+  { scope: 'read:page:confluence', reason: 'Check whether the current user can edit a page, and read page titles for the Classification Report.' },
+  { scope: 'read:blogpost:confluence', reason: 'The same checks for blog posts.' },
+  { scope: 'read:confluence-user', reason: 'Identify the current user, to check admin permissions and edit rights.' },
+  { scope: 'read:space:confluence', reason: "Read a space's permissions, to check whether the user is a space admin." },
+  { scope: 'read:confluence-space.summary', reason: 'List spaces, for template rollout, Space Access Control and the Compliance dashboard.' },
+  { scope: 'read:confluence-content.summary', reason: 'Receive page and blog post deletion events, to clean up classification records.' },
+  { scope: 'write:confluence-space', reason: 'Required by Atlassian Forge to receive the space deletion event. Classify makes no changes to spaces.' },
+];
+
+const STORED = [
+  'Classification levels per space: name, colour, description, label, view and edit group names, banner design.',
+  'Global templates and the list of spaces that use each one.',
+  'Per classified page: page ID, space key, page title, level, the label and restrictions Classify applied, and the time of classification.',
+  'Banner background images that admins upload in the Banner Studio.',
+  'Space Access Control settings.',
+  'For template rollouts: the job record, including the account ID of the admin who started it.',
+];
+
+const NOT_STORED = [
+  'Page content. Classify never reads or copies the body of a page.',
+  'Attachments, comments or files.',
+  'Email addresses or user profiles.',
+  'Analytics or telemetry about your users.',
+];
+---
+
+<SiteLayout
+  title="Security and trust | Zeitdocs"
+  description="How Classify handles your data: runs on Atlassian Forge, no external servers, every requested scope explained, and what is and is not stored."
+  canonicalPath="/security/"
+>
+  <section class="hero">
+    <div class="section-inner trust-hero">
+      <div>
+        <span class="eyebrow">Trust centre</span>
+        <h1>Your Confluence data stays on Atlassian.</h1>
+        <p class="lead">
+          Classify runs entirely on Atlassian Forge. There is no Zeitdocs server, and no app data
+          leaves Atlassian. This page answers the questions a security review usually asks.
+        </p>
+        <nav class="trust-toc" aria-label="On this page">
+          <a href="#hosting">Hosting</a>
+          <a href="#scopes">Permissions</a>
+          <a href="#data">Data handling</a>
+          <a href="#commercial">Privacy and contracts</a>
+          <a href="#vulnerabilities">Reporting a vulnerability</a>
+        </nav>
+      </div>
+      <RunsOnAtlassian size="large" />
+    </div>
+  </section>
+
+  <section class="section band" id="hosting">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">Hosting</span>
+        <h2>Built and hosted on Atlassian Forge.</h2>
+      </div>
+      <div class="fact-grid">
+        <article class="fact">
+          <Icon name="cloud" size={22} />
+          <h3>Runs on Atlassian</h3>
+          <p>
+            Classify carries Atlassian's Runs on Atlassian badge on the
+            <a href={MARKETPLACE_CLASSIFY}>Marketplace listing</a>. The app runs on Atlassian's
+            infrastructure, and its data stays there.
+          </p>
+        </article>
+        <article class="fact">
+          <Icon name="server-off" size={22} />
+          <h3>No external servers</h3>
+          <p>
+            The app declares no external connections (egress) and no Forge Remote. It cannot send
+            data to a server outside Atlassian.
+          </p>
+        </article>
+        <article class="fact">
+          <Icon name="lock" size={22} />
+          <h3>Atlassian authentication</h3>
+          <p>
+            Users sign in to Confluence as usual. Classify acts with the user's own Confluence
+            permissions, and checks admin rights on the server before any admin action.
+          </p>
+        </article>
+        <article class="fact">
+          <Icon name="document" size={22} />
+          <h3>Forge storage</h3>
+          <p>
+            App data lives in Forge hosted storage, separated per Atlassian site. Retention, backup
+            and data residency follow Atlassian's Forge policies.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="scopes">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">Permissions</span>
+        <h2>Every scope Classify requests, and why.</h2>
+        <p>
+          Atlassian shows these scopes when an admin installs the app. Classify requests only what
+          its documented features need.
+        </p>
+      </div>
+      <div class="scope-table">
+        <table>
+          <caption>Forge scopes requested by Classify</caption>
+          <thead>
+            <tr><th scope="col">Scope</th><th scope="col">Why Classify needs it</th></tr>
+          </thead>
+          <tbody>
+            {
+              SCOPES.map((s) => (
+                <tr>
+                  <th scope="row"><code>{s.scope}</code></th>
+                  <td>{s.reason}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band--blue" id="data">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">Data handling</span>
+        <h2>What Classify stores, and what it does not.</h2>
+      </div>
+      <div class="data-grid">
+        <div class="data-card">
+          <h3><Icon name="check" size={18} /> Stored in Forge storage</h3>
+          <ul>{STORED.map((s) => <li>{s}</li>)}</ul>
+        </div>
+        <div class="data-card data-card--not">
+          <h3><Icon name="server-off" size={18} /> Not stored</h3>
+          <ul>{NOT_STORED.map((s) => <li>{s}</li>)}</ul>
+        </div>
+      </div>
+      <p class="data-note">
+        The labels and restrictions Classify applies are normal Confluence labels and restrictions,
+        stored by Confluence. CSV exports from the Classification Report and the Compliance dashboard
+        are created in the admin's browser and are not sent anywhere.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="commercial">
+    <div class="section-inner split-grid">
+      <div>
+        <span class="eyebrow">Privacy and contracts</span>
+        <h2>Sub-processors, DPA and residency.</h2>
+      </div>
+      <dl class="qa">
+        <div>
+          <dt>Sub-processors</dt>
+          <dd>
+            Atlassian hosts and runs the app on Forge. Zeitdocs uses no other service to process
+            Classify app data.
+          </dd>
+        </div>
+        <div>
+          <dt>Data residency</dt>
+          <dd>
+            App data is stored in Forge hosted storage. Data residency follows Atlassian's Forge
+            policies for your site.
+            {/* TODO(WEB-1): confirm the residency wording against the Runs on Atlassian requirements before stating more. */}
+          </dd>
+        </div>
+        <div>
+          <dt>Data processing agreement</dt>
+          <dd>
+            <a href={withBase('/contact/')}>Contact us</a> to request a data processing agreement.
+            {/* TODO(WEB-1): publish the DPA (or a download link) once it exists. */}
+          </dd>
+        </div>
+        <div>
+          <dt>Policies</dt>
+          <dd>
+            <a href={withBase('/privacy/')}>Privacy Policy</a> and
+            <a href={withBase('/terms/')}>Terms of Use</a>.
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="section-inner split-grid">
+      <div>
+        <span class="eyebrow">Shared responsibility</span>
+        <h2>Who is responsible for what.</h2>
+      </div>
+      <div>
+        <p>
+          <strong>Atlassian</strong> is responsible for the security and operation of the Forge
+          platform and its infrastructure.
+        </p>
+        <p>
+          <strong>Zeitdocs</strong> is responsible for the app code, the scopes it requests, its
+          configuration and how it handles data. We review dependencies in CI, fix known
+          vulnerabilities, and review the security impact of every change.
+        </p>
+        <p>
+          <strong>You</strong> are responsible for your Atlassian users, permissions, sharing
+          settings and the app configuration, including which groups each level grants access to.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="vulnerabilities">
+    <div class="section-inner split-grid">
+      <div>
+        <span class="eyebrow">Vulnerability disclosure</span>
+        <h2>Reporting a security issue.</h2>
+      </div>
+      <div>
+        <p>
+          Report a potential vulnerability to
+          <a href="mailto:support@zeitdocs.com">support@zeitdocs.com</a> or through the
+          <a href={SUPPORT_PORTAL}>support portal</a>. Please include the affected app, a
+          description, steps to reproduce, the potential impact and any screenshots.
+        </p>
+        <p>
+          We investigate every report and fix vulnerabilities within the timelines that Atlassian
+          Marketplace security policies require for their severity.
+        </p>
+      </div>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .trust-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .trust-toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 26px;
+  }
+
+  .trust-toc a {
+    border: var(--zd-border);
+    border-radius: 999px;
+    background: var(--zd-white);
+    color: var(--zd-gray-700);
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+
+  .trust-toc a:hover {
+    border-color: var(--zd-blue-300);
+    color: var(--zd-blue-700);
+  }
+
+  .fact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .fact {
+    border: var(--zd-border);
+    border-radius: var(--zd-radius-md);
+    background: var(--zd-white);
+    box-shadow: var(--zd-shadow-card);
+    padding: 22px;
+  }
+
+  .fact :global(.zd-icon) {
+    color: var(--zd-blue-700);
+  }
+
+  .fact h3 {
+    margin: 12px 0 8px;
+    font-size: 1.05rem;
+  }
+
+  .fact p {
+    margin: 0;
+    color: var(--zd-gray-700);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .fact a,
+  .qa a,
+  #vulnerabilities a,
+  .data-note a {
+    color: var(--zd-blue-700);
+    font-weight: 600;
+  }
+
+  .scope-table {
+    overflow-x: auto;
+    border: var(--zd-border);
+    border-radius: var(--zd-radius-md);
+    background: var(--zd-white);
+  }
+
+  .scope-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .scope-table caption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .scope-table th,
+  .scope-table td {
+    vertical-align: top;
+    border-top: var(--zd-border);
+    padding: 12px 20px;
+    text-align: left;
+  }
+
+  .scope-table thead th {
+    border-top: 0;
+    color: var(--zd-gray-700);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .scope-table tbody th {
+    width: 38%;
+    font-weight: 500;
+  }
+
+  .scope-table code {
+    border-radius: 4px;
+    background: var(--zd-blue-50);
+    color: var(--zd-blue-700);
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+    padding: 2px 6px;
+  }
+
+  .data-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .data-card {
+    border: var(--zd-border);
+    border-radius: var(--zd-radius-md);
+    background: var(--zd-white);
+    padding: 24px;
+  }
+
+  .data-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 12px;
+    font-size: 1.05rem;
+  }
+
+  .data-card h3 :global(.zd-icon) {
+    color: #1f845a;
+  }
+
+  .data-card--not h3 :global(.zd-icon) {
+    color: var(--zd-orange-700);
+  }
+
+  .data-card ul {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding-left: 20px;
+    color: var(--zd-gray-700);
+    line-height: 1.55;
+  }
+
+  .data-note {
+    max-width: 760px;
+    margin: 22px 0 0;
+    color: var(--zd-gray-700);
+    line-height: 1.6;
+  }
+
+  .qa {
+    display: grid;
+    gap: 18px;
+    margin: 0;
+  }
+
+  .qa dt {
+    font-weight: 700;
+  }
+
+  .qa dd {
+    margin: 4px 0 0;
+    color: var(--zd-gray-700);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .trust-hero {
+      grid-template-columns: 1fr;
+    }
+
+    .fact-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .data-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .fact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .scope-table th,
+    .scope-table td {
+      padding: 10px 14px;
+    }
+
+    .scope-table thead {
+      display: none;
+    }
+
+    .scope-table tr,
+    .scope-table tbody th,
+    .scope-table td {
+      display: block;
+      width: auto;
+    }
+
+    .scope-table td {
+      border-top: 0;
+      padding-top: 0;
+      color: var(--zd-gray-700);
+    }
+  }
+</style>

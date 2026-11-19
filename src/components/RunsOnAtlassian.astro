@@ -1,0 +1,79 @@
+---
+/**
+ * The Runs on Atlassian trust signal (WEB-1), linked to the Marketplace listing where
+ * Atlassian shows the badge, so anyone can verify it.
+ *
+ * TODO(WEB-1): replace the text mark with Atlassian's official Runs on Atlassian badge artwork
+ * (from the Atlassian Marketplace partner brand resources) and follow its usage guidelines.
+ * Until then this is a plain text label, not an imitation of Atlassian's artwork.
+ */
+import Icon from './Icon.astro';
+import { MARKETPLACE_CLASSIFY } from '../utils/links';
+
+interface Props {
+  size?: 'small' | 'large';
+}
+
+const { size = 'small' } = Astro.props;
+---
+
+<a
+  class={`roa roa--${size}`}
+  href={MARKETPLACE_CLASSIFY}
+  title="See the Runs on Atlassian badge on the Classify Marketplace listing"
+>
+  <Icon name="shield" size={size === 'large' ? 26 : 18} />
+  <span>
+    <strong>Runs on Atlassian</strong>
+    {size === 'large' && <small>Verified on the Atlassian Marketplace</small>}
+  </span>
+</a>
+
+<style>
+  .roa {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--zd-blue-100);
+    border-radius: 999px;
+    background: var(--zd-blue-50);
+    color: var(--zd-gray-900);
+    padding: 4px 12px 4px 8px;
+    text-decoration: none;
+  }
+
+  .roa :global(.zd-icon) {
+    color: var(--zd-blue-700);
+  }
+
+  .roa strong {
+    font-size: 0.92rem;
+    font-weight: 650;
+  }
+
+  .roa--large {
+    gap: 12px;
+    border-radius: var(--zd-radius-md);
+    background: var(--zd-white);
+    box-shadow: var(--zd-shadow-card);
+    padding: 18px 22px;
+  }
+
+  .roa--large span {
+    display: grid;
+    gap: 2px;
+  }
+
+  .roa--large strong {
+    font-size: 1.1rem;
+  }
+
+  .roa--large small {
+    color: var(--zd-gray-700);
+    font-size: 0.84rem;
+  }
+
+  .roa:hover {
+    border-color: var(--zd-blue-300);
+  }
+</style>

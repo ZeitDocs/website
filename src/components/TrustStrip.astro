@@ -2,14 +2,16 @@
 /**
  * What an Atlassian admin checks before installing an app. Every item here is a verifiable
  * fact about Classify (no external egress is declared in its Forge manifest) — no ratings,
- * install counts or badges we cannot back up (AGENTS.md: avoid unsupported claims).
+ * install counts or badges we cannot back up (AGENTS.md: avoid unsupported claims). The Runs
+ * on Atlassian badge links to the Marketplace listing, where Atlassian shows it.
  */
 import Icon from './Icon.astro';
+import RunsOnAtlassian from './RunsOnAtlassian.astro';
 import { withBase } from '../utils/paths';
 
 const ITEMS = [
   { icon: 'cloud', text: 'Built for Confluence Cloud' },
-  { icon: 'shield', text: 'Runs on Atlassian Forge' },
+  { icon: 'shield', text: 'Built on Atlassian Forge' },
   { icon: 'server-off', text: 'No external servers: your data stays on Atlassian' },
 ] as const;
 ---
@@ -17,6 +19,7 @@ const ITEMS = [
 <section class="trust" aria-label="Platform and security">
   <div class="section-inner trust__inner">
     <ul class="trust__list">
+      <li><RunsOnAtlassian /></li>
       {
         ITEMS.map((item) => (
           <li>
@@ -27,7 +30,7 @@ const ITEMS = [
       }
     </ul>
     <a class="trust__link" href={withBase('/security/')}>
-      Security & privacy
+      Trust centre
       <Icon name="arrow-right" size={16} />
     </a>
   </div>
