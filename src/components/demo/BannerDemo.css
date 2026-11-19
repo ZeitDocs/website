@@ -210,6 +210,9 @@
 
 /* ── The mock page ───────────────────────────────────────────────────────────── */
 .demo-page {
+  /* Stays in view while the visitor works down the controls (desktop only, see below). */
+  position: sticky;
+  top: 104px;
   overflow: hidden;
   margin: 0;
   border: 1px solid var(--zd-gray-200);
@@ -326,6 +329,7 @@
 
   /* Preview first on narrow screens, so the effect of each control is visible. */
   .demo-page {
+    position: static;
     order: -1;
   }
 }

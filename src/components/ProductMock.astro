@@ -5,7 +5,6 @@
  * screenshot to keep up to date. It cycles Internal → Confidential → Restricted with CSS only
  * (no client JavaScript), and holds still on Confidential for people who prefer reduced motion.
  */
-import Icon from './Icon.astro';
 
 const LEVELS = [
   { name: 'Internal', color: '#0C66E4', text: "For employees only. Don't share this page outside the company." },
@@ -31,11 +30,8 @@ const PICKER = [{ name: 'Public', color: '#1F845A' }, ...LEVELS];
         {
           LEVELS.map((l, i) => (
             <div class={`mock-banner mock-layer mock-layer--${i}`} style={`--lvl: ${l.color}`}>
-              <Icon name="shield" size={18} />
-              <div>
-                <strong>{l.name}</strong>
-                <span>{l.text}</span>
-              </div>
+              <strong>{l.name}</strong>
+              <span>{l.text}</span>
             </div>
           ))
         }
@@ -153,32 +149,33 @@ const PICKER = [{ name: 'Public', color: '#1F845A' }, ...LEVELS];
     margin: 10px -22px 0;
   }
 
+  /* Drawn like the real Classify banner (vendor/classify-banner): a colour band with the
+     level name and description in the banner's own system font and text shadow. */
   .mock-banner {
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    min-height: 104px;
     background: var(--lvl);
     color: #fff;
-    padding: 14px 22px;
-  }
-
-  .mock-banner :global(.zd-icon) {
-    flex: none;
-    margin-top: 2px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding: 16px 22px;
   }
 
   .mock-banner strong {
     display: block;
-    font-size: 0.98rem;
-    letter-spacing: 0.01em;
+    font-size: 1.6rem;
+    line-height: 1.1;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
   }
 
   .mock-banner span {
     display: block;
-    margin-top: 2px;
-    font-size: 0.78rem;
-    line-height: 1.4;
-    opacity: 0.92;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.8rem;
+    line-height: 1.3;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 
   .mock-byline {

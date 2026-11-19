@@ -76,10 +76,12 @@ import { withBase } from '../utils/paths';
 
   <section class="section">
     <div class="section-inner">
-      <div class="showcase">
-        <div class="showcase__text">
+      <div class="showcase showcase--wide">
+        <div class="showcase__head">
           <span class="eyebrow">Compliance dashboard</span>
           <h2>Prove your policy is in use.</h2>
+        </div>
+        <div class="showcase__text">
           <p>
             The Compliance dashboard shows classification across every space on your site, so
             you can answer "how widely is this applied?" without opening each space.
@@ -90,19 +92,22 @@ import { withBase } from '../utils/paths';
             <li><Icon name="check" size={18} /> CSV export, one row per space</li>
           </ul>
         </div>
-        <figure class="shot">
+        <figure class="shot shot--framed">
+          <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i></div>
           <Image
             src={complianceShot}
             alt="The Compliance dashboard: share of spaces with classification enabled, four status tiles, weekly classification activity and levels in use."
-            sizes="(max-width: 900px) calc(100vw - 32px), 680px"
+            sizes="(max-width: 1168px) calc(100vw - 48px), 1120px"
             widths={[680, 1100, 1568]}
           />
         </figure>
       </div>
-      <div class="showcase showcase--flip">
-        <div class="showcase__text">
+      <div class="showcase showcase--wide">
+        <div class="showcase__head">
           <span class="eyebrow">Banner Studio</span>
           <h2>Banners that look like your intranet.</h2>
+        </div>
+        <div class="showcase__text">
           <p>
             Design each level's banner with a live preview: colours, gradients, your own images,
             text position and a contrast check, at every banner size.
@@ -111,11 +116,12 @@ import { withBase } from '../utils/paths';
             See the Banner Studio <Icon name="arrow-right" size={16} />
           </a>
         </div>
-        <figure class="shot">
+        <figure class="shot shot--framed">
+          <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i></div>
           <Image
             src={studioShot}
             alt="The Banner Studio: background options on the left, a live banner preview in the middle, text position and size controls on the right."
-            sizes="(max-width: 900px) calc(100vw - 32px), 680px"
+            sizes="(max-width: 1168px) calc(100vw - 48px), 1120px"
             widths={[680, 1100, 1568]}
           />
         </figure>

@@ -605,6 +605,28 @@ p {
   order: 2;
 }
 
+/* Wide screenshots (1568px sources) get the full content width, so their UI is legible:
+   heading on the left, copy on the right, the framed screenshot below both. */
+.showcase--wide {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 20px 56px;
+  align-items: end;
+}
+
+.showcase--wide .showcase__head {
+  display: grid;
+  gap: 14px;
+}
+
+.showcase--wide .showcase__text > :first-child {
+  margin-top: 0;
+}
+
+.showcase--wide .shot {
+  grid-column: 1 / -1;
+  margin-top: 20px;
+}
+
 .showcase__text ul {
   display: grid;
   gap: 10px;
@@ -633,6 +655,22 @@ p {
   border-radius: var(--zd-radius-md);
   background: var(--zd-white);
   box-shadow: var(--zd-shadow-soft);
+}
+
+/* A light browser frame, the same as the hero and demo mocks. */
+.shot--framed .shot__bar {
+  display: flex;
+  gap: 6px;
+  border-bottom: 1px solid var(--zd-gray-100);
+  background: var(--zd-gray-50);
+  padding: 10px 14px;
+}
+
+.shot--framed .shot__bar i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--zd-gray-200);
 }
 
 .shot img {
@@ -678,9 +716,16 @@ p {
 }
 
 @media (max-width: 900px) {
+  /* The nav wraps to two rows here; a sticky header would then cover a fifth of a phone
+     screen, so it scrolls away with the page instead. */
+  .site-header {
+    position: static;
+  }
+
   .steps,
   .showcase,
   .showcase--flip,
+  .showcase--wide,
   .footer-grid {
     grid-template-columns: 1fr;
   }

@@ -137,7 +137,8 @@ const LEVELS = [
             Classifying a page <Icon name="arrow-right" size={16} />
           </a>
         </div>
-        <figure class="shot">
+        <figure class="shot shot--framed">
+          <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i></div>
           <Image
             src={bylineShot}
             alt="A Confluence page with the Classify level picker open from the byline, listing the space's classification levels."
@@ -146,10 +147,12 @@ const LEVELS = [
           />
         </figure>
       </div>
-      <div class="showcase showcase--flip">
-        <div class="showcase__text">
+      <div class="showcase showcase--wide">
+        <div class="showcase__head">
           <span class="eyebrow">For admins</span>
           <h2>See where the policy is in use.</h2>
+        </div>
+        <div class="showcase__text">
           <p>
             The Compliance dashboard shows coverage across every space, flags pages on deleted
             levels and pages left behind, and exports everything as CSV.
@@ -158,11 +161,12 @@ const LEVELS = [
             Compliance dashboard <Icon name="arrow-right" size={16} />
           </a>
         </div>
-        <figure class="shot">
+        <figure class="shot shot--framed">
+          <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i></div>
           <Image
             src={complianceShot}
             alt="The Compliance dashboard with the share of spaces enabled, status tiles and charts."
-            sizes="(max-width: 900px) calc(100vw - 32px), 680px"
+            sizes="(max-width: 1168px) calc(100vw - 48px), 1120px"
             widths={[680, 1100, 1568]}
           />
         </figure>
