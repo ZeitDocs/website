@@ -31,6 +31,7 @@ export default defineConfig({
             { label: 'Global Templates', link: '/docs/classify/global-templates/' },
             { label: 'Space Access Control', link: '/docs/classify/space-access-control/' },
             { label: 'Classification Report', link: '/docs/classify/classification-report/' },
+            { label: 'Compliance Dashboard', link: '/docs/classify/compliance-dashboard/' },
             { label: 'FAQ', link: '/docs/classify/faq/' },
           ],
         },
