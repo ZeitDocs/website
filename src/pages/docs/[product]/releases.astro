@@ -1,0 +1,77 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getCollection } from 'astro:content';
+import { products } from '../../../config/products';
+
+export async function getStaticPaths() {
+  return products.map((product) => ({
+    params: { product: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+
+const releases = (
+  await getCollection('releases', (entry) => entry.data.product === product.slug)
+).sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const dateFormat = new Intl.DateTimeFormat('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<StarlightPage
+  frontmatter={{
+    title: `${product.name} releases`,
+    description: `Release notes and changelog for ${product.name}.`,
+  }}
+>
+  {
+    releases.length === 0 ? (
+      <p>No releases yet. Check back after the next {product.name} release.</p>
+    ) : (
+      releases.map((release) => (
+        <section class="release">
+          <h2 id={release.data.tag}>
+            {release.data.name}
+            {release.data.prerelease && <span class="release__tag">pre-release</span>}
+          </h2>
+          <p class="release__meta">
+            <time datetime={release.data.date}>
+              {dateFormat.format(new Date(release.data.date))}
+            </time>
+            {' · '}
+            <a href={release.data.url} target="_blank" rel="noopener noreferrer">
+              View on GitHub
+            </a>
+          </p>
+          <Fragment set:html={release.data.html} />
+        </section>
+      ))
+    )
+  }
+</StarlightPage>
+
+<style>
+  .release + .release {
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--sl-color-hairline);
+  }
+  .release__meta {
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-sm);
+  }
+  .release__tag {
+    margin-inline-start: 0.5rem;
+    padding: 0.1em 0.5em;
+    font-size: var(--sl-text-xs);
+    border-radius: 0.25rem;
+    background: var(--sl-color-gray-6);
+    color: var(--sl-color-gray-2);
+    vertical-align: middle;
+  }
+</style>

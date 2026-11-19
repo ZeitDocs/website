@@ -4,6 +4,13 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Fired by an app repo (e.g. ZeitDocs/Classification) when a release is published,
+  # so the changelog rebuilds automatically. See .github/notify-website.example.yml.
+  repository_dispatch:
+    types: [release-published]
+  # Safety net in case a dispatch is ever missed: rebuild once a day.
+  schedule:
+    - cron: '0 6 * * *'
 
 permissions:
   contents: read
@@ -27,6 +34,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          # Fine-grained PAT with `contents: read` on the app repos (private),
+          # used by the GitHub Releases content loader at build time.
+          RELEASES_TOKEN: ${{ secrets.RELEASES_TOKEN }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/
