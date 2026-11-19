@@ -4,6 +4,7 @@ import FeatureCard from '../../components/FeatureCard.astro';
 import Icon from '../../components/Icon.astro';
 import ProductMock from '../../components/ProductMock.astro';
 import TrustStrip from '../../components/TrustStrip.astro';
+import TryIt from '../../components/TryIt.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import bylineShot from '../../assets/site/byline-picker.png';
 import complianceShot from '../../assets/site/16-compliance-overview.png';
@@ -45,7 +46,7 @@ const LEVELS = [
           <a class="button button-primary" href={MARKETPLACE_CLASSIFY}>
             Get Classify on the Marketplace <Icon name="external" size={16} />
           </a>
-          <a class="button button-secondary" href={withBase('/docs/classify/')}>Read the docs</a>
+          <a class="button button-secondary" href="#try-it">Try it on this page</a>
         </div>
       </div>
       <ProductMock />
@@ -74,7 +75,9 @@ const LEVELS = [
     </div>
   </section>
 
-  <section class="section band">
+  <TryIt />
+
+  <section class="section">
     <div class="section-inner">
       <div class="section-heading">
         <span class="eyebrow">What it does</span>

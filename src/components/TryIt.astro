@@ -1,0 +1,61 @@
+---
+/**
+ * The "Try it" section (WEB-1). The demo is the one interactive island on the site: it
+ * hydrates only when scrolled into view, and everything around it stays static HTML.
+ */
+import BannerDemo from './demo/BannerDemo.jsx';
+import Icon from './Icon.astro';
+import { withBase } from '../utils/paths';
+
+interface Props {
+  /** Section id, so the hero can link to it. */
+  id?: string;
+}
+
+const { id = 'try-it' } = Astro.props;
+---
+
+<section class="section band--blue" id={id} aria-labelledby={`${id}-title`}>
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="eyebrow">Try it</span>
+      <h2 id={`${id}-title`}>Classify a page right here.</h2>
+      <p>
+        Pick a level and change the background, pattern and text. The banner below is drawn by
+        the same code Classify uses on your Confluence pages.
+      </p>
+    </div>
+    <BannerDemo client:visible />
+    <noscript>
+      <p class="tryit-noscript">The interactive demo needs JavaScript.</p>
+    </noscript>
+    <p class="tryit-more">
+      <a href={withBase('/docs/classify/banner-studio/')}>
+        Admins design each level's banner in the Banner Studio <Icon name="arrow-right" size={16} />
+      </a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .tryit-more {
+    margin: 22px 0 0;
+  }
+
+  .tryit-more a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--zd-blue-700);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .tryit-more a:hover :global(.zd-icon) {
+    translate: 3px 0;
+  }
+
+  .tryit-noscript {
+    color: var(--zd-gray-700);
+  }
+</style>

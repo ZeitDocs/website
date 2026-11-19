@@ -1,0 +1,122 @@
+/* Banner styles (CLAS-127) — shared by the published banner and every preview of it (the
+   Banner Studio stage and the level-form card). Anything that changes how the banner looks
+   changes it for every customer: run the CLAS-138 visual comparison before shipping.
+
+   The banner app has a global `*` reset; the other apps do not, so the same reset is applied
+   here, scoped to the banner, and FIRST so the component rules below still win over it. */
+.banner-wrap,
+.banner-wrap * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.banner-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-bg {
+  position: absolute;
+  inset: -30px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px) brightness(0.7);
+}
+
+/* A studio image framed on its focal point (CLAS-132). Legacy images never use it. */
+.banner-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.banner-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* The legibility wash that used to be painted into the JPEG (CLAS-117). Sits between the
+   image and the text; the gradient itself comes from the level via scrimStyle(). */
+.banner-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Position, size and alignment are inline, computed per band height by bannerText.js —
+   only the things that never vary live here. `bottom` is deliberately absent: the block is
+   anchored from the top so it can grow downwards as the description wraps. */
+.banner-text {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+/* Auto mode (CLAS-123). The band grows around the text, which only works if the text is in
+   NORMAL FLOW — an absolutely positioned block contributes nothing to its parent's height.
+   That is why the authored drag anchor is not applied in auto mode. */
+.banner-wrap--auto {
+  display: flex;
+  align-items: center;
+  background-color: inherit;
+}
+
+.banner-text--flow {
+  position: static;
+  width: 100%;
+  max-width: 100%;
+}
+
+.banner-level-name {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 1.1;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+}
+
+/* NO nowrap/ellipsis. A long description wraps and is clamped by line count instead of
+   being silently truncated mid-sentence — the whole of CLAS-114/CLAS-116. The clamp itself
+   is inline and computed per band height: a fixed one overflows the 80px band.
+   pre-line keeps the line breaks typed in the level form (CLAS-154) while still collapsing
+   runs of spaces and wrapping long lines — identical to `normal` for text with no newline. */
+.banner-description {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.3;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.banner-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Text above a positioned background layer, in Auto's normal flow as well (CLAS-132).
+   Last, so it wins over .banner-text--flow's `position: static` at equal specificity. */
+.banner-text--raised {
+  position: relative;
+  z-index: 1;
+}

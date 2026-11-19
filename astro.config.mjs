@@ -1,10 +1,13 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
+import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://www.zeitdocs.com',
   integrations: [
+    // Only for the "Try it" banner demo, which renders the app's own React banner component.
+    react(),
     starlight({
       plugins: [starlightImageZoom()],
       title: 'Zeitdocs Documentation',

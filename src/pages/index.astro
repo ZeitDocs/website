@@ -5,6 +5,7 @@ import Icon from '../components/Icon.astro';
 import ProductCard from '../components/ProductCard.astro';
 import ProductMock from '../components/ProductMock.astro';
 import TrustStrip from '../components/TrustStrip.astro';
+import TryIt from '../components/TryIt.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import complianceShot from '../assets/site/16-compliance-overview.png';
 import studioShot from '../assets/site/14-banner-studio.png';
@@ -29,7 +30,7 @@ import { withBase } from '../utils/paths';
           <a class="button button-primary" href={MARKETPLACE_CLASSIFY}>
             Get Classify on the Marketplace <Icon name="external" size={16} />
           </a>
-          <a class="button button-secondary" href={withBase('/docs/classify/')}>Read the docs</a>
+          <a class="button button-secondary" href="#try-it">Try it on this page</a>
         </div>
       </div>
       <ProductMock />
@@ -70,7 +71,9 @@ import { withBase } from '../utils/paths';
     </div>
   </section>
 
-  <section class="section band--blue">
+  <TryIt />
+
+  <section class="section">
     <div class="section-inner">
       <div class="showcase">
         <div class="showcase__text">
