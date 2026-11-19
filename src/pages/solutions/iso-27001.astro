@@ -1,0 +1,131 @@
+---
+import ControlMap from '../../components/ControlMap.astro';
+import SolutionLayout from '../../layouts/SolutionLayout.astro';
+import { withBase } from '../../utils/paths';
+
+/*
+ * Control references are ISO/IEC 27001:2022 Annex A. Requirements are described in our own
+ * words; the standard's text is copyrighted and is not quoted.
+ */
+const rows = [
+  {
+    ref: 'Annex A 5.12',
+    requirement: 'Classification of information',
+    classify:
+      'Admins define classification levels once, in a global template, and roll them out to every space. Editors pick a level from the page byline.',
+    evidence:
+      'The global template is your scheme in writing. The Compliance dashboard shows which spaces use it.',
+    href: '/docs/classify/global-templates/',
+  },
+  {
+    ref: 'Annex A 5.13',
+    requirement: 'Labelling of information',
+    classify:
+      "Each classified page gets the level's Confluence label and a visual banner at the top, so readers see the level before they read the page.",
+    evidence: 'The Classification Report lists every classified page with its level and label, with CSV export.',
+    href: '/docs/classify/classifying-a-page/',
+  },
+  {
+    ref: 'Annex A 5.15',
+    requirement: 'Access control',
+    classify:
+      "Each level carries view and edit groups. When an editor classifies a page, Classify applies them as Confluence page restrictions.",
+    evidence: 'The restrictions are visible on the page in Confluence. The level of each page is in the report.',
+    href: '/docs/classify/classifying-a-page/',
+    partial: true,
+  },
+  {
+    ref: 'Clause 9.1',
+    requirement: 'Monitoring and measurement',
+    classify:
+      'The Compliance dashboard shows classification across the site: spaces enabled, pages per level, pages on removed levels and recent activity.',
+    evidence: 'CSV export of the dashboard, one row per space, to attach to an internal audit.',
+    href: '/docs/classify/compliance-dashboard/',
+    partial: true,
+  },
+];
+
+const STEPS = [
+  {
+    title: 'Write your scheme as a global template',
+    text: "Start from the Enterprise Standard or Compliance / Regulated template, or enter your own levels. Use the names, descriptions and colours from your classification policy.",
+  },
+  {
+    title: 'Attach groups to each level',
+    text: 'For levels such as Confidential or Restricted, add the Confluence groups that may view and edit. Classify applies them when a page is classified.',
+  },
+  {
+    title: 'Roll the template out',
+    text: 'Apply the template to the spaces in scope, in one background job. Use Space Access Control to keep classification out of spaces that are not in scope.',
+  },
+  {
+    title: 'Collect the evidence',
+    text: 'Before the audit, export the Compliance dashboard and the Classification Report of key spaces as CSV.',
+  },
+];
+---
+
+<SolutionLayout
+  title="ISO 27001 information classification in Confluence | Classify"
+  description="How Classify helps you meet ISO 27001 Annex A 5.12 and 5.13 in Confluence: classification levels, labels, level-based restrictions and audit evidence."
+  eyebrow="ISO/IEC 27001"
+  heading="Classify and label Confluence pages for ISO 27001."
+  lead="ISO 27001 asks you to classify information and to label it so people know how to handle it. Classify does both inside Confluence, and gives you the reports to prove it."
+  slug="iso-27001"
+>
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">Control mapping</span>
+        <h2>Which controls Classify supports.</h2>
+        <p>
+          The mapping covers ISO/IEC 27001:2022. Annex A 5.12 and 5.13 are the controls Classify
+          is built for. For the others it covers the Confluence part only.
+        </p>
+      </div>
+      <ControlMap rows={rows} caption="ISO/IEC 27001:2022 controls and how Classify supports them in Confluence." />
+    </div>
+  </section>
+
+  <section class="section band--blue">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">Setup</span>
+        <h2>From policy document to classified pages.</h2>
+      </div>
+      <ol class="steps">
+        {
+          STEPS.map((s) => (
+            <li class="step">
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner split-grid">
+      <div>
+        <span class="eyebrow">Audit evidence</span>
+        <h2>What you can hand to the auditor.</h2>
+      </div>
+      <div>
+        <p>
+          The <a href={withBase('/docs/classify/compliance-dashboard/')}>Compliance dashboard</a>
+          exports one row per space: classification status, template, number of classified pages,
+          pages per level and the date of the last classification.
+        </p>
+        <p>
+          The <a href={withBase('/docs/classify/classification-report/')}>Classification Report</a>
+          of a space exports one row per page: title, level, label, classification date and page ID.
+        </p>
+        <p>
+          Both files are created in your browser. Nothing is sent to an external service.
+        </p>
+      </div>
+    </div>
+  </section>
+</SolutionLayout>

@@ -4,18 +4,19 @@
  * own navigation and the Marketplace button, so moving between the marketing pages and the
  * documentation feels like one site rather than two.
  */
-import { MARKETPLACE_CLASSIFY } from '../../utils/links';
+import { marketplaceUrl } from '../../utils/links';
 
 const LINKS = [
   { href: '/', label: 'Home' },
   { href: '/products/', label: 'Products' },
+  { href: '/solutions/', label: 'Solutions' },
   { href: '/contact/', label: 'Contact' },
 ];
 ---
 
 <nav class="zd-docs-nav" aria-label="Zeitdocs site">
   {LINKS.map((l) => <a href={l.href}>{l.label}</a>)}
-  <a class="zd-docs-cta" href={MARKETPLACE_CLASSIFY}>Get Classify</a>
+  <a class="zd-docs-cta" href={marketplaceUrl('docs-header')}>Get Classify</a>
 </nav>
 
 <style>

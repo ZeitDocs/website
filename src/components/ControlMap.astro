@@ -1,0 +1,176 @@
+---
+/**
+ * A requirement → what Classify does → evidence table for the solution pages (WEB-1).
+ * The wording rule for every row: Classify *helps you meet* a control; it never makes an
+ * organisation compliant on its own.
+ */
+interface Row {
+  /** Short reference, e.g. "A 5.12". */
+  ref: string;
+  /** The requirement in our own words (never the standard's text). */
+  requirement: string;
+  /** What Classify does for it. */
+  classify: string;
+  /** What you can show an auditor. */
+  evidence: string;
+  /** Docs page for the feature. */
+  href?: string;
+  /** Classify supports only part of the control. */
+  partial?: boolean;
+}
+
+interface Props {
+  rows: Row[];
+  caption: string;
+}
+
+import { withBase } from '../utils/paths';
+
+const { rows, caption } = Astro.props;
+---
+
+<div class="control-map">
+  <table>
+    <caption>{caption}</caption>
+    <thead>
+      <tr>
+        <th scope="col">Requirement</th>
+        <th scope="col">How Classify helps</th>
+        <th scope="col">Evidence you can show</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((r) => (
+          <tr>
+            <th scope="row">
+              <span class="control-map__ref">{r.ref}</span>
+              {r.requirement}
+              {r.partial && <span class="control-map__partial">Partial support</span>}
+            </th>
+            <td>
+              {r.classify}
+              {r.href && (
+                <>
+                  {' '}
+                  <a href={withBase(r.href)}>Learn more</a>
+                </>
+              )}
+            </td>
+            <td>{r.evidence}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .control-map {
+    overflow-x: auto;
+    border: var(--zd-border);
+    border-radius: var(--zd-radius-md);
+    background: var(--zd-white);
+    box-shadow: var(--zd-shadow-card);
+  }
+
+  table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  caption {
+    padding: 16px 20px 0;
+    color: var(--zd-gray-700);
+    font-size: 0.86rem;
+    text-align: left;
+  }
+
+  th,
+  td {
+    vertical-align: top;
+    border-top: var(--zd-border);
+    padding: 16px 20px;
+    text-align: left;
+  }
+
+  thead th {
+    border-top: 0;
+    color: var(--zd-gray-700);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  tbody th {
+    width: 30%;
+    font-weight: 600;
+  }
+
+  .control-map__ref {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--zd-blue-700);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .control-map__partial {
+    display: inline-block;
+    margin-top: 8px;
+    border-radius: 999px;
+    background: var(--zd-orange-50);
+    color: var(--zd-orange-700);
+    font-size: 0.74rem;
+    font-weight: 650;
+    padding: 2px 8px;
+  }
+
+  td a {
+    color: var(--zd-blue-700);
+    font-weight: 600;
+  }
+
+  @media (max-width: 700px) {
+    .control-map {
+      overflow-x: visible;
+    }
+
+    table,
+    caption,
+    tbody,
+    tr,
+    th,
+    td {
+      display: block;
+      min-width: 0;
+    }
+
+    thead {
+      display: none;
+    }
+
+    tbody th {
+      width: auto;
+      padding-bottom: 6px;
+    }
+
+    tbody td {
+      border-top: 0;
+      padding-block: 6px;
+    }
+
+    tbody td:last-child {
+      padding-bottom: 18px;
+      color: var(--zd-gray-700);
+    }
+
+    tbody td:last-child::before {
+      content: 'Evidence: ';
+      font-weight: 650;
+    }
+  }
+</style>

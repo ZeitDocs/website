@@ -8,7 +8,7 @@ import TryIt from '../../components/TryIt.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import bylineShot from '../../assets/site/byline-picker.png';
 import complianceShot from '../../assets/site/16-compliance-overview.png';
-import { MARKETPLACE_CLASSIFY } from '../../utils/links';
+import { marketplaceUrl } from '../../utils/links';
 import { withBase } from '../../utils/paths';
 
 const LEVELS = [
@@ -43,7 +43,7 @@ const LEVELS = [
           shows the banner, adds the label and applies the level's view and edit restrictions.
         </p>
         <div class="cta-row">
-          <a class="button button-primary" href={MARKETPLACE_CLASSIFY}>
+          <a class="button button-primary" href={marketplaceUrl('classify-hero')}>
             Get Classify on the Marketplace <Icon name="external" size={16} />
           </a>
           <a class="button button-secondary" href="#try-it">Try it on this page</a>
@@ -202,7 +202,7 @@ const LEVELS = [
           </p>
         </div>
         <div class="cta-row">
-          <a class="button button-primary" href={MARKETPLACE_CLASSIFY}>
+          <a class="button button-primary" href={marketplaceUrl('classify-footer')}>
             Get Classify <Icon name="external" size={16} />
           </a>
           <a class="button button-secondary" href={withBase('/docs/classify/getting-started/')}>Getting started</a>

@@ -1,0 +1,154 @@
+---
+import ControlMap from '../../components/ControlMap.astro';
+import SolutionLayout from '../../layouts/SolutionLayout.astro';
+
+/*
+ * GDPR articles are described in our own words. The levels below are the app's built-in
+ * Privacy / Personal Data template (src/domains/templates.js in the Classification repo).
+ */
+const rows = [
+  {
+    ref: 'Art. 5(1)(f) and Art. 32',
+    requirement: 'Keep personal data confidential, with appropriate technical and organisational measures',
+    classify:
+      'Pages marked Personal or Highly Sensitive get view and edit restrictions from the level, so only the named groups can open or change them.',
+    evidence: 'Each page shows its level in the banner and the byline. The restrictions are visible in Confluence.',
+    href: '/docs/classify/classifying-a-page/',
+    partial: true,
+  },
+  {
+    ref: 'Art. 30 and Art. 15–17',
+    requirement: 'Know where personal data is kept, so you can document it and answer requests from data subjects',
+    classify:
+      'The Classification Report of a space lists every page by level. Search it for Personal or Highly Sensitive to find the pages that hold personal data.',
+    evidence: 'CSV export of the report, one row per page, with level and classification date.',
+    href: '/docs/classify/classification-report/',
+    partial: true,
+  },
+  {
+    ref: 'Art. 39',
+    requirement: 'Awareness of the people who handle personal data',
+    classify:
+      'The banner tells every reader that the page contains personal data before they copy, share or export it.',
+    evidence: 'The level description on the banner is your handling rule, written once by the admin.',
+    href: '/docs/classify/page-banner/',
+    partial: true,
+  },
+];
+
+const LEVELS = [
+  { name: 'Public', color: '#00875A', text: 'No personal data' },
+  { name: 'Internal', color: '#0052CC', text: 'Internal non-personal data' },
+  { name: 'Personal', color: '#FF8B00', text: 'Contains personal data' },
+  { name: 'Highly Sensitive', color: '#DE350B', text: 'Health / financial / identity data' },
+];
+---
+
+<SolutionLayout
+  title="GDPR and personal data in Confluence | Classify"
+  description="Mark Confluence pages that contain personal data, restrict who can open them and find them again with Classify's Privacy / Personal Data template."
+  eyebrow="GDPR / personal data"
+  heading="Know which Confluence pages hold personal data."
+  lead="HR, legal and support teams keep personal data in Confluence. Classify marks those pages clearly, restricts who can open them, and lists them when you need to find them again."
+  slug="gdpr"
+>
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">Ready-made template</span>
+        <h2>Start from the Privacy / Personal Data template.</h2>
+        <p>
+          Classify includes a template made for GDPR-oriented spaces such as HR, legal and
+          healthcare. These are its levels. A Confluence admin can rename them, change the
+          descriptions and add the groups that may view and edit each level.
+        </p>
+      </div>
+      <div class="level-list">
+        {
+          LEVELS.map((l) => (
+            <div class="level-item" style={`--lvl: ${l.color}`}>
+              <strong>{l.name}</strong>
+              <span>{l.text}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section band--blue">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">Requirement mapping</span>
+        <h2>Where Classify fits in your GDPR work.</h2>
+        <p>
+          Classify covers personal data in Confluence pages. It does not cover attachments
+          stored elsewhere, other Atlassian products or your other systems.
+        </p>
+      </div>
+      <ControlMap rows={rows} caption="GDPR requirements and how Classify supports them for Confluence pages." />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner split-grid">
+      <div>
+        <span class="eyebrow">Example</span>
+        <h2>An HR space with employee records.</h2>
+      </div>
+      <div>
+        <p>
+          The HR team keeps onboarding checklists, salary reviews and absence notes in one space.
+          The space admin applies the Privacy / Personal Data template and adds the HR group to
+          the Personal and Highly Sensitive levels.
+        </p>
+        <p>
+          An editor writes a salary review and picks <strong>Highly Sensitive</strong> from the
+          byline. The page gets a red banner, the <code>HIGHLY_SENSITIVE</code> label, and view
+          and edit restrictions for the HR group. When the data protection officer asks where
+          salary data is kept, the space's Classification Report lists every Highly Sensitive page.
+        </p>
+      </div>
+    </div>
+  </section>
+</SolutionLayout>
+
+<style>
+  .level-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .level-item {
+    display: grid;
+    gap: 8px;
+    border: var(--zd-border);
+    border-top: 4px solid var(--lvl);
+    border-radius: var(--zd-radius-sm);
+    background: var(--zd-white);
+    padding: 18px;
+  }
+
+  .level-item strong {
+    font-size: 1.05rem;
+  }
+
+  .level-item span {
+    color: var(--zd-gray-700);
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .level-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .level-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

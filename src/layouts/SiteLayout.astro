@@ -2,7 +2,7 @@
 import '@fontsource-variable/inter';
 import Icon from '../components/Icon.astro';
 import LogoMark from '../components/LogoMark.astro';
-import { MARKETPLACE_CLASSIFY, SUPPORT_PORTAL } from '../utils/links';
+import { marketplaceUrl, SUPPORT_PORTAL } from '../utils/links';
 import { withBase } from '../utils/paths';
 import '../styles/global.css';
 
@@ -21,6 +21,7 @@ const ogImageUrl = new URL(withBase(ogImage), Astro.site ?? Astro.url).href;
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/products/', label: 'Products' },
+  { href: '/solutions/', label: 'Solutions' },
   { href: '/docs/classify/', label: 'Docs' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
@@ -69,7 +70,7 @@ const year = new Date().getFullYear();
                 ))
               }
             </nav>
-            <a class="button button-primary button-sm site-header__cta" href={MARKETPLACE_CLASSIFY}>
+            <a class="button button-primary button-sm site-header__cta" href={marketplaceUrl('header')}>
               Get Classify
             </a>
           </div>
@@ -100,7 +101,9 @@ const year = new Date().getFullYear();
               <h2 id="footer-resources">Resources</h2>
               <ul>
                 <li><a href={withBase('/docs/classify/')}>Classify documentation</a></li>
-                <li><a href={MARKETPLACE_CLASSIFY}>Atlassian Marketplace <Icon name="external" size={14} /></a></li>
+                <li><a href={withBase('/solutions/iso-27001/')}>ISO 27001</a></li>
+                <li><a href={withBase('/solutions/gdpr-personal-data/')}>GDPR and personal data</a></li>
+                <li><a href={marketplaceUrl('footer-resources')}>Atlassian Marketplace <Icon name="external" size={14} /></a></li>
                 <li><a href={SUPPORT_PORTAL}>Support portal <Icon name="external" size={14} /></a></li>
               </ul>
             </nav>
