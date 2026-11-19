@@ -1,0 +1,105 @@
+---
+/**
+ * Anonymous Marketplace review quotes (WEB-1): static content, no live embed and no client
+ * JavaScript. Source and rules: src/data/reviews.ts.
+ */
+import Icon from './Icon.astro';
+import { REVIEWS } from '../data/reviews';
+import { MARKETPLACE_CLASSIFY_REVIEWS } from '../utils/links';
+
+const quotes = REVIEWS.slice(0, 3);
+---
+
+{
+  quotes.length > 0 && (
+    <section class="section reviews" aria-labelledby="reviews-title">
+      <div class="section-inner">
+        <div class="section-heading">
+          <span class="eyebrow">From the Marketplace</span>
+          <h2 id="reviews-title">What reviewers say.</h2>
+        </div>
+        <div class={`reviews__grid reviews__grid--${quotes.length}`}>
+          {quotes.map((r) => (
+            <figure class="review">
+              <blockquote>
+                <p>{r.text}</p>
+              </blockquote>
+              <figcaption>Atlassian Marketplace review, {r.posted}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <a class="reviews__link" href={MARKETPLACE_CLASSIFY_REVIEWS}>
+          Read the reviews on the Atlassian Marketplace <Icon name="external" size={16} />
+        </a>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .reviews__grid--1 {
+    grid-template-columns: minmax(0, 760px);
+  }
+
+  .reviews__grid--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .review {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    border: var(--zd-border);
+    border-left: 4px solid var(--zd-orange-300);
+    border-radius: var(--zd-radius-md);
+    background: var(--zd-white);
+    box-shadow: var(--zd-shadow-card);
+    padding: 24px 26px;
+  }
+
+  .review blockquote {
+    margin: 0;
+  }
+
+  .review p {
+    margin: 0;
+    font-size: 1.18rem;
+    line-height: 1.55;
+  }
+
+  .review p::before {
+    content: '\201C';
+  }
+
+  .review p::after {
+    content: '\201D';
+  }
+
+  .review figcaption {
+    color: var(--zd-gray-700);
+    font-size: 0.88rem;
+  }
+
+  .reviews__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 22px;
+    color: var(--zd-blue-700);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  @media (max-width: 900px) {
+    .reviews__grid,
+    .reviews__grid--2 {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

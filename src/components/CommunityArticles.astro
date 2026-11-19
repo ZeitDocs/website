@@ -1,0 +1,61 @@
+---
+/** Links to Atlassian Community articles about Classify (WEB-1). Data: src/data/community.ts. */
+import Icon from './Icon.astro';
+import { COMMUNITY_ARTICLES } from '../data/community';
+---
+
+{
+  COMMUNITY_ARTICLES.length > 0 && (
+    <section class="section" aria-labelledby="community-title">
+      <div class="section-inner">
+        <div class="section-heading">
+          <span class="eyebrow">Atlassian Community</span>
+          <h2 id="community-title">Read how teams use it.</h2>
+        </div>
+        <div class="card-grid">
+          {COMMUNITY_ARTICLES.map((a) => (
+            <a class="community-card" href={a.url}>
+              <h3>{a.title}</h3>
+              <p>{a.summary}</p>
+              <span>
+                Read on Atlassian Community <Icon name="external" size={14} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .community-card {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    border: var(--zd-border);
+    border-radius: var(--zd-radius-md);
+    background: var(--zd-white);
+    color: inherit;
+    padding: 22px;
+    text-decoration: none;
+  }
+
+  .community-card h3,
+  .community-card p {
+    margin: 0;
+  }
+
+  .community-card p {
+    color: var(--zd-gray-700);
+    line-height: 1.55;
+  }
+
+  .community-card span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--zd-blue-700);
+    font-weight: 650;
+  }
+</style>

@@ -41,7 +41,7 @@ export default defineConfig({
             { label: 'Classification Report', link: '/docs/classify/classification-report/' },
             { label: 'Compliance Dashboard', link: '/docs/classify/compliance-dashboard/' },
             { label: 'FAQ', link: '/docs/classify/faq/' },
-            { label: 'Releases', link: '/docs/classify/releases/' },
+            { label: "What's new", link: '/docs/classify/releases/' },
           ],
         },
       ],
