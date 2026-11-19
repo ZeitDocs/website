@@ -186,3 +186,18 @@
 .zd-role-cards > * {
   margin: 0;
 }
+
+/* The classification strip (WEB-1), shared with the marketing site: a thin bar of the four
+   example level colours along the bottom edge of the docs header. */
+.page > header.header {
+  border-bottom: 0;
+  box-shadow: inset 0 -1px 0 var(--sl-color-hairline-shade);
+}
+
+.page > header.header::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, #1f845a 0 25%, #0c66e4 25% 50%, #c25100 50% 75%, #ae2e24 75% 100%);
+  content: '';
+}

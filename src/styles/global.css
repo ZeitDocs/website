@@ -22,6 +22,20 @@
   --zd-shadow-soft: 0 16px 40px rgba(32, 32, 29, 0.08);
   --zd-shadow-card: 0 8px 24px rgba(32, 32, 29, 0.06);
   --zd-max-width: 1120px;
+  /* The classification strip (WEB-1): the four example levels side by side, Public →
+     Restricted, as one thin bar. It is the brand device: used on the header, the footer,
+     every eyebrow and link hovers, so the site is recognisable without the logo. */
+  --zd-level-public: #1f845a;
+  --zd-level-internal: #0c66e4;
+  --zd-level-confidential: #c25100;
+  --zd-level-restricted: #ae2e24;
+  --zd-strip: linear-gradient(
+    90deg,
+    var(--zd-level-public) 0 25%,
+    var(--zd-level-internal) 25% 50%,
+    var(--zd-level-confidential) 50% 75%,
+    var(--zd-level-restricted) 75% 100%
+  );
   color-scheme: light;
 }
 
@@ -190,10 +204,54 @@ svg {
 
 .eyebrow::before {
   display: block;
-  width: 26px;
-  height: 2px;
+  width: 28px;
+  height: 3px;
   border-radius: 99px;
-  background: var(--zd-orange-500);
+  background: var(--zd-strip);
+  content: "";
+}
+
+/* The strip across the top of the page and the footer. */
+.site-shell::before,
+.site-footer::before {
+  display: block;
+  height: 3px;
+  background: var(--zd-strip);
+  content: "";
+}
+
+.site-footer::before {
+  margin-top: -48px;
+  margin-bottom: 45px;
+}
+
+/* Text links inside content: the strip draws in under the link on hover. */
+.section p a,
+.section dd a,
+.section td a {
+  background: var(--zd-strip) no-repeat 0 100% / 0 2px;
+  text-decoration-color: var(--zd-gray-200);
+  transition: background-size 220ms ease;
+}
+
+.section p a:hover,
+.section dd a:hover,
+.section td a:hover {
+  background-size: 100% 2px;
+  text-decoration-color: transparent;
+}
+
+/* The closing call to action carries the strip on its top edge. */
+.cta-band {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-band::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--zd-strip);
   content: "";
 }
 
