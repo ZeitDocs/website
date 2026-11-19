@@ -1,42 +1,129 @@
 ---
+import { Image } from 'astro:assets';
 import FeatureCard from '../components/FeatureCard.astro';
-import HeroIllustration from '../components/HeroIllustration.astro';
+import Icon from '../components/Icon.astro';
 import ProductCard from '../components/ProductCard.astro';
+import ProductMock from '../components/ProductMock.astro';
+import TrustStrip from '../components/TrustStrip.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
+import complianceShot from '../assets/site/16-compliance-overview.png';
+import studioShot from '../assets/site/14-banner-studio.png';
+import { MARKETPLACE_CLASSIFY } from '../utils/links';
 import { withBase } from '../utils/paths';
 ---
 
 <SiteLayout
   title="Zeitdocs | Documentation governance apps for Confluence"
-  description="Zeitdocs builds clear, governance-oriented apps for Atlassian Confluence documentation teams."
+  description="Classify puts a visible classification on every Confluence page: a banner, a label and the right restrictions, applied in one click."
 >
   <section class="hero">
     <div class="section-inner hero-grid">
       <div>
         <span class="eyebrow">Confluence governance</span>
-        <h1>Clearer control for serious documentation work.</h1>
+        <h1>See how sensitive a page is before you read a word.</h1>
         <p class="lead">
-          Zeitdocs builds practical Confluence apps for teams that need visible classification,
-          structured documentation governance and clearer guidance for sensitive content.
+          Classify gives every Confluence page a classification level: a clear banner, a label
+          and the view and edit restrictions that belong to it, applied in one click.
         </p>
         <div class="cta-row">
-          <a class="button button-primary" href={withBase('/products/')}>View products</a>
-          <a class="button button-secondary" href={withBase('/products/classify/')}>View Classify</a>
+          <a class="button button-primary" href={MARKETPLACE_CLASSIFY}>
+            Get Classify on the Marketplace <Icon name="external" size={16} />
+          </a>
+          <a class="button button-secondary" href={withBase('/docs/classify/')}>Read the docs</a>
         </div>
       </div>
-      <HeroIllustration />
+      <ProductMock />
     </div>
   </section>
 
-  <section class="section band">
+  <TrustStrip />
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">How it works</span>
+        <h2>One click for the editor. A policy for the admin.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <h3>Admins set the levels</h3>
+          <p>
+            Start from a ready-made template or build your own levels, then roll it out to one
+            space or hundreds at once.
+          </p>
+        </li>
+        <li class="step">
+          <h3>Editors pick a level</h3>
+          <p>
+            Right from the page byline. Classify shows the banner, adds the label and applies
+            the level's view and edit restrictions.
+          </p>
+        </li>
+        <li class="step">
+          <h3>You see the coverage</h3>
+          <p>
+            The Space Report lists every classified page, and the Compliance dashboard shows
+            the whole site, with CSV export for audits.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section band--blue">
+    <div class="section-inner">
+      <div class="showcase">
+        <div class="showcase__text">
+          <span class="eyebrow">New in 2.12</span>
+          <h2>Prove your policy is in use.</h2>
+          <p>
+            The Compliance dashboard shows classification across every space on your site, so
+            you can answer "how widely is this applied?" without opening each space.
+          </p>
+          <ul>
+            <li><Icon name="check" size={18} /> Share of spaces with classification enabled</li>
+            <li><Icon name="check" size={18} /> Pages on deleted levels, and pages left behind</li>
+            <li><Icon name="check" size={18} /> CSV export, one row per space</li>
+          </ul>
+        </div>
+        <figure class="shot">
+          <Image
+            src={complianceShot}
+            alt="The Compliance dashboard: share of spaces with classification enabled, four status tiles, weekly classification activity and levels in use."
+            sizes="(max-width: 900px) calc(100vw - 32px), 680px"
+            widths={[680, 1100, 1568]}
+          />
+        </figure>
+      </div>
+      <div class="showcase showcase--flip">
+        <div class="showcase__text">
+          <span class="eyebrow">Banner Studio</span>
+          <h2>Banners that look like your intranet.</h2>
+          <p>
+            Design each level's banner with a live preview: colours, gradients, your own images,
+            text position and a contrast check, at every banner size.
+          </p>
+          <a class="button button-secondary" href={withBase('/docs/classify/banner-studio/')}>
+            See the Banner Studio <Icon name="arrow-right" size={16} />
+          </a>
+        </div>
+        <figure class="shot">
+          <Image
+            src={studioShot}
+            alt="The Banner Studio: background options on the left, a live banner preview in the middle, text position and size controls on the right."
+            sizes="(max-width: 900px) calc(100vw - 32px), 680px"
+            widths={[680, 1100, 1568]}
+          />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="section-inner">
       <div class="section-heading">
         <span class="eyebrow">Products</span>
         <h2>Apps for visible, maintainable Confluence governance.</h2>
-        <p>
-          The first product area is Classify, with documentation focused on visual
-          classification banners, page header styles and permission guidance.
-        </p>
       </div>
       <div class="card-grid">
         <ProductCard
@@ -70,31 +157,55 @@ import { withBase } from '../utils/paths';
     </div>
   </section>
 
-  <section class="section">
+  <section class="section band">
     <div class="section-inner">
       <div class="section-heading">
-        <span class="eyebrow">Why Zeitdocs</span>
-        <h2>Documentation-first, admin-oriented and calm by design.</h2>
+        <span class="eyebrow">Why teams use it</span>
+        <h2>Classification people actually notice.</h2>
       </div>
       <div class="feature-grid">
         <FeatureCard
-          title="Built for Confluence admins"
-          text="Zeitdocs products explain governance through settings, page behavior and clear documentation instead of vague claims."
+          icon="eye"
+          title="Sensitivity at a glance"
+          text="Readers see the level in the banner and the byline, before they share, copy or export anything."
         />
         <FeatureCard
-          title="Visible guidance for readers"
-          text="Classify makes sensitivity visible in the page experience so readers can understand how content should be handled."
+          icon="lock"
+          title="Restrictions that follow the level"
+          text="Each level carries its own view and edit groups. Classify applies them when a page is classified."
           accent="orange"
         />
         <FeatureCard
-          title="Structured product documentation"
-          text="The documentation area is organized around common admin tasks, page editor tasks and practical use cases."
+          icon="template"
+          title="One template, every space"
+          text="Roll a classification scheme out to hundreds of spaces in one background job, and push updates the same way."
         />
         <FeatureCard
-          title="Conservative product claims"
-          text="The site avoids unsupported security promises and clearly separates classification guidance from permissions."
+          icon="chart"
+          title="Ready for the auditor"
+          text="Coverage per space, pages left behind and a CSV export, all in the Compliance dashboard."
           accent="orange"
         />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="cta-band">
+        <div>
+          <h2>Try Classify on your Confluence site.</h2>
+          <p>
+            Install it from the Atlassian Marketplace, apply a template to one space and classify
+            your first page in a few minutes.
+          </p>
+        </div>
+        <div class="cta-row">
+          <a class="button button-primary" href={MARKETPLACE_CLASSIFY}>
+            Get Classify <Icon name="external" size={16} />
+          </a>
+          <a class="button button-secondary" href={withBase('/docs/classify/getting-started/')}>Getting started</a>
+        </div>
       </div>
     </div>
   </section>

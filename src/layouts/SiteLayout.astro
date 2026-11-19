@@ -1,5 +1,8 @@
 ---
+import '@fontsource-variable/inter';
+import Icon from '../components/Icon.astro';
 import LogoMark from '../components/LogoMark.astro';
+import { MARKETPLACE_CLASSIFY, SUPPORT_PORTAL } from '../utils/links';
 import { withBase } from '../utils/paths';
 import '../styles/global.css';
 
@@ -7,20 +10,26 @@ interface Props {
   title: string;
   description: string;
   canonicalPath?: string;
+  /** Social preview image, relative to the site root. */
+  ogImage?: string;
 }
 
-const { title, description, canonicalPath } = Astro.props;
+const { title, description, canonicalPath, ogImage = '/assets/og/zeitdocs-og.png' } = Astro.props;
 const pathname = Astro.url.pathname;
 const canonicalUrl = new URL(canonicalPath ?? pathname, Astro.site ?? Astro.url).href;
+const ogImageUrl = new URL(withBase(ogImage), Astro.site ?? Astro.url).href;
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/products/', label: 'Products' },
+  { href: '/docs/classify/', label: 'Docs' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
 
 const isCurrent = (href: string) =>
   href === '/' ? pathname === withBase('/') : pathname === withBase(href) || pathname.startsWith(withBase(href));
+
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -32,6 +41,15 @@ const isCurrent = (href: string) =>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
     <title>{title}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Zeitdocs" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <div class="site-shell">
@@ -41,30 +59,70 @@ const isCurrent = (href: string) =>
             <LogoMark />
             <span class="brand-name">Zeitdocs</span>
           </a>
-          <nav class="site-nav" aria-label="Main navigation">
-            {
-              navItems.map((item) => (
-                <a href={withBase(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>
-                  {item.label}
-                </a>
-              ))
-            }
-          </nav>
+          <div class="site-header__end">
+            <nav class="site-nav" aria-label="Main navigation">
+              {
+                navItems.map((item) => (
+                  <a href={withBase(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                ))
+              }
+            </nav>
+            <a class="button button-primary button-sm site-header__cta" href={MARKETPLACE_CLASSIFY}>
+              Get Classify
+            </a>
+          </div>
         </div>
       </header>
       <main class="main-content">
         <slot />
       </main>
       <footer class="site-footer">
-        <div class="section-inner site-footer__inner">
-          <span>&copy; {new Date().getFullYear()} Zeitdocs</span>
-          <nav class="footer-legal-links" aria-label="Legal and trust links">
-            <a href={withBase('/privacy/')}>Privacy Policy</a>
-            <span aria-hidden="true">&middot;</span>
-            <a href={withBase('/terms/')}>Terms of Use</a>
-            <span aria-hidden="true">&middot;</span>
-            <a href={withBase('/security/')}>Security</a>
-          </nav>
+        <div class="section-inner">
+          <div class="footer-grid">
+            <div class="footer-brand">
+              <a class="brand-link" href={withBase('/')} aria-label="Zeitdocs home">
+                <LogoMark />
+                <span class="brand-name">Zeitdocs</span>
+              </a>
+              <p>Governance apps for Confluence Cloud: visible classification, clear permissions and calm documentation.</p>
+            </div>
+            <nav class="footer-col" aria-labelledby="footer-products">
+              <h2 id="footer-products">Products</h2>
+              <ul>
+                <li><a href={withBase('/products/classify/')}>Classify</a></li>
+                <li><a href={withBase('/products/sync-my-page-copy-publish/')}>Sync My Page</a></li>
+                <li><a href={withBase('/products/advanced-page-properties-metadata/')}>Page Properties & Metadata</a></li>
+              </ul>
+            </nav>
+            <nav class="footer-col" aria-labelledby="footer-resources">
+              <h2 id="footer-resources">Resources</h2>
+              <ul>
+                <li><a href={withBase('/docs/classify/')}>Classify documentation</a></li>
+                <li><a href={MARKETPLACE_CLASSIFY}>Atlassian Marketplace <Icon name="external" size={14} /></a></li>
+                <li><a href={SUPPORT_PORTAL}>Support portal <Icon name="external" size={14} /></a></li>
+              </ul>
+            </nav>
+            <nav class="footer-col" aria-labelledby="footer-company">
+              <h2 id="footer-company">Company</h2>
+              <ul>
+                <li><a href={withBase('/about/')}>About</a></li>
+                <li><a href={withBase('/contact/')}>Contact</a></li>
+                <li><a href={withBase('/security/')}>Security</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="site-footer__inner">
+            <span>&copy; {year} Zeitdocs</span>
+            <nav class="footer-legal-links" aria-label="Legal and trust links">
+              <a href={withBase('/privacy/')}>Privacy Policy</a>
+              <span aria-hidden="true">&middot;</span>
+              <a href={withBase('/terms/')}>Terms of Use</a>
+              <span aria-hidden="true">&middot;</span>
+              <a href={withBase('/security/')}>Security</a>
+            </nav>
+          </div>
         </div>
       </footer>
     </div>

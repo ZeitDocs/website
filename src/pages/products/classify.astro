@@ -1,13 +1,26 @@
 ---
+import { Image } from 'astro:assets';
 import FeatureCard from '../../components/FeatureCard.astro';
-import HeroIllustration from '../../components/HeroIllustration.astro';
+import Icon from '../../components/Icon.astro';
+import ProductMock from '../../components/ProductMock.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import bylineShot from '../../assets/site/byline-picker.png';
+import complianceShot from '../../assets/site/16-compliance-overview.png';
+import { MARKETPLACE_CLASSIFY } from '../../utils/links';
 import { withBase } from '../../utils/paths';
+
+const LEVELS = [
+  { name: 'Public', color: '#1F845A', text: 'Safe to share outside the company. No restrictions.' },
+  { name: 'Internal', color: '#0C66E4', text: 'For employee-only documentation and internal operating pages.' },
+  { name: 'Confidential', color: '#C25100', text: 'For sensitive content that named teams should handle with care.' },
+  { name: 'Restricted', color: '#AE2E24', text: 'For highly sensitive content that needs limited view and edit access.' },
+];
 ---
 
 <SiteLayout
   title="Classify | Zeitdocs"
-  description="Classify helps Confluence teams visually classify pages with banners, page header styles and permission guidance."
+  description="Classify helps Confluence teams classify pages with visual banners, labels and level-based view and edit restrictions."
 >
   <section class="hero">
     <div class="section-inner hero-grid">
@@ -21,39 +34,133 @@ import { withBase } from '../../utils/paths';
             height="256"
             decoding="async"
           />
-          <span class="eyebrow">Classify</span>
+          <span class="eyebrow">Classify for Confluence Cloud</span>
         </div>
-        <h1>Page Permissions & Visual Security Banners for Confluence.</h1>
+        <h1>Page permissions and visual security banners.</h1>
         <p class="lead">
-          Classify helps Confluence teams visually classify pages, define
-          classification levels and guide users around permissions and information
-          sensitivity.
+          Define classification levels once. Editors pick one from the page byline, and Classify
+          shows the banner, adds the label and applies the level's view and edit restrictions.
         </p>
         <div class="cta-row">
-          <a class="button button-primary" href={withBase('/docs/classify/')}>Read documentation</a>
-          <a class="button button-secondary" href={withBase('/contact/')}>Contact Zeitdocs</a>
+          <a class="button button-primary" href={MARKETPLACE_CLASSIFY}>
+            Get Classify on the Marketplace <Icon name="external" size={16} />
+          </a>
+          <a class="button button-secondary" href={withBase('/docs/classify/')}>Read the docs</a>
         </div>
       </div>
-      <HeroIllustration label="Classify page banner illustration" />
+      <ProductMock />
     </div>
   </section>
 
-  <section class="section band">
+  <TrustStrip />
+
+  <section class="section">
     <div class="section-inner split-grid">
       <div>
-        <span class="eyebrow">Problem</span>
+        <span class="eyebrow">The problem</span>
         <h2>Sensitive pages should not look like ordinary pages.</h2>
       </div>
       <div>
         <p>
-          Confluence pages can contain public, internal, confidential or restricted
-          information. Permissions may exist in the background, but readers and
-          editors do not always see a clear visual signal.
+          Confluence pages can hold public, internal, confidential or restricted information.
+          Permissions may exist in the background, but readers and editors rarely see a clear
+          signal, and restricting each page by hand doesn't scale.
         </p>
         <p>
-          Classify makes the selected classification visible in the page header area
-          so teams can handle content with more care.
+          Classify makes the classification visible where people look first, and ties the
+          restrictions to the level, so choosing the level is all an editor has to do.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="eyebrow">What it does</span>
+        <h2>Everything a classification policy needs, inside Confluence.</h2>
+      </div>
+      <div class="card-grid">
+        <FeatureCard
+          icon="shield"
+          title="Classification levels"
+          text="Define your own levels with a colour, description and label, or start from a ready-made template."
+        />
+        <FeatureCard
+          icon="banner"
+          title="Visual banners"
+          text="A banner at the top of every classified page, designed per level in the Banner Studio."
+          accent="orange"
+        />
+        <FeatureCard
+          icon="lock"
+          title="Level-based restrictions"
+          text="Each level carries its own view and edit groups, applied when an editor classifies the page."
+        />
+        <FeatureCard
+          icon="template"
+          title="Templates and rollout"
+          text="Apply a scheme to hundreds of spaces in one background job, and re-apply it when it changes."
+          accent="orange"
+        />
+        <FeatureCard
+          icon="users"
+          title="Space access control"
+          text="Choose which spaces may use classification: all of them, an allow list or a block list."
+        />
+        <FeatureCard
+          icon="chart"
+          title="Reports and compliance"
+          text="A report per space, a Compliance dashboard for the whole site, and CSV export for both."
+          accent="orange"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section band--blue">
+    <div class="section-inner">
+      <div class="showcase">
+        <div class="showcase__text">
+          <span class="eyebrow">For editors</span>
+          <h2>Classify a page in one click.</h2>
+          <p>
+            The level picker lives in the page byline. Editors see each level's description, pick
+            one, and Classify takes care of the banner, label and restrictions.
+          </p>
+          <a class="button button-secondary" href={withBase('/docs/classify/classifying-a-page/')}>
+            Classifying a page <Icon name="arrow-right" size={16} />
+          </a>
+        </div>
+        <figure class="shot">
+          <Image
+            src={bylineShot}
+            alt="A Confluence page with the Classify level picker open from the byline, listing the space's classification levels."
+            sizes="(max-width: 900px) calc(100vw - 32px), 680px"
+            widths={[680, 840]}
+          />
+        </figure>
+      </div>
+      <div class="showcase showcase--flip">
+        <div class="showcase__text">
+          <span class="eyebrow">For admins</span>
+          <h2>See where the policy is in use.</h2>
+          <p>
+            The Compliance dashboard shows coverage across every space, flags pages on deleted
+            levels and pages left behind, and exports everything as CSV.
+          </p>
+          <a class="button button-secondary" href={withBase('/docs/classify/compliance-dashboard/')}>
+            Compliance dashboard <Icon name="arrow-right" size={16} />
+          </a>
+        </div>
+        <figure class="shot">
+          <Image
+            src={complianceShot}
+            alt="The Compliance dashboard with the share of spaces enabled, status tiles and charts."
+            sizes="(max-width: 900px) calc(100vw - 32px), 680px"
+            widths={[680, 1100, 1568]}
+          />
+        </figure>
       </div>
     </div>
   </section>
@@ -61,59 +168,42 @@ import { withBase } from '../../utils/paths';
   <section class="section">
     <div class="section-inner">
       <div class="section-heading">
-        <span class="eyebrow">Core capabilities</span>
-        <h2>Focused on visible classification and clear guidance.</h2>
+        <span class="eyebrow">Example levels</span>
+        <h2>A starting point you adapt to your policy.</h2>
+        <p>
+          These are examples. A Confluence admin adapts the names, descriptions, labels and
+          restriction groups to the organisation's own classification policy.
+        </p>
       </div>
-      <div class="feature-grid">
-        <FeatureCard
-          title="Classification levels"
-          text="Admins can define levels such as Pending Classification, Public, Internal, Confidential and Restricted."
-        />
-        <FeatureCard
-          title="Visual banners"
-          text="Classification can appear directly in the page header area, where page readers naturally look first."
-          accent="orange"
-        />
-        <FeatureCard
-          title="Page header styles"
-          text="Admins can configure colors and expected header styles for each classification level."
-        />
-        <FeatureCard
-          title="Permission guidance"
-          text="Classify can help users understand whether page permissions appear aligned with the selected classification."
-          accent="orange"
-        />
+      <div class="level-list">
+        {
+          LEVELS.map((l) => (
+            <div class="level-item" style={`--lvl: ${l.color}`}>
+              <strong>{l.name}</strong>
+              <span>{l.text}</span>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
 
-  <section class="section band">
+  <section class="section">
     <div class="section-inner">
-      <div class="section-heading">
-        <span class="eyebrow">Governance examples</span>
-        <h2>Common classification levels.</h2>
-        <p>
-          These examples are starting points. A Confluence admin should adapt labels,
-          descriptions and guidance to the organization's policies.
-        </p>
-      </div>
-      <div class="mini-stats">
-        <div class="mini-stat">
-          <strong>Internal</strong>
-          <span>For employee-only documentation and internal operating pages.</span>
+      <div class="cta-band">
+        <div>
+          <h2>Ready to classify your first page?</h2>
+          <p>
+            Install Classify from the Atlassian Marketplace and follow the getting-started guide:
+            apply a template to one space, then pick a level on any page.
+          </p>
         </div>
-        <div class="mini-stat">
-          <strong>Confidential</strong>
-          <span>For sensitive content that should be reviewed before sharing.</span>
+        <div class="cta-row">
+          <a class="button button-primary" href={MARKETPLACE_CLASSIFY}>
+            Get Classify <Icon name="external" size={16} />
+          </a>
+          <a class="button button-secondary" href={withBase('/docs/classify/getting-started/')}>Getting started</a>
         </div>
-        <div class="mini-stat">
-          <strong>Restricted</strong>
-          <span>For highly sensitive content that needs limited access.</span>
-        </div>
-      </div>
-      <div class="cta-row">
-        <a class="button button-primary" href={withBase('/docs/classify/getting-started/')}>Get started</a>
-        <a class="button button-secondary" href={withBase('/docs/classify/classifying-a-page/')}>Read permission guidance</a>
       </div>
     </div>
   </section>
@@ -128,15 +218,52 @@ import { withBase } from '../../utils/paths';
 
   .product-hero-logo {
     display: block;
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
     object-fit: contain;
+  }
+
+  .level-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .level-item {
+    display: grid;
+    gap: 8px;
+    border: var(--zd-border);
+    border-top: 4px solid var(--lvl);
+    border-radius: var(--zd-radius-sm);
+    background: var(--zd-white);
+    padding: 18px;
+  }
+
+  .level-item strong {
+    color: var(--lvl);
+    font-size: 1.05rem;
+  }
+
+  .level-item span {
+    color: var(--zd-gray-700);
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .level-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   @media (max-width: 560px) {
     .product-hero-logo {
-      width: 60px;
-      height: 60px;
+      width: 52px;
+      height: 52px;
+    }
+
+    .level-list {
+      grid-template-columns: 1fr;
     }
   }
 </style>

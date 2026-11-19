@@ -1,0 +1,51 @@
+---
+/**
+ * Starlight's header has a "social icons" slot on the right. The docs use it for the site's
+ * own navigation and the Marketplace button, so moving between the marketing pages and the
+ * documentation feels like one site rather than two.
+ */
+import { MARKETPLACE_CLASSIFY } from '../../utils/links';
+
+const LINKS = [
+  { href: '/', label: 'Home' },
+  { href: '/products/', label: 'Products' },
+  { href: '/contact/', label: 'Contact' },
+];
+---
+
+<nav class="zd-docs-nav" aria-label="Zeitdocs site">
+  {LINKS.map((l) => <a href={l.href}>{l.label}</a>)}
+  <a class="zd-docs-cta" href={MARKETPLACE_CLASSIFY}>Get Classify</a>
+</nav>
+
+<style>
+  .zd-docs-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    white-space: nowrap;
+  }
+
+  .zd-docs-nav a {
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .zd-docs-nav a:hover {
+    color: var(--sl-color-accent);
+  }
+
+  .zd-docs-nav .zd-docs-cta {
+    border-radius: 999px;
+    background: #ed9852;
+    color: #20201d;
+    padding: 0.4rem 0.95rem;
+  }
+
+  .zd-docs-nav .zd-docs-cta:hover {
+    background: #f7b474;
+    color: #20201d;
+  }
+</style>
