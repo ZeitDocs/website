@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { withBase } from '../utils/paths';
 
 interface Props {
@@ -51,8 +52,8 @@ const {
   <p class="product-card__description">{description}</p>
   <p>{detail}</p>
   <div class="product-card__actions">
-    <a class="card-link" href={withBase(href)}>View product</a>
-    {docsHref && <a class="card-link card-link--muted" href={withBase(docsHref)}>Documentation</a>}
+    <a class="card-link" href={withBase(href)}>View product <Icon name="arrow-right" size={16} /></a>
+    {docsHref && <a class="card-link card-link--muted" href={withBase(docsHref)}>Documentation <Icon name="arrow-right" size={16} /></a>}
   </div>
 </article>
 
@@ -66,6 +67,13 @@ const {
     background: var(--zd-white);
     box-shadow: var(--zd-shadow-card);
     padding: 24px;
+    transition: border-color 0.2s, box-shadow 0.2s, translate 0.2s;
+  }
+
+  .product-card:hover {
+    translate: 0 -2px;
+    border-color: var(--zd-blue-300);
+    box-shadow: var(--zd-shadow-soft);
   }
 
   .product-card__top {
@@ -160,6 +168,8 @@ const {
   }
 
   .card-link {
+    display: inline-flex;
+    gap: 6px;
     align-items: center;
     border-radius: 999px;
     color: var(--zd-blue-700);
@@ -167,9 +177,12 @@ const {
     text-decoration: none;
   }
 
-  .card-link::after {
-    margin-left: 6px;
-    content: "->";
+  .card-link :global(.zd-icon) {
+    transition: translate 0.2s;
+  }
+
+  .card-link:hover :global(.zd-icon) {
+    translate: 3px 0;
   }
 
   .card-link--muted {

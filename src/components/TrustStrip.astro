@@ -1,0 +1,86 @@
+---
+/**
+ * What an Atlassian admin checks before installing an app. Every item here is a verifiable
+ * fact about Classify (no external egress is declared in its Forge manifest) — no ratings,
+ * install counts or badges we cannot back up (AGENTS.md: avoid unsupported claims).
+ */
+import Icon from './Icon.astro';
+import { withBase } from '../utils/paths';
+
+const ITEMS = [
+  { icon: 'cloud', text: 'Built for Confluence Cloud' },
+  { icon: 'shield', text: 'Runs on Atlassian Forge' },
+  { icon: 'server-off', text: 'No external servers: your data stays on Atlassian' },
+] as const;
+---
+
+<section class="trust" aria-label="Platform and security">
+  <div class="section-inner trust__inner">
+    <ul class="trust__list">
+      {
+        ITEMS.map((item) => (
+          <li>
+            <Icon name={item.icon} size={18} />
+            {item.text}
+          </li>
+        ))
+      }
+    </ul>
+    <a class="trust__link" href={withBase('/security/')}>
+      Security & privacy
+      <Icon name="arrow-right" size={16} />
+    </a>
+  </div>
+</section>
+
+<style>
+  .trust {
+    border-block: var(--zd-border);
+    background: var(--zd-white);
+  }
+
+  .trust__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 32px;
+    flex-wrap: wrap;
+    padding-block: 18px;
+  }
+
+  .trust__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .trust__list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--zd-gray-700);
+    font-size: 0.94rem;
+    font-weight: 550;
+  }
+
+  .trust__list :global(.zd-icon) {
+    color: var(--zd-blue-700);
+  }
+
+  .trust__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--zd-blue-700);
+    font-size: 0.94rem;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .trust__link:hover :global(.zd-icon) {
+    translate: 3px 0;
+  }
+</style>

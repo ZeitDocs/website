@@ -14,9 +14,14 @@ export default defineConfig({
         alt: 'Zeitdocs',
       },
       favicon: '/assets/brand/no-background-zeitdocs.png',
-      customCss: ['./src/styles/starlight.css'],
+      head: [
+        { tag: 'meta', attrs: { property: 'og:image', content: 'https://www.zeitdocs.com/assets/og/zeitdocs-og.png' } },
+        { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
+      ],
+      customCss: ['@fontsource-variable/inter', './src/styles/starlight.css'],
       components: {
         Footer: './src/components/starlight/Footer.astro',
+        SocialIcons: './src/components/starlight/SocialIcons.astro',
       },
       sidebar: [
         {
