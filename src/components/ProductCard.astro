@@ -67,13 +67,13 @@ const {
     background: var(--zd-white);
     box-shadow: var(--zd-shadow-card);
     padding: 24px;
-    transition: border-color 0.2s, box-shadow 0.2s, translate 0.2s;
+    transition: border-color 260ms ease, box-shadow 260ms var(--zd-ease), translate 260ms var(--zd-ease);
   }
 
   .product-card:hover {
-    translate: 0 -2px;
-    border-color: var(--zd-blue-300);
-    box-shadow: var(--zd-shadow-soft);
+    translate: 0 -3px;
+    border-color: var(--zd-blue-100);
+    box-shadow: var(--zd-shadow-hover);
   }
 
   .product-card__top {

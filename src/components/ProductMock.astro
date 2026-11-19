@@ -60,6 +60,14 @@ const PICKER = [{ name: 'Public', color: '#1F845A' }, ...LEVELS];
     </div>
   </div>
 
+  <!-- What classifying does, as floating notes beside the page. -->
+  <div class="mock-note mock-note--label" aria-hidden="true">
+    <span class="mock-note__tick">✓</span> Label added
+  </div>
+  <div class="mock-note mock-note--lock" aria-hidden="true">
+    <span class="mock-note__tick">✓</span> View and edit restricted
+  </div>
+
   <div class="mock-picker" aria-hidden="true">
     <div class="mock-picker__title">Classification</div>
     <div class="mock-picker__list">
@@ -121,7 +129,7 @@ const PICKER = [{ name: 'Public', color: '#1F845A' }, ...LEVELS];
     border-radius: 999px;
     background: var(--zd-white);
     box-shadow: inset 0 0 0 1px var(--zd-gray-100);
-    color: #8a857c;
+    color: var(--zd-gray-500);
     font-size: 0.72rem;
     padding: 4px 12px;
   }
@@ -132,7 +140,7 @@ const PICKER = [{ name: 'Public', color: '#1F845A' }, ...LEVELS];
 
   .mock-breadcrumb,
   .mock-muted {
-    color: #8a857c;
+    color: var(--zd-gray-500);
     font-size: 0.72rem;
   }
 
@@ -331,6 +339,61 @@ const PICKER = [{ name: 'Public', color: '#1F845A' }, ...LEVELS];
     100% { translate: 0 32px; }
   }
 
+  /* ── Floating notes ────────────────────────────────────────────────────────────── */
+  .mock-note {
+    position: absolute;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--zd-gray-200);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--zd-shadow-card);
+    color: var(--zd-gray-900);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 12px;
+    white-space: nowrap;
+  }
+
+  .mock-note__tick {
+    display: grid;
+    width: 18px;
+    height: 18px;
+    place-items: center;
+    border-radius: 50%;
+    background: #dcfff1;
+    color: #1f845a;
+    font-size: 0.7rem;
+  }
+
+  .mock-note--label {
+    top: 112px;
+    right: -30px;
+  }
+
+  .mock-note--lock {
+    bottom: 64px;
+    left: -46px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mock-note {
+      animation: zd-float 6s ease-in-out infinite;
+    }
+
+    .mock-note--lock {
+      animation-delay: -3s;
+    }
+  }
+
+  @keyframes zd-float {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -6px; }
+  }
+
   @media (max-width: 900px) {
     .mock {
       justify-self: stretch;
@@ -340,6 +403,14 @@ const PICKER = [{ name: 'Public', color: '#1F845A' }, ...LEVELS];
     .mock-picker {
       right: 12px;
     }
+
+    .mock-note--label {
+      right: 12px;
+    }
+
+    .mock-note--lock {
+      left: 12px;
+    }
   }
 
   @media (max-width: 560px) {
@@ -348,6 +419,7 @@ const PICKER = [{ name: 'Public', color: '#1F845A' }, ...LEVELS];
     }
 
     .mock-picker,
+    .mock-note,
     .mock-muted {
       display: none;
     }

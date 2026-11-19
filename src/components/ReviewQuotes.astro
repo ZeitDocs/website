@@ -12,7 +12,7 @@ const quotes = REVIEWS.slice(0, 3);
 
 {
   quotes.length > 0 && (
-    <section class="section reviews" aria-labelledby="reviews-title">
+    <section class={`section reviews${quotes.length === 1 ? ' reviews--single' : ''}`} aria-labelledby="reviews-title">
       <div class="section-inner">
         <div class="section-heading">
           <span class="eyebrow">From the Marketplace</span>
@@ -94,6 +94,47 @@ const quotes = REVIEWS.slice(0, 3);
     color: var(--zd-blue-700);
     font-weight: 650;
     text-decoration: none;
+  }
+
+  /* One review: a centred testimonial instead of a lone card. */
+  .reviews--single .section-heading {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .reviews--single .section-heading :global(.eyebrow) {
+    justify-content: center;
+  }
+
+  .reviews--single .reviews__grid {
+    grid-template-columns: minmax(0, 860px);
+    justify-content: center;
+  }
+
+  .reviews--single .review {
+    border: 0;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    text-align: center;
+  }
+
+  .reviews--single .review p {
+    color: var(--zd-gray-900);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+    font-weight: 560;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+  }
+
+  .reviews--single .review figcaption {
+    font-size: 0.92rem;
+  }
+
+  .reviews--single .reviews__link {
+    display: flex;
+    width: fit-content;
+    margin-inline: auto;
   }
 
   @media (max-width: 900px) {

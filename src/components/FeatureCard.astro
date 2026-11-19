@@ -27,13 +27,14 @@ const { title, text, accent = 'blue', icon = 'document' } = Astro.props;
     border-radius: var(--zd-radius-md);
     background: var(--zd-white);
     box-shadow: var(--zd-shadow-card);
-    padding: 24px;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    padding: 28px;
+    transition: border-color 260ms ease, box-shadow 260ms var(--zd-ease), translate 260ms var(--zd-ease);
   }
 
   .feature-card:hover {
-    border-color: var(--zd-blue-300);
-    box-shadow: var(--zd-shadow-soft);
+    translate: 0 -3px;
+    border-color: var(--zd-blue-100);
+    box-shadow: var(--zd-shadow-hover);
   }
 
   .feature-card__icon {

@@ -1,0 +1,104 @@
+---
+/**
+ * Facts in numbers (WEB-1). Every figure is checkable in the app or its docs, never a
+ * customer count or a rating (AGENTS.md: no unsupported claims):
+ * - 7: built-in global templates (src/domains/templates.js in the Classification repo).
+ * - 1: one level choice applies banner, label and restrictions (docs: Classifying a page).
+ * - 4: banner sizes Small, Medium, Large, Auto (docs: Page Banner).
+ * - 0: no egress or Forge Remote in the app manifest (see /security/).
+ */
+const STATS = [
+  { value: '1', unit: 'click', text: 'for an editor to set the banner, label and restrictions' },
+  { value: '7', unit: 'templates', text: 'ready to apply, from Enterprise Standard to Privacy' },
+  { value: '4', unit: 'banner sizes', text: 'Small, Medium, Large and Auto, set per space' },
+  { value: '0', unit: 'external servers', text: 'the app runs on Atlassian and your data stays there' },
+];
+---
+
+<ul class="stats" aria-label="Classify in numbers">
+  {
+    STATS.map((s) => (
+      <li>
+        <span class="stats__value">
+          {s.value}
+          <small>{s.unit}</small>
+        </span>
+        <span class="stats__text">{s.text}</span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 56px 0 0;
+    border: 1px solid var(--zd-gray-200);
+    border-radius: var(--zd-radius-md);
+    background: var(--zd-white);
+    box-shadow: var(--zd-shadow-card);
+    padding: 0;
+    list-style: none;
+  }
+
+  .stats li {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    padding: 26px 28px;
+  }
+
+  .stats li + li {
+    border-left: 1px solid var(--zd-gray-100);
+  }
+
+  .stats__value {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    color: var(--zd-gray-900);
+    font-size: 2.6rem;
+    font-weight: 680;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .stats__value small {
+    color: var(--zd-blue-700);
+    font-size: 0.9rem;
+    font-weight: 650;
+    letter-spacing: 0;
+  }
+
+  .stats__text {
+    color: var(--zd-gray-700);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stats li:nth-child(3) {
+      border-left: 0;
+    }
+
+    .stats li:nth-child(n + 3) {
+      border-top: 1px solid var(--zd-gray-100);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats {
+      grid-template-columns: 1fr;
+    }
+
+    .stats li + li {
+      border-left: 0;
+      border-top: 1px solid var(--zd-gray-100);
+    }
+  }
+</style>
